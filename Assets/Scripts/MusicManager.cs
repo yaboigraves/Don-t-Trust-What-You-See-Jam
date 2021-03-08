@@ -46,6 +46,9 @@ public class MusicManager : MonoBehaviour
 
     public int maxBeatsPerLoop = 8, beatsPerLoop = 0;
 
+    public int nextOneTime;
+
+
     public int msPerBeat;
 
     private void Awake()
@@ -87,6 +90,14 @@ public class MusicManager : MonoBehaviour
     public void beatTrigger()
     {
         //do stuff every beat
+        if (timelineInfo.currentBeat == 2)
+        {
+            //recalculate the next 1
+
+            //so the next 1 is the current time + (4 * seconds per beat)
+            nextOneTime = timelineInfo.currentPosition + (int)(3 * (60 / timelineInfo.currentTempo) * 1000);
+        }
+
 
         beatsPerLoop++;
         if (beatsPerLoop >= maxBeatsPerLoop)
@@ -145,8 +156,8 @@ public class MusicManager : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Box(String.Format("Current Bar = {0}, CurrentBeat = {1}, Current Position = {2}, sec per beat = {3}",
-        timelineInfo.currentBar, timelineInfo.currentBeat, timelineInfo.currentPosition, msPerBeat));
+        GUILayout.Box(String.Format("Current Bar = {0}, CurrentBeat = {1}, Current Position = {2}, next one time = {3}",
+        timelineInfo.currentBar, timelineInfo.currentBeat, timelineInfo.currentPosition, nextOneTime));
     }
 
     void OnDestroy()

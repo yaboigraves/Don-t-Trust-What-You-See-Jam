@@ -37,18 +37,19 @@ public class InputManager : MonoBehaviour
     //math to guestimate it i guess?
     public bool CheckInput(int time)
     {
-        //assuming no loop for now
 
-        //check if the current beat is 4 or 1
+        //so we need to check if we're near a 1
 
-        //so we need to know what time in the song all the 1's are (past the first bar)
-        //seconds per beat * 4, seconds per beat * 8 ....
+        //the way to do this is use the current bar * 4 * seconds per beat
+        //store this in the timeline info for now
 
-        //TODO: left off here debug from here
-        if (Mathf.Abs(MusicManager.current.timelineInfo.currentPosition - (MusicManager.current.msPerBeat * MusicManager.current.timelineInfo.currentBar)) < tolerance)
+        //check and see if the difference between the current time and the next one is less than tolerance
+
+        if (Mathf.Abs(MusicManager.current.timelineInfo.currentPosition - MusicManager.current.nextOneTime) < tolerance)
         {
             return true;
         }
+
 
         return false;
     }

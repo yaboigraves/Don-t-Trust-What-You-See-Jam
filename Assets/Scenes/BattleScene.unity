@@ -403,6 +403,7 @@ MonoBehaviour:
   loopStartTime: 0
   maxBeatsPerLoop: 8
   beatsPerLoop: 0
+  nextOneTime: 0
   msPerBeat: 0
 --- !u!1 &279623773
 GameObject:
@@ -1230,7 +1231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c99ee7fb5737f648b6b94af2fe69fde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tolerance: 0.5
+  tolerance: 500
   bind: 32
 --- !u!1001 &1862425475
 PrefabInstance:
