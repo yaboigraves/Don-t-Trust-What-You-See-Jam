@@ -330,8 +330,8 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../WeekJam1/FMOD SHIT/weekJam/weekJam.fspro
-  sourceBankPath: ..\WeekJam1\FMOD SHIT\weekJam\Build
+  sourceProjectPath: FMOD SHIT/weekJam/weekJam.fspro
+  sourceBankPath: FMOD SHIT\weekJam\Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0

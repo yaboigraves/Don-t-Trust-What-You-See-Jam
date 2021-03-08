@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{2d513de2-692b-499d-b7bd-34494913baec}">
+		<property name="name">
+			<value>BeatTick</value>
+		</property>
+		<relationship name="folder">
+			<destination>{5ded8c03-f7eb-4003-8ac0-32aa3388dfb3}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{3ecb0dad-bf59-482c-995a-5fdaae7dcd06}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{3ecb0dad-bf59-482c-995a-5fdaae7dcd06}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
