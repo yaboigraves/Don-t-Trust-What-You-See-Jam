@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
+using IronPython.Hosting;
 
 
 /*
@@ -13,5 +15,42 @@ using UnityEngine;
 
 public static class SongLoader
 {
+    public static SongInfo loadSongInfoFromMidi(string midiFileName)
+    {
+        var engine = Python.CreateEngine();
+
+        ICollection<string> searchPaths = engine.GetSearchPaths();
+
+        //Path to the folder of greeter.py
+        searchPaths.Add(Application.dataPath);
+        //Path to the Python standard library
+        searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
+        engine.SetSearchPaths(searchPaths);
+
+        dynamic py = engine.ExecuteFile(Application.dataPath + @"\scripts\midiParser.py");
+        dynamic parser = py.MidiParser();
+        Debug.Log(parser.test());
+
+
+
+
+        return null;
+    }
+
+
+
+}
+
+public class SongInfo
+{
+    public List<float> indicatorOneInfo, indicatorTwoInfo;
+    public SongInfo(List<float> oneInfo, List<float> twoInfo)
+    {
+        //floats? I guess?
+        indicatorOneInfo = oneInfo;
+        indicatorTwoInfo = twoInfo;
+    }
+
+
 
 }

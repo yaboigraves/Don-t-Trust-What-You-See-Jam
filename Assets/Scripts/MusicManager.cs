@@ -78,6 +78,13 @@ public class MusicManager : MonoBehaviour
         descriptionCallback.getLength(out int length);
 
         timelineInfo.songLength = length;
+
+
+
+
+        //testing the static loader
+        SongLoader.loadSongInfoFromMidi("ass");
+
     }
 
     private void Update()
