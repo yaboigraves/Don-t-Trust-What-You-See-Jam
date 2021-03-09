@@ -10,12 +10,11 @@ using IronPython.Hosting;
     all we really need is 2 lanes for now
     basic idea for now : just program in manually that we hit on the 1
 
-
 */
 
 public static class SongLoader
 {
-    public static SongInfo loadSongInfoFromMidi(string midiFileName)
+    public static SongInfo loadSongInfoFromMidi(string midiFileName, float bpm)
     {
         var engine = Python.CreateEngine();
 
@@ -29,12 +28,13 @@ public static class SongLoader
 
         dynamic py = engine.ExecuteFile(Application.dataPath + @"\scripts\midiParser.py");
         dynamic parser = py.MidiParser();
-        Debug.Log(parser.test());
+        // Debug.Log(parser.test());
+
+        Dictionary<string, List<System.Double>> midiParse = parser.parse(Application.dataPath + @"\scripts\midis\" + midiFileName + ".mid", bpm);
 
 
 
-
-        return null;
+        return new SongInfo(midiParse["kick"], midiParse["snare"]);
     }
 
 
@@ -43,8 +43,8 @@ public static class SongLoader
 
 public class SongInfo
 {
-    public List<float> indicatorOneInfo, indicatorTwoInfo;
-    public SongInfo(List<float> oneInfo, List<float> twoInfo)
+    public List<double> indicatorOneInfo, indicatorTwoInfo;
+    public SongInfo(List<double> oneInfo, List<double> twoInfo)
     {
         //floats? I guess?
         indicatorOneInfo = oneInfo;

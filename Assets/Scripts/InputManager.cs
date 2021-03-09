@@ -5,8 +5,26 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    public static InputManager current;
     public float tolerance;
     public KeyCode bind = KeyCode.Space;
+
+
+    //so going to need to maintain two lists for the indicators 
+
+    public SongInfo currentInfo;
+
+    public RotateOn cubeTest;
+
+
+
+
+    private void Awake()
+    {
+        current = this;
+    }
+
     void Start()
     {
 
@@ -28,31 +46,114 @@ public class InputManager : MonoBehaviour
                 print("Bad");
             }
         }
+
+        CheckIndicatorStatus();
+
+
+
+
+
+
     }
 
 
-    //TODO: get this to work by having us hit specifically on the 1 of the loop
+    void CheckIndicatorStatus()
+    {
 
-    //so if we know what beat something is supposed to run on and we know the time that beat occurs, we can do some 
-    //math to guestimate it i guess?
+        if (currentInfo.indicatorOneInfo.Count > 0 && currentInfo.indicatorOneInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
+        {
+            currentInfo.indicatorOneInfo.RemoveAt(0);
+            Debug.Log("missed a kick");
+            cubeTest.rotate(0);
+        }
+
+        if (currentInfo.indicatorTwoInfo.Count > 0 && currentInfo.indicatorTwoInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
+        {
+            currentInfo.indicatorTwoInfo.RemoveAt(0);
+            Debug.Log("missed a snare");
+            cubeTest.rotate(1);
+        }
+
+        //if theres no indicators left turn off the input
+        if (currentInfo.indicatorOneInfo.Count < 1 && currentInfo.indicatorTwoInfo.Count < 1)
+        {
+            this.enabled = false;
+        }
+    }
+
     public bool CheckInput(int time)
     {
 
-        //so we need to check if we're near a 1
 
-        //the way to do this is use the current bar * 4 * seconds per beat
-        //store this in the timeline info for now
+        //TODO: this is extremely ugly and messy refactor this later, at least its evil is contained for now
 
-        //check and see if the difference between the current time and the next one is less than tolerance
+        double nextIndicatorTime = 0;
 
-        if (Mathf.Abs(MusicManager.current.timelineInfo.currentPosition - MusicManager.current.nextOneTime) < tolerance)
+        double indicatorOnePeek = -1, indicatorTwoPeek = -1;
+
+
+        if (currentInfo.indicatorOneInfo.Count > 0)
         {
-            return true;
+            indicatorOnePeek = currentInfo.indicatorOneInfo[0];
+        }
+        if (currentInfo.indicatorTwoInfo.Count > 0)
+        {
+            indicatorTwoPeek = currentInfo.indicatorTwoInfo[0];
         }
 
 
-        return false;
+        if (indicatorOnePeek != -1 && indicatorTwoPeek == -1)
+        {
+            //theres still at least one indicator one left
+            nextIndicatorTime = indicatorOnePeek;
+        }
+        else if (indicatorTwoPeek != -1 && indicatorOnePeek == -1)
+        {
+            //theres still at least one indicator two left
+            nextIndicatorTime = indicatorTwoPeek;
+        }
+        else
+        {
+
+            if (currentInfo.indicatorOneInfo[0] < currentInfo.indicatorTwoInfo[0])
+            {
+                //indicator 1 is the next one
+                nextIndicatorTime = currentInfo.indicatorOneInfo[0];
+                // currentInfo.indicatorOneInfo.RemoveAt(0);
+
+            }
+            //account for floating point fuckery (ignore the lazy casts lol)
+            else if (Mathf.Abs((float)currentInfo.indicatorOneInfo[0] - (float)currentInfo.indicatorTwoInfo[0]) < 0.01f)
+            {
+                //same time, dequeue both
+                nextIndicatorTime = currentInfo.indicatorOneInfo[0];
+                // currentInfo.indicatorOneInfo.RemoveAt(0);
+                // currentInfo.indicatorTwoInfo.RemoveAt(0);
+            }
+            else if (currentInfo.indicatorTwoInfo.Count > 1 && currentInfo.indicatorOneInfo[0] > currentInfo.indicatorTwoInfo[0])
+            {
+                //indicator 2 is the next one
+                nextIndicatorTime = currentInfo.indicatorTwoInfo[0];
+                // currentInfo.indicatorTwoInfo.RemoveAt(0);
+            }
+            else
+            {
+                Debug.LogWarning("SOMETHING IS FUCKED UP  :)");
+            }
+        }
+
+        //so now that we know the next indicator lets see if you hit it on time or you suck
+        //again lazy casts
+        if (Mathf.Abs(time - (float)nextIndicatorTime) < tolerance)
+        {
+            Debug.Log("got it with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
+            return true;
+        }
+        else
+        {
+            Debug.Log("missed with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
+            return false;
+        }
+
     }
-
-
 }

@@ -51,18 +51,18 @@ class MidiParser:
                 # print(track[j].type)
                 totTime += track[j].time
                 if(track[j].type == "note_on"):
-                    if(track[j].note == 36):
+                    if(track[j].note == 60):
                         kickMessages.append(mido.tick2second(
                             totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * (bpm/60))
-                    if(track[j].note == 38):
+                    if(track[j].note == 64):
                         snareMessages.append(mido.tick2second(
                             totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * (bpm/60))
-                    if(track[j].note == 40):
-                        hatMessages.append(mido.tick2second(
-                            totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * (bpm/60))
-                    if(track[j].note == 41):
-                        percMessages.append(mido.tick2second(
-                            totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * (bpm/60))
+                    # if(track[j].note == 40):
+                    #     hatMessages.append(mido.tick2second(
+                    #         totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * (bpm/60))
+                    # if(track[j].note == 41):
+                    #     percMessages.append(mido.tick2second(
+                    #         totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * (bpm/60))
 
         # note this gives the time of the last note off event, not the actual end of the midi track
         #print(mido.tick2second(totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * 2)

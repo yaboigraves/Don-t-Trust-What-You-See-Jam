@@ -48,7 +48,6 @@ public class MusicManager : MonoBehaviour
 
     public int nextOneTime;
 
-
     public int msPerBeat;
 
     private void Awake()
@@ -79,18 +78,21 @@ public class MusicManager : MonoBehaviour
 
         timelineInfo.songLength = length;
 
-
-
-
-        //testing the static loader
-        SongLoader.loadSongInfoFromMidi("ass");
-
     }
 
     private void Update()
     {
         musicPlayEvent.getTimelinePosition(out timelineInfo.currentPosition);
         msPerBeat = (int)(timelineInfo.currentTempo / 60 * 1000);
+    }
+
+    public SongInfo getMidiInfo(string songName)
+    {
+
+        //so we need to just pass in the bpm info of the current loaded track, need to make sure everything 
+        //is loaded in fmod
+
+        return SongLoader.loadSongInfoFromMidi(songName, 80);
     }
 
 
