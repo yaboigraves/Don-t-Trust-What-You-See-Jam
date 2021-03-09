@@ -30,6 +30,9 @@ public class BattleManager : MonoBehaviour
         }
 
         InputManager.current.currentInfo = info;
+        UIManager.current.SetupIndicators(info);
+
+
     }
 
 
