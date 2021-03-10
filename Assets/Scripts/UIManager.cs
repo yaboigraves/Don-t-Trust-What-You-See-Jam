@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     public int pixelToSeconds = 100;
     public GameObject feedbackText;
     public Transform feedbackContainer;
+
+    public TextMeshProUGUI defensePromptText;
     private void Awake()
     {
         current = this;
@@ -53,6 +55,11 @@ public class UIManager : MonoBehaviour
     public void SpawnFeedBackText()
     {
         Instantiate(feedbackText, feedbackContainer.transform.position, Quaternion.identity, feedbackContainer);
+    }
+
+    public void SpawnDefensePrompt(bool b)
+    {
+        defensePromptText.text = b.ToString();
     }
 
     // Update is called once per frame

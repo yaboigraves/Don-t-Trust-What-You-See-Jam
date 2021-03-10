@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour
 
     public int defenseQueueLength = 16;
     public Queue<bool> defenseQueue;
+    public string battleMode = "defense";
 
 
     private void Awake()
@@ -26,7 +27,7 @@ public class BattleManager : MonoBehaviour
         //indicator manager and the input manager 
 
         SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
-
+        defenseQueue = new Queue<bool>();
 
         //initialize the defense queue stuff
         for (int i = 0; i < defenseQueueLength; i++)
@@ -49,6 +50,23 @@ public class BattleManager : MonoBehaviour
 
         currentSongInfo = info;
         //UIManager.current.SetupIndicators();
+    }
+
+    public void DequeuDefensePrompt()
+    {
+        //tell the ui manager to present a new prompt to the screen
+
+        if (defenseQueue.Count > 1)
+        {
+            UIManager.current.SpawnDefensePrompt(defenseQueue.Dequeue());
+            //tell the input manager to get ready to open up a window for input 
+            InputManager.current.OpenDefeneseWindow();
+        }
+        else
+        {
+            //switch the battle mode
+        }
+
     }
 
 

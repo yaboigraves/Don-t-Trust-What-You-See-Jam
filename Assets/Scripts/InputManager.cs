@@ -12,7 +12,9 @@ public class InputManager : MonoBehaviour
 
     public RotateOn cubeTest;
 
-    public string battleMode = "defense";
+    public bool defenseInputOpen = false;
+
+    public float defenseTolerance = 0.2f;
 
 
     //notes for defense mode
@@ -37,7 +39,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(bind))
         {
             //check if we hit on the right time
-            if (battleMode == "offense")
+            if (BattleManager.current.battleMode == "offense")
             {
                 if (CheckInput(MusicManager.current.timelineInfo.currentPosition))
                 {
@@ -52,16 +54,27 @@ public class InputManager : MonoBehaviour
                     print("Bad");
                 }
             }
-            else if (battleMode == "defense")
+            else if (BattleManager.current.battleMode == "defense")
             {
-
+                //check if we're currently in a window to accept an input
+                if (defenseInputOpen)
+                {
+                    Debug.Log("Good");
+                    UIManager.current.SpawnFeedBackText();
+                    defenseInputOpen = false;
+                }
+                else
+                {
+                    Debug.Log("Bad");
+                    defenseInputOpen = false;
+                }
             }
 
         }
 
         //only do this if we're in offense mode
 
-        if (battleMode == "offense")
+        if (BattleManager.current.battleMode == "offense")
         {
             CheckIndicatorStatus();
         }
@@ -72,6 +85,27 @@ public class InputManager : MonoBehaviour
 
     }
 
+    public void OpenDefeneseWindow()
+    {
+        //so this is going to be called specifically on the one or the three
+        //so we need to mark the time that this gets called for testing so lets debug log it
+
+        // Debug.Log(MusicManager.current.timelineInfo.currentPosition);
+
+        //so we can use the same tolerance value, the input needs to open at 1.5 beats in the future and close 2.5 beats in the future
+        //achieve this through two coroutines
+
+        //convert the tolerance into beats?
+
+        StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 - defenseTolerance) * (60f / 80f) * 1000), true));
+        StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 + defenseTolerance) * (60f / 80f) * 1000), false));
+    }
+
+    public IEnumerator openWindowRoutine(double time, bool toggle)
+    {
+        yield return new WaitUntil(() => MusicManager.current.timelineInfo.currentPosition >= time);
+        defenseInputOpen = toggle;
+    }
 
     void CheckIndicatorStatus()
     {

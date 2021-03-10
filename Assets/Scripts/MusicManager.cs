@@ -93,25 +93,45 @@ public class MusicManager : MonoBehaviour
     }
 
 
+
     public void beatTrigger()
     {
+
+        if (BattleManager.current.battleMode == "defense")
+        {
+            //check whether we're waiting for an input or not
+            if (timelineInfo.currentBeat == 1 || timelineInfo.currentBeat == 3)
+            {
+                //tell the battlemanager to dequeue a new defense prompt
+                BattleManager.current.DequeuDefensePrompt();
+            }
+            else
+            {
+                //we're just waiting for a defense prompt
+            }
+
+        }
+
+
+
+
         //do stuff every beat
-        if (timelineInfo.currentBeat == 2)
-        {
-            //recalculate the next 1
+        // if (timelineInfo.currentBeat == 2)
+        // {
+        //     //recalculate the next 1
 
-            //so the next 1 is the current time + (4 * seconds per beat)
-            nextOneTime = timelineInfo.currentPosition + (int)(3 * (60 / timelineInfo.currentTempo) * 1000);
-        }
+        //     //so the next 1 is the current time + (4 * seconds per beat)
+        //     nextOneTime = timelineInfo.currentPosition + (int)(3 * (60 / timelineInfo.currentTempo) * 1000);
+        // }
 
 
-        beatsPerLoop++;
-        if (beatsPerLoop >= maxBeatsPerLoop)
-        {
+        // beatsPerLoop++;
+        // if (beatsPerLoop >= maxBeatsPerLoop)
+        // {
 
-            musicPlayEvent.setParameterByName("nextTrack", UnityEngine.Random.Range(1, 3));
-            beatsPerLoop = 0;
-        }
+        //     musicPlayEvent.setParameterByName("nextTrack", UnityEngine.Random.Range(1, 3));
+        //     beatsPerLoop = 0;
+        // }
     }
 
 
