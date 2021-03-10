@@ -47,14 +47,20 @@ public class InputManager : MonoBehaviour
     {
         if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
         {
+            Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorOneInfo[0]].gameObject);
             BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
+
+            //delete the indicator too
             Debug.Log("missed a kick");
             cubeTest.rotate(0);
         }
 
         if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorTwoInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
         {
+            Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorTwoInfo[0]].gameObject);
             BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
+
+            //delete the indicator too
             Debug.Log("missed a snare");
             cubeTest.rotate(1);
         }
@@ -108,7 +114,7 @@ public class InputManager : MonoBehaviour
                 //indicator 1 is the next one
                 nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
                 indicatorNext = 1;
-                // BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
+
             }
             //account for floating point fuckery (ignore the lazy casts lol)
             else if (Mathf.Abs((float)BattleManager.current.currentSongInfo.indicatorOneInfo[0] - (float)BattleManager.current.currentSongInfo.indicatorTwoInfo[0]) < 0.01f)
@@ -116,15 +122,14 @@ public class InputManager : MonoBehaviour
                 //same time, dequeue both
                 nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
                 indicatorNext = 1;
-                // BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
-                // BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
+
             }
             else if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 1 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] > BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
             {
                 //indicator 2 is the next one
                 nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
                 indicatorNext = 2;
-                // BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
+
             }
             else
             {

@@ -53,11 +53,13 @@ public class Indicator : MonoBehaviour
             lerpProgress = MusicManager.current.timelineInfo.currentPosition / indicatorTime;
             transform.position = Vector3.Lerp(startPosition, destinationPoint.position, lerpProgress);
         }
-        // else
+        //TODO: reimpliment this
+        // else if (postLerpProgress < 1)
         // {
         //     postLerpProgress = MusicManager.current.timelineInfo.currentPosition / (indicatorTime + (lerpProgress = MusicManager.current.timelineInfo.currentPosition / (indicatorTime + (postLerpLength * (60f / 80f)))));
         //     transform.position = Vector3.Lerp(destinationPoint.position, destinationPoint.position + postLerpDistance, postLerpProgress);
         // }
+
 
     }
 }
