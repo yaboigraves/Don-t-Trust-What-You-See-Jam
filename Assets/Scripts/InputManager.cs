@@ -5,21 +5,12 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     // Start is called before the first frame update
-
     public static InputManager current;
     public float tolerance;
     public KeyCode bind = KeyCode.Space;
-
-
     //so going to need to maintain two lists for the indicators 
 
-    public SongInfo currentInfo;
-
     public RotateOn cubeTest;
-
-
-
-
     private void Awake()
     {
         current = this;
@@ -40,42 +31,36 @@ public class InputManager : MonoBehaviour
             if (CheckInput(MusicManager.current.timelineInfo.currentPosition))
             {
                 print("Good");
+
+
             }
             else
             {
                 print("Bad");
             }
         }
-
         CheckIndicatorStatus();
-
-
-
-
-
-
     }
 
 
     void CheckIndicatorStatus()
     {
-
-        if (currentInfo.indicatorOneInfo.Count > 0 && currentInfo.indicatorOneInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
+        if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
         {
-            currentInfo.indicatorOneInfo.RemoveAt(0);
+            BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
             Debug.Log("missed a kick");
             cubeTest.rotate(0);
         }
 
-        if (currentInfo.indicatorTwoInfo.Count > 0 && currentInfo.indicatorTwoInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
+        if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorTwoInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
         {
-            currentInfo.indicatorTwoInfo.RemoveAt(0);
+            BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
             Debug.Log("missed a snare");
             cubeTest.rotate(1);
         }
 
         //if theres no indicators left turn off the input
-        if (currentInfo.indicatorOneInfo.Count < 1 && currentInfo.indicatorTwoInfo.Count < 1)
+        if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count < 1 && BattleManager.current.currentSongInfo.indicatorTwoInfo.Count < 1)
         {
             this.enabled = false;
         }
@@ -91,14 +76,16 @@ public class InputManager : MonoBehaviour
 
         double indicatorOnePeek = -1, indicatorTwoPeek = -1;
 
+        int indicatorNext = 0;
 
-        if (currentInfo.indicatorOneInfo.Count > 0)
+
+        if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0)
         {
-            indicatorOnePeek = currentInfo.indicatorOneInfo[0];
+            indicatorOnePeek = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
         }
-        if (currentInfo.indicatorTwoInfo.Count > 0)
+        if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0)
         {
-            indicatorTwoPeek = currentInfo.indicatorTwoInfo[0];
+            indicatorTwoPeek = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
         }
 
 
@@ -106,35 +93,38 @@ public class InputManager : MonoBehaviour
         {
             //theres still at least one indicator one left
             nextIndicatorTime = indicatorOnePeek;
+            indicatorNext = 1;
         }
         else if (indicatorTwoPeek != -1 && indicatorOnePeek == -1)
         {
             //theres still at least one indicator two left
             nextIndicatorTime = indicatorTwoPeek;
+            indicatorNext = 2;
         }
         else
         {
-
-            if (currentInfo.indicatorOneInfo[0] < currentInfo.indicatorTwoInfo[0])
+            if (BattleManager.current.currentSongInfo.indicatorOneInfo[0] < BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
             {
                 //indicator 1 is the next one
-                nextIndicatorTime = currentInfo.indicatorOneInfo[0];
-                // currentInfo.indicatorOneInfo.RemoveAt(0);
-
+                nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
+                indicatorNext = 1;
+                // BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
             }
             //account for floating point fuckery (ignore the lazy casts lol)
-            else if (Mathf.Abs((float)currentInfo.indicatorOneInfo[0] - (float)currentInfo.indicatorTwoInfo[0]) < 0.01f)
+            else if (Mathf.Abs((float)BattleManager.current.currentSongInfo.indicatorOneInfo[0] - (float)BattleManager.current.currentSongInfo.indicatorTwoInfo[0]) < 0.01f)
             {
                 //same time, dequeue both
-                nextIndicatorTime = currentInfo.indicatorOneInfo[0];
-                // currentInfo.indicatorOneInfo.RemoveAt(0);
-                // currentInfo.indicatorTwoInfo.RemoveAt(0);
+                nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
+                indicatorNext = 1;
+                // BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
+                // BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
             }
-            else if (currentInfo.indicatorTwoInfo.Count > 1 && currentInfo.indicatorOneInfo[0] > currentInfo.indicatorTwoInfo[0])
+            else if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 1 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] > BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
             {
                 //indicator 2 is the next one
-                nextIndicatorTime = currentInfo.indicatorTwoInfo[0];
-                // currentInfo.indicatorTwoInfo.RemoveAt(0);
+                nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
+                indicatorNext = 2;
+                // BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
             }
             else
             {
@@ -146,12 +136,25 @@ public class InputManager : MonoBehaviour
         //again lazy casts
         if (Mathf.Abs(time - (float)nextIndicatorTime) < tolerance)
         {
-            Debug.Log("got it with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
+            //Debug.Log("got it with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
+
+            //delete the indicator object
+            Destroy(BattleManager.current.currentSongInfo.indicatorDict[nextIndicatorTime].gameObject);
+
+            if (indicatorNext == 1)
+            {
+                BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
+            }
+            else if (indicatorNext == 2)
+            {
+                BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
+            }
+
             return true;
         }
         else
         {
-            Debug.Log("missed with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
+            //Debug.Log("missed with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
             return false;
         }
 

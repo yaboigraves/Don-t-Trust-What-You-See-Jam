@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: event:/sourpunchv1
   guid: a15dd662733ad447b03816ce0c52313b
   Banks:
-  - {fileID: 5171146116181958702}
+  - {fileID: 6643916884609311788}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -41,6 +41,46 @@ MonoBehaviour:
   lastModified: 637507546348201064
   LoadResult: 0
   FileSizes: []
+  Exists: 0
+--- !u!114 &-4962644259976623053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD SHIT/weekJam/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637508191904116642
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-4191745310697559331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD SHIT/weekJam/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637508191904136587
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 848
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -55,18 +95,42 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 3676910649272943687}
-  - {fileID: -6134444199134616852}
-  - {fileID: 5171146116181958702}
+  - {fileID: -4191745310697559331}
+  - {fileID: -4962644259976623053}
+  - {fileID: 6643916884609311788}
   EditorEvents:
   - {fileID: -7605947241426354027}
+  - {fileID: 3221954066816181366}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -6134444199134616852}
+  - {fileID: -4962644259976623053}
   StringsBanks:
-  - {fileID: 3676910649272943687}
-  stringsBankWriteTime: 637507546348221013
+  - {fileID: -4191745310697559331}
+  stringsBankWriteTime: 637508191904136587
   cacheVersion: 6
+--- !u!114 &3221954066816181366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/omariTest
+  m_EditorClassIdentifier: 
+  Path: event:/omariTest
+  guid: 695f1757d1685e44918bddb9a9d1675d
+  Banks:
+  - {fileID: 6643916884609311788}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 48000
 --- !u!114 &3676910649272943687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +151,7 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 796
-  Exists: 1
+  Exists: 0
 --- !u!114 &5171146116181958702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +168,25 @@ MonoBehaviour:
   Name: Songs
   StudioPath: bank:/Songs
   lastModified: 637507546348431542
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &6643916884609311788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Songs.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD SHIT/weekJam/Build/Desktop/Songs.bank
+  Name: Songs
+  StudioPath: bank:/Songs
+  lastModified: 637508191934243781
   LoadResult: 0
   FileSizes: []
   Exists: 1

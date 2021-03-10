@@ -5,10 +5,6 @@ using System.Runtime.InteropServices;
 using FMODUnity;
 using System;
 
-//TESTING GOALS 
-//1. get a track to loop 2 times before randomly moving to another track within the timeline
-
-
 
 public class MusicManager : MonoBehaviour
 {
@@ -24,6 +20,7 @@ public class MusicManager : MonoBehaviour
         public int currentBeat = 0, currentBar = 0, currentPosition = 0;
         public float currentTempo = 0, songLength = 0;
         public FMOD.StringWrapper lastMarker = new FMOD.StringWrapper();
+
     }
 
     //every beat we store the time of the last beat hit in the audiosettings dsp time
