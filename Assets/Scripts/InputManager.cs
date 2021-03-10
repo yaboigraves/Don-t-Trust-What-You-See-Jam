@@ -11,6 +11,16 @@ public class InputManager : MonoBehaviour
     //so going to need to maintain two lists for the indicators 
 
     public RotateOn cubeTest;
+
+    public string battleMode = "defense";
+
+
+    //notes for defense mode
+    //-queue of true/false to start 
+    //-dequeue every beat and present to ui, wait a beat for input, dequeue again and then present etc
+
+
+
     private void Awake()
     {
         current = this;
@@ -27,19 +37,39 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(bind))
         {
             //check if we hit on the right time
-
-            if (CheckInput(MusicManager.current.timelineInfo.currentPosition))
+            if (battleMode == "offense")
             {
-                print("Good");
+                if (CheckInput(MusicManager.current.timelineInfo.currentPosition))
+                {
+                    print("Good");
+                    //spawn a good feedback
+                    UIManager.current.SpawnFeedBackText();
 
+
+                }
+                else
+                {
+                    print("Bad");
+                }
+            }
+            else if (battleMode == "defense")
+            {
 
             }
-            else
-            {
-                print("Bad");
-            }
+
         }
-        CheckIndicatorStatus();
+
+        //only do this if we're in offense mode
+
+        if (battleMode == "offense")
+        {
+            CheckIndicatorStatus();
+        }
+        else
+        {
+
+        }
+
     }
 
 
@@ -164,4 +194,7 @@ public class InputManager : MonoBehaviour
         }
 
     }
+
+
+
 }

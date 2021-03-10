@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class UIManager : MonoBehaviour
 
     //100 pixels for every beat
     public int pixelToSeconds = 100;
-
+    public GameObject feedbackText;
+    public Transform feedbackContainer;
     private void Awake()
     {
         current = this;
@@ -46,6 +48,11 @@ public class UIManager : MonoBehaviour
             indic.SetIndicatorTime((float)info.indicatorTwoInfo[i], indicatorDestination);
             info.indicatorDict[info.indicatorTwoInfo[i]] = indic;
         }
+    }
+
+    public void SpawnFeedBackText()
+    {
+        Instantiate(feedbackText, feedbackContainer.transform.position, Quaternion.identity, feedbackContainer);
     }
 
     // Update is called once per frame

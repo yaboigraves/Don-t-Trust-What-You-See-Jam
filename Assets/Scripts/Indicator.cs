@@ -48,6 +48,7 @@ public class Indicator : MonoBehaviour
     void Update()
     {
 
+
         if (lerpProgress < 1)
         {
             lerpProgress = MusicManager.current.timelineInfo.currentPosition / indicatorTime;

@@ -8,7 +8,12 @@ public class BattleManager : MonoBehaviour
     public static BattleManager current;
     public string currentBattleSongName;
     public SongInfo currentSongInfo;
-    // Start is called before the first frame update
+
+    //defense mode queue 
+
+    public int defenseQueueLength = 16;
+    public Queue<bool> defenseQueue;
+
 
     private void Awake()
     {
@@ -22,8 +27,14 @@ public class BattleManager : MonoBehaviour
 
         SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
 
-        Debug.Log("SONG INFO");
-        Debug.Log("Kicks");
+
+        //initialize the defense queue stuff
+        for (int i = 0; i < defenseQueueLength; i++)
+        {
+            defenseQueue.Enqueue(Random.Range(0, 2) == 0);
+        }
+
+
 
         float beatsPerSecond = 60f / 80f;
         for (int i = 0; i < info.indicatorOneInfo.Count; i++)
@@ -37,7 +48,7 @@ public class BattleManager : MonoBehaviour
         }
 
         currentSongInfo = info;
-        UIManager.current.SetupIndicators();
+        //UIManager.current.SetupIndicators();
     }
 
 
