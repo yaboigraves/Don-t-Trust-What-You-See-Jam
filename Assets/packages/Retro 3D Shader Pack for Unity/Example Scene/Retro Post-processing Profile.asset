@@ -24,23 +24,23 @@ MonoBehaviour:
     value: 4
   FixedVerticalResolution:
     overrideState: 1
-    value: 180
+    value: 140
   ColorDepth:
     overrideState: 1
     value: 0.102
   DitherPattern:
     overrideState: 1
-    value: {fileID: 2800000, guid: fd3fc319873bd5346875483dde02fcf7, type: 3}
+    value: {fileID: 2800000, guid: 88e26117924f1a04681fc1dceadd49e8, type: 3}
     defaultState: 0
   DitherPatternScale:
     overrideState: 1
-    value: 2
+    value: 3
   DitherThreshold:
     overrideState: 1
-    value: 0.023
+    value: 0.021
   DitherIntensity:
     overrideState: 1
-    value: 0.293
+    value: 0.276
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
