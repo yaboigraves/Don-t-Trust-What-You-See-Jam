@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 4
   FixedVerticalResolution:
     overrideState: 1
-    value: 420
+    value: 180
   ColorDepth:
     overrideState: 1
     value: 0.02
@@ -34,13 +34,13 @@ MonoBehaviour:
     defaultState: 0
   DitherPatternScale:
     overrideState: 1
-    value: 1
+    value: 2
   DitherThreshold:
     overrideState: 1
-    value: 0.04
+    value: 0.011
   DitherIntensity:
     overrideState: 1
-    value: 0.1
+    value: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

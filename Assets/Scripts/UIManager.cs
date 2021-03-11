@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     public Transform feedbackContainer;
 
     public TextMeshProUGUI defensePromptText;
+
+
+    public SpriteRenderer defenseCenterPointIndicator;
     private void Awake()
     {
         current = this;
@@ -62,9 +65,15 @@ public class UIManager : MonoBehaviour
         defensePromptText.text = b.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleDefenseInputUi()
     {
-
+        //turn on the white bar or turn it off
+        defenseCenterPointIndicator.enabled = !defenseCenterPointIndicator.enabled;
     }
+
+
+
+
+
+
 }

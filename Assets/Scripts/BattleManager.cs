@@ -61,6 +61,8 @@ public class BattleManager : MonoBehaviour
             UIManager.current.SpawnDefensePrompt(defenseQueue.Dequeue());
             //tell the input manager to get ready to open up a window for input 
             InputManager.current.OpenDefeneseWindow();
+
+
         }
         else
         {
