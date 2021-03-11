@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class BattleManager : MonoBehaviour
 {
@@ -8,12 +10,13 @@ public class BattleManager : MonoBehaviour
     public static BattleManager current;
     public string currentBattleSongName;
     public SongInfo currentSongInfo;
-
     //defense mode queue 
-
-    public int defenseQueueLength = 16;
+    public int defenseQueueLength = 64;
     public Queue<bool> defenseQueue;
     public string battleMode = "defense";
+    public bool currentDefense;
+
+
 
 
     private void Awake()
@@ -35,8 +38,6 @@ public class BattleManager : MonoBehaviour
             defenseQueue.Enqueue(Random.Range(0, 2) == 0);
         }
 
-
-
         float beatsPerSecond = 60f / 80f;
         for (int i = 0; i < info.indicatorOneInfo.Count; i++)
         {
@@ -50,6 +51,8 @@ public class BattleManager : MonoBehaviour
 
         currentSongInfo = info;
         //UIManager.current.SetupIndicators();
+
+        //init the input mode
     }
 
     public void DequeuDefensePrompt()
@@ -58,23 +61,37 @@ public class BattleManager : MonoBehaviour
 
         if (defenseQueue.Count > 1)
         {
-            UIManager.current.SpawnDefensePrompt(defenseQueue.Dequeue());
+            currentDefense = defenseQueue.Dequeue();
+            UIManager.current.SpawnDefensePrompt(currentDefense);
             //tell the input manager to get ready to open up a window for input 
             InputManager.current.OpenDefeneseWindow();
-
-
         }
         else
         {
             //switch the battle mode
         }
-
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PlayerPrefs.SetInt("inputMode", 1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            PlayerPrefs.SetInt("inputMode", 2);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
     }
 }

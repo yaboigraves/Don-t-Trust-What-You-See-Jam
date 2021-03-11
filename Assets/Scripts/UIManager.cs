@@ -10,16 +10,13 @@ public class UIManager : MonoBehaviour
     public GameObject indicator;
     public Transform indicatorContainer;
     public Transform indicatorDestination;
-
     //100 pixels for every beat
     public int pixelToSeconds = 100;
     public GameObject feedbackText;
     public Transform feedbackContainer;
-
     public TextMeshProUGUI defensePromptText;
-
-
     public SpriteRenderer defenseCenterPointIndicator;
+    public GameObject oneButtonDefenseUI, twoButtonDefenseUI;
     private void Awake()
     {
         current = this;
@@ -71,9 +68,16 @@ public class UIManager : MonoBehaviour
         defenseCenterPointIndicator.enabled = !defenseCenterPointIndicator.enabled;
     }
 
+    public void ToggleOneButtonDefenseInput()
+    {
+        oneButtonDefenseUI.SetActive(true);
+        twoButtonDefenseUI.SetActive(false);
+    }
 
-
-
-
+    public void ToggleTwoButtonDefenseInput()
+    {
+        oneButtonDefenseUI.SetActive(false);
+        twoButtonDefenseUI.SetActive(true);
+    }
 
 }

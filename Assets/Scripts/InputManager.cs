@@ -7,19 +7,18 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     public static InputManager current;
     public float tolerance;
-    public KeyCode bind = KeyCode.Space;
+    public KeyCode oneButtonBind = KeyCode.Space;
     //so going to need to maintain two lists for the indicators 
 
+    public KeyCode twoButtonBindOne = KeyCode.A, twoButtonBindTwo = KeyCode.D;
     public RotateOn cubeTest;
 
     public bool defenseInputOpen = false;
 
     public float defenseTolerance = 0.2f;
 
-
-    //notes for defense mode
-    //-queue of true/false to start 
-    //-dequeue every beat and present to ui, wait a beat for input, dequeue again and then present etc
+    //one or two
+    public string inputMode = "one";
 
 
 
@@ -30,13 +29,50 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
-
+        InitInputs();
     }
+
+    public void InitInputs()
+    {
+        if (inputMode == "one")
+        {
+            UIManager.current.ToggleOneButtonDefenseInput();
+        }
+        else if (inputMode == "two")
+        {
+            UIManager.current.ToggleTwoButtonDefenseInput();
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(bind))
+        if (inputMode == "one")
+        {
+            OneButtonInput();
+        }
+        else if (inputMode == "two")
+        {
+            TwoButtonInput();
+        }
+
+
+        //only do this if we're in offense mode
+
+        if (BattleManager.current.battleMode == "offense")
+        {
+            CheckIndicatorStatus();
+        }
+        else
+        {
+
+        }
+    }
+
+    public void OneButtonInput()
+    {
+        if (Input.GetKeyDown(oneButtonBind))
         {
             //check if we hit on the right time
             if (BattleManager.current.battleMode == "offense")
@@ -57,7 +93,7 @@ public class InputManager : MonoBehaviour
             else if (BattleManager.current.battleMode == "defense")
             {
                 //check if we're currently in a window to accept an input
-                if (defenseInputOpen)
+                if (defenseInputOpen && BattleManager.current.currentDefense)
                 {
                     Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText();
@@ -69,34 +105,39 @@ public class InputManager : MonoBehaviour
                     defenseInputOpen = false;
                 }
             }
-
         }
-
-        //only do this if we're in offense mode
-
-        if (BattleManager.current.battleMode == "offense")
-        {
-            CheckIndicatorStatus();
-        }
-        else
-        {
-
-        }
-
     }
+
+    public void TwoButtonInput()
+    {
+        if (BattleManager.current.battleMode == "defense")
+        {
+            //so assuming that input 1 is true and input 2 is false for now
+
+            if (Input.GetKeyDown(twoButtonBindOne))
+            {
+                if (defenseInputOpen && BattleManager.current.currentDefense)
+                {
+                    Debug.Log("Good");
+                    UIManager.current.SpawnFeedBackText();
+                    defenseInputOpen = false;
+                }
+            }
+            else if (Input.GetKeyDown(twoButtonBindTwo))
+            {
+                if (defenseInputOpen && !BattleManager.current.currentDefense)
+                {
+                    Debug.Log("Good");
+                    UIManager.current.SpawnFeedBackText();
+                    defenseInputOpen = false;
+                }
+            }
+        }
+    }
+
 
     public void OpenDefeneseWindow()
     {
-        //so this is going to be called specifically on the one or the three
-        //so we need to mark the time that this gets called for testing so lets debug log it
-
-        // Debug.Log(MusicManager.current.timelineInfo.currentPosition);
-
-        //so we can use the same tolerance value, the input needs to open at 1.5 beats in the future and close 2.5 beats in the future
-        //achieve this through two coroutines
-
-        //convert the tolerance into beats?
-
         StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 - defenseTolerance) * (60f / 80f) * 1000), true));
         StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 + defenseTolerance) * (60f / 80f) * 1000), false));
     }
