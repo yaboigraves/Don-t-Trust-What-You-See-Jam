@@ -35,6 +35,7 @@ public static class SongLoader
 
 
 //so this is going to also need to maintain a dictionary mapping indicators to their times
+[System.Serializable]
 public class SongInfo
 {
     public List<double> indicatorOneInfo, indicatorTwoInfo;

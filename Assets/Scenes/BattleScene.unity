@@ -1637,9 +1637,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentBattleSongName: omariTest
+  currentSongInfo:
+    indicatorOneInfo: []
+    indicatorTwoInfo: []
   defenseQueueLength: 16
   battleMode: defense
   currentDefense: 0
+  currentLevelSongInfo: {fileID: 11400000, guid: f333b6c268742974298a19a6442e8ed5,
+    type: 2}
 --- !u!4 &887040859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8e57a3bdace6b3240a167bdc071ed0b0,

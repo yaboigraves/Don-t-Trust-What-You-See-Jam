@@ -16,6 +16,8 @@ public class BattleManager : MonoBehaviour
     public string battleMode = "defense";
     public bool currentDefense;
 
+    public Level currentLevelSongInfo;
+
 
 
 
@@ -29,7 +31,9 @@ public class BattleManager : MonoBehaviour
         //load the midi data for the current song name into two lists then send that off to the 
         //indicator manager and the input manager 
 
-        SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
+        // SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
+
+        SongInfo info = currentLevelSongInfo.songInfo;
         defenseQueue = new Queue<bool>();
 
         //initialize the defense queue stuff
@@ -43,7 +47,7 @@ public class BattleManager : MonoBehaviour
         {
             info.indicatorOneInfo[i] *= (beatsPerSecond * 1000);
         }
-        Debug.Log("Snares");
+        // Debug.Log("Snares");
         for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
         {
             info.indicatorTwoInfo[i] *= (beatsPerSecond * 1000);
