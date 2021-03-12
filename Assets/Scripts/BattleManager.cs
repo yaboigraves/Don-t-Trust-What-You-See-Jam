@@ -20,6 +20,7 @@ public class BattleManager : MonoBehaviour
 
     public StatusInfo statusInfo;
 
+    public GameObject levelObject;
 
     private void Awake()
     {
@@ -29,6 +30,9 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
 
+        GameObject lo = Instantiate(levelObject, transform.position, Quaternion.identity, transform);
+
+        currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
 
         // SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
         currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();

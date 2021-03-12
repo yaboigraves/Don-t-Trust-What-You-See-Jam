@@ -1713,6 +1713,8 @@ MonoBehaviour:
     minVibe: 50
     vibeIncreaseRate: 2
     vibeDecreaseRate: -4
+  levelObject: {fileID: 3313923100036815364, guid: e254717a415855d4ab50356c78e52179,
+    type: 3}
   currentBeatCounter: 0
   totalBeatCounter: 0
 --- !u!4 &887040859 stripped
@@ -2104,6 +2106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1853094968961178454, guid: 81187a5b2641adc419691a512e190c5c,
         type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1853094968961178454, guid: 81187a5b2641adc419691a512e190c5c,
+        type: 3}
       propertyPath: field of view
       value: 138.38527
       objectReference: {fileID: 0}
@@ -2121,6 +2128,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SensorSize.y
       value: 52.63
+      objectReference: {fileID: 0}
+    - target: {fileID: -1853094968961178454, guid: 81187a5b2641adc419691a512e190c5c,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1853094968961178454, guid: 81187a5b2641adc419691a512e190c5c,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1853094968961178454, guid: 81187a5b2641adc419691a512e190c5c,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1853094968961178454, guid: 81187a5b2641adc419691a512e190c5c,
         type: 3}

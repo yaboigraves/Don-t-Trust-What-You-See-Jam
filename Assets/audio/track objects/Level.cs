@@ -35,6 +35,7 @@ public class Level : ScriptableObject
             songInfo.indicatorTwoInfo[i] *= (beatsPerSecond) * 1000;
         }
 
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 
 

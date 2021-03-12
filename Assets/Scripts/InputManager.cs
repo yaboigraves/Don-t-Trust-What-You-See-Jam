@@ -170,6 +170,12 @@ public class InputManager : MonoBehaviour
         yield return new WaitUntil(() => MusicManager.current.timelineInfo.currentPosition >= time);
         defenseInputOpen = toggle;
 
+        if (toggle == false && BattleManager.current.currentDefense)
+        {
+            //check if we missed a true window 
+            BattleManager.current.ProcessHit(false);
+        }
+
         //so we're also in here going to need to have the ui manager indicate that its opened
         //just flash it green for now
         UIManager.current.ToggleDefenseInputUi();

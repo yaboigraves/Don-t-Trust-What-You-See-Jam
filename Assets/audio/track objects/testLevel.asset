@@ -13,7 +13,48 @@ MonoBehaviour:
   m_Name: testLevel
   m_EditorClassIdentifier: 
   songInfo:
-    indicatorOneInfo: []
-    indicatorTwoInfo: []
+    indicatorOneInfo:
+    - 13687.5
+    - 13875
+    - 15000
+    - 15187.5
+    - 16687.5
+    - 16875
+    - 18000
+    - 18375
+    - 19687.5
+    - 19875
+    - 21000
+    - 21375
+    - 22687.5
+    - 22875
+    - 36000
+    - 36375
+    - 37687.5
+    - 37875
+    - 39000
+    - 39187.5
+    - 40687.5
+    - 40875
+    - 42000
+    - 42375
+    - 43687.5
+    - 43875
+    - 45000
+    - 45375
+    - 46687.5
+    - 46875
+    indicatorTwoInfo:
+    - 13507.812499999998
+    - 16507.8125
+    - 19507.8125
+    - 22507.8125
+    - 37507.8125
+    - 40507.8125
+    - 43507.8125
+    - 46507.8125
   midiFileName: omariTest
   bpm: 80
+  defensePhaseLength: 16
+  offensePhaseLength: 16
+  songLengthInBeats: 64
