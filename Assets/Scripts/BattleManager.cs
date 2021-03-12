@@ -18,7 +18,7 @@ public class BattleManager : MonoBehaviour
 
     public Level currentLevelSongInfo;
 
-
+    public StatusInfo statusInfo;
 
 
     private void Awake()
@@ -108,8 +108,36 @@ public class BattleManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        CheckStatus();
     }
 
+    public void CheckStatus()
+    {
+        if (statusInfo.currentVibe < statusInfo.minVibe)
+        {
+            //lose state
+        }
+    }
+
+    public void ProcessHit(bool hit)
+    {
+        if (hit)
+        {
+            if (statusInfo.currentVibe + statusInfo.vibeIncreaseRate <= statusInfo.maxVibe)
+            {
+                statusInfo.currentVibe += statusInfo.vibeIncreaseRate;
+            }
+
+
+            statusInfo.streak++;
+        }
+        else
+        {
+            statusInfo.currentVibe += statusInfo.vibeDecreaseRate;
+            statusInfo.streak = 0;
+        }
+    }
 
     //call this in the music manager every beat
 
@@ -117,6 +145,12 @@ public class BattleManager : MonoBehaviour
     public void CheckPhase()
     {
         currentBeatCounter++;
+
+        if (currentBeatCounter > +currentLevelSongInfo.songLengthInBeats)
+        {
+            //win state
+        }
+
         if (battleMode == "defense")
         {
             if (currentBeatCounter >= currentLevelSongInfo.defensePhaseLength)
@@ -141,4 +175,18 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+}
+
+[System.Serializable]
+public class StatusInfo
+{
+    public int maxVibe;
+    public int streak;
+
+    public int currentVibe;
+
+    public int minVibe;
+    public int vibeIncreaseRate, vibeDecreaseRate;
+
+
 }

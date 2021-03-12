@@ -91,11 +91,13 @@ public class InputManager : MonoBehaviour
                     print("Good");
                     //spawn a good feedback
                     UIManager.current.SpawnFeedBackText();
+                    BattleManager.current.ProcessHit(true);
 
 
                 }
                 else
                 {
+                    BattleManager.current.ProcessHit(false);
                     print("Bad");
                 }
             }
@@ -107,10 +109,13 @@ public class InputManager : MonoBehaviour
                     Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText();
                     defenseInputOpen = false;
+
+                    BattleManager.current.ProcessHit(true);
                 }
                 else
                 {
                     Debug.Log("Bad");
+                    BattleManager.current.ProcessHit(false);
                     defenseInputOpen = false;
                 }
             }
@@ -130,6 +135,11 @@ public class InputManager : MonoBehaviour
                     Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText();
                     defenseInputOpen = false;
+                    BattleManager.current.ProcessHit(true);
+                }
+                else
+                {
+                    BattleManager.current.ProcessHit(false);
                 }
             }
             else if (Input.GetKeyDown(twoButtonBindTwo))
@@ -139,6 +149,10 @@ public class InputManager : MonoBehaviour
                     Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText();
                     defenseInputOpen = false;
+                }
+                else
+                {
+                    BattleManager.current.ProcessHit(false);
                 }
             }
         }
@@ -170,6 +184,7 @@ public class InputManager : MonoBehaviour
 
             //delete the indicator too
             Debug.Log("missed a kick");
+            BattleManager.current.ProcessHit(false);
             cubeTest.rotate(0);
         }
 
@@ -180,6 +195,7 @@ public class InputManager : MonoBehaviour
 
             //delete the indicator too
             Debug.Log("missed a snare");
+            BattleManager.current.ProcessHit(false);
             cubeTest.rotate(1);
         }
 

@@ -88,7 +88,6 @@ public class MusicManager : MonoBehaviour
 
         //so we need to just pass in the bpm info of the current loaded track, need to make sure everything 
         //is loaded in fmod
-
         return SongLoader.loadSongInfoFromMidi(songName, 80);
     }
 

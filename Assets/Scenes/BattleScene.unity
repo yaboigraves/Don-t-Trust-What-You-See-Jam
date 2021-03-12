@@ -1572,6 +1572,13 @@ MonoBehaviour:
   currentDefense: 0
   currentLevelSongInfo: {fileID: 11400000, guid: f333b6c268742974298a19a6442e8ed5,
     type: 2}
+  statusInfo:
+    maxVibe: 200
+    streak: 0
+    currentVibe: 100
+    minVibe: 50
+    vibeIncreaseRate: 2
+    vibeDecreaseRate: -4
   currentBeatCounter: 0
 --- !u!4 &887040859 stripped
 Transform:

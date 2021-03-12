@@ -16,6 +16,7 @@ public class Level : ScriptableObject
     public int defensePhaseLength = 16;
     public int offensePhaseLength = 16;
 
+    public int songLengthInBeats = 64;
 
     public void buildSongInfo()
     {
