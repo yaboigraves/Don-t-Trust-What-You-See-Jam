@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI defensePromptText;
     public SpriteRenderer defenseCenterPointIndicator;
     public GameObject oneButtonDefenseUI, twoButtonDefenseUI;
+
+    public GameObject defenseUIContainer, offenseUIContainer;
+
+
     private void Awake()
     {
         current = this;
@@ -30,15 +34,19 @@ public class UIManager : MonoBehaviour
     public void SetupIndicators()
     {
 
-        SongInfo info = BattleManager.current.currentSongInfo;
+        SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
         //so when we spawn in the songinfo stuff, we should map the times to the indicators to reference them
         //assuming every beat is based on the ratio, plop them down
         for (int i = 0; i < info.indicatorOneInfo.Count; i++)
         {
+
+            // Debug.Break();
             Vector3 indicPos = indicatorContainer.transform.position + new Vector3((float)info.indicatorOneInfo[i] / 1000 * pixelToSeconds, 0, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
             indic.SetIndicatorTime((float)info.indicatorOneInfo[i], indicatorDestination);
 
+
+            // Debug.Log(info.indicatorDict);
             //map the indicator at this time in the song info dictionary
             info.indicatorDict[info.indicatorOneInfo[i]] = indic;
         }
@@ -68,6 +76,9 @@ public class UIManager : MonoBehaviour
         defenseCenterPointIndicator.enabled = !defenseCenterPointIndicator.enabled;
     }
 
+
+
+
     public void ToggleOneButtonDefenseInput()
     {
         oneButtonDefenseUI.SetActive(true);
@@ -78,6 +89,17 @@ public class UIManager : MonoBehaviour
     {
         oneButtonDefenseUI.SetActive(false);
         twoButtonDefenseUI.SetActive(true);
+    }
+
+    public void EnableDefenseModeUi()
+    {
+        offenseUIContainer.SetActive(false);
+        defenseUIContainer.SetActive(true);
+    }
+    public void EnableOffenseModeUi()
+    {
+        offenseUIContainer.SetActive(true);
+        defenseUIContainer.SetActive(false);
     }
 
 }

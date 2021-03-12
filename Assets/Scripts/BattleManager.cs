@@ -11,7 +11,7 @@ public class BattleManager : MonoBehaviour
     public string currentBattleSongName;
     public SongInfo currentSongInfo;
     //defense mode queue 
-    public int defenseQueueLength = 64;
+    public int defenseQueueLength = 8;
     public Queue<bool> defenseQueue;
     public string battleMode = "defense";
     public bool currentDefense;
@@ -32,31 +32,43 @@ public class BattleManager : MonoBehaviour
         //indicator manager and the input manager 
 
         // SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
-
+        currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
         SongInfo info = currentLevelSongInfo.songInfo;
+
+        //defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
+
         defenseQueue = new Queue<bool>();
 
-        //initialize the defense queue stuff
+        FillDefenseQueue();
+
+        // float beatsPerSecond = 60f / 80f;
+        // for (int i = 0; i < info.indicatorOneInfo.Count; i++)
+        // {
+        //     info.indicatorOneInfo[i] *= (beatsPerSecond * 1000);
+        // }
+        // // Debug.Log("Snares");
+        // for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
+        // {
+        //     info.indicatorTwoInfo[i] *= (beatsPerSecond * 1000);
+        // }
+
+        currentSongInfo = info;
+
+
+        UIManager.current.SetupIndicators();
+
+        UIManager.current.EnableDefenseModeUi();
+
+        //init the input mode
+    }
+
+    public void FillDefenseQueue()
+    {
+        defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
         for (int i = 0; i < defenseQueueLength; i++)
         {
             defenseQueue.Enqueue(Random.Range(0, 2) == 0);
         }
-
-        float beatsPerSecond = 60f / 80f;
-        for (int i = 0; i < info.indicatorOneInfo.Count; i++)
-        {
-            info.indicatorOneInfo[i] *= (beatsPerSecond * 1000);
-        }
-        // Debug.Log("Snares");
-        for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
-        {
-            info.indicatorTwoInfo[i] *= (beatsPerSecond * 1000);
-        }
-
-        currentSongInfo = info;
-        //UIManager.current.SetupIndicators();
-
-        //init the input mode
     }
 
     public void DequeuDefensePrompt()
@@ -96,6 +108,37 @@ public class BattleManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
 
+
+    //call this in the music manager every beat
+
+    public int currentBeatCounter;
+    public void CheckPhase()
+    {
+        currentBeatCounter++;
+        if (battleMode == "defense")
+        {
+            if (currentBeatCounter >= currentLevelSongInfo.defensePhaseLength)
+            {
+                //switch the ui to offense mode
+
+                UIManager.current.EnableOffenseModeUi();
+                battleMode = "offense";
+                currentBeatCounter = 0;
+
+            }
+        }
+        else if (battleMode == "offense")
+        {
+            if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength)
+            {
+                //requeue a bunch more defense prompts into the queue
+                FillDefenseQueue();
+                battleMode = "defense";
+                UIManager.current.EnableDefenseModeUi();
+                currentBeatCounter = 0;
+            }
+        }
     }
 }

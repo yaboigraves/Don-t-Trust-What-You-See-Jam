@@ -96,7 +96,7 @@ public class MusicManager : MonoBehaviour
 
     public void beatTrigger()
     {
-
+        BattleManager.current.CheckPhase();
         if (BattleManager.current.battleMode == "defense")
         {
             //check whether we're waiting for an input or not

@@ -29,6 +29,15 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.GetInt("inputMode") == 2)
+        {
+            inputMode = "two";
+        }
+        else
+        {
+            inputMode = "one";
+        }
+
         InitInputs();
     }
 

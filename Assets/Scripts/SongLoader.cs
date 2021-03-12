@@ -40,7 +40,7 @@ public class SongInfo
 {
     public List<double> indicatorOneInfo, indicatorTwoInfo;
 
-    public Dictionary<double, Indicator> indicatorDict;
+    public Dictionary<double, Indicator> indicatorDict = new Dictionary<double, Indicator>();
     public SongInfo(List<double> oneInfo, List<double> twoInfo)
     {
         //floats? I guess?
