@@ -28,29 +28,17 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-        //load the midi data for the current song name into two lists then send that off to the 
-        //indicator manager and the input manager 
+
 
         // SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
         currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
         SongInfo info = currentLevelSongInfo.songInfo;
 
-        //defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
+
 
         defenseQueue = new Queue<bool>();
 
         FillDefenseQueue();
-
-        // float beatsPerSecond = 60f / 80f;
-        // for (int i = 0; i < info.indicatorOneInfo.Count; i++)
-        // {
-        //     info.indicatorOneInfo[i] *= (beatsPerSecond * 1000);
-        // }
-        // // Debug.Log("Snares");
-        // for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
-        // {
-        //     info.indicatorTwoInfo[i] *= (beatsPerSecond * 1000);
-        // }
 
         currentSongInfo = info;
 
@@ -117,6 +105,8 @@ public class BattleManager : MonoBehaviour
         if (statusInfo.currentVibe < statusInfo.minVibe)
         {
             //lose state
+            UIManager.current.EnableWinLoseUI(false);
+            InputManager.current.enabled = false;
         }
     }
 
@@ -128,7 +118,6 @@ public class BattleManager : MonoBehaviour
             {
                 statusInfo.currentVibe += statusInfo.vibeIncreaseRate;
             }
-
 
             statusInfo.streak++;
         }
@@ -142,13 +131,17 @@ public class BattleManager : MonoBehaviour
     //call this in the music manager every beat
 
     public int currentBeatCounter;
+    public int totalBeatCounter;
     public void CheckPhase()
     {
         currentBeatCounter++;
+        totalBeatCounter++;
 
-        if (currentBeatCounter > +currentLevelSongInfo.songLengthInBeats)
+        if (totalBeatCounter > +currentLevelSongInfo.songLengthInBeats)
         {
             //win state
+            UIManager.current.EnableWinLoseUI(true);
+            InputManager.current.enabled = false;
         }
 
         if (battleMode == "defense")

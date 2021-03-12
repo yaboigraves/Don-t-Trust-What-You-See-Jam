@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     public GameObject defenseUIContainer, offenseUIContainer;
 
 
+    public GameObject winLoseContainer;
     private void Awake()
     {
         current = this;
@@ -100,6 +101,23 @@ public class UIManager : MonoBehaviour
     {
         offenseUIContainer.SetActive(true);
         defenseUIContainer.SetActive(false);
+    }
+
+    public void EnableWinLoseUI(bool didWin)
+    {
+        //disable the other ui
+        offenseUIContainer.SetActive(false);
+        defenseUIContainer.SetActive(false);
+
+        winLoseContainer.SetActive(true);
+        if (didWin)
+        {
+            // winLoseContainer.GetComponent<TextMeshProUGUI>().text = "You Won!";
+        }
+        else
+        {
+            // winLoseContainer.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+        }
     }
 
 }
