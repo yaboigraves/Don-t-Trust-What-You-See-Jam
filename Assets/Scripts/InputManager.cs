@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
 
     public bool gotGoodDefenseInput = false;
 
+
     private void Awake()
     {
         current = this;

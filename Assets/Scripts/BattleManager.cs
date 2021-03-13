@@ -135,6 +135,7 @@ public class BattleManager : MonoBehaviour
         }
 
         UIManager.current.UpdateVibeBarSlider(statusInfo.currentVibe);
+        UIManager.current.UpdateStreakText(statusInfo.streak);
     }
 
     //call this in the music manager every beat

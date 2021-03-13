@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     public Slider vibeBarSlider;
 
     public GameObject winLoseContainer;
+
+    public TextMeshProUGUI streakText;
     private void Awake()
     {
         current = this;
@@ -87,6 +89,10 @@ public class UIManager : MonoBehaviour
         vibeBarSlider.value = curVibe;
     }
 
+    public void UpdateStreakText(int streak)
+    {
+        streakText.text = "Streak X " + streak.ToString();
+    }
 
 
 

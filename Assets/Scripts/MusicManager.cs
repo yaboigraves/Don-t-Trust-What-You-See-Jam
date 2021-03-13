@@ -96,6 +96,11 @@ public class MusicManager : MonoBehaviour
     public void beatTrigger()
     {
         BattleManager.current.CheckPhase();
+
+        if (timelineInfo.currentBeat == 1)
+        {
+            CameraManager.current.SwitchCamera();
+        }
         if (BattleManager.current.battleMode == "defense")
         {
             //check whether we're waiting for an input or not
@@ -106,6 +111,7 @@ public class MusicManager : MonoBehaviour
 
                 //reset if we got an input from the last defense
                 InputManager.current.gotGoodDefenseInput = false;
+
             }
             else
             {
