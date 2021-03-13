@@ -18,9 +18,9 @@ public class InputManager : MonoBehaviour
     public float defenseTolerance = 0.2f;
 
     //one or two
-    public string inputMode = "one";
+    public string inputMode;
 
-    public bool gotGoodDefenseInput = false;
+    public bool gotInputLastDefense = false;
 
 
     private void Awake()
@@ -60,12 +60,14 @@ public class InputManager : MonoBehaviour
     {
         if (inputMode == "one")
         {
-            OneButtonInput();
+            // OneButtonInput();
         }
         else if (inputMode == "two")
         {
-            TwoButtonInput();
+            // TwoButtonInput();
         }
+
+        TwoButtonInput();
 
 
         //only do this if we're in offense mode
@@ -80,48 +82,50 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void OneButtonInput()
-    {
-        if (Input.GetKeyDown(oneButtonBind))
-        {
-            //check if we hit on the right time
-            if (BattleManager.current.battleMode == "offense")
-            {
-                if (CheckInput(MusicManager.current.timelineInfo.currentPosition))
-                {
-                    print("Good");
-                    //spawn a good feedback
-                    UIManager.current.SpawnFeedBackText();
-                    BattleManager.current.ProcessHit(true);
+    // public void OneButtonInput()
+    // {
+    //     if (Input.GetKeyDown(oneButtonBind))
+    //     {
+    //         //check if we hit on the right time
+    //         if (BattleManager.current.battleMode == "offense")
+    //         {
+    //             if (CheckInput(MusicManager.current.timelineInfo.currentPosition))
+    //             {
+    //                 print("Good");
+    //                 //spawn a good feedback
+    //                 UIManager.current.SpawnFeedBackText(true);
+    //                 BattleManager.current.ProcessHit(true);
 
 
-                }
-                else
-                {
-                    BattleManager.current.ProcessHit(false);
-                    print("Bad");
-                }
-            }
-            else if (BattleManager.current.battleMode == "defense")
-            {
-                //check if we're currently in a window to accept an input
-                if (defenseInputOpen && BattleManager.current.currentDefense)
-                {
-                    Debug.Log("Good");
-                    UIManager.current.SpawnFeedBackText();
-                    defenseInputOpen = false;
-                    gotGoodDefenseInput = true;
-                    BattleManager.current.ProcessHit(true);
-                }
-                else
-                {
-                    Debug.Log("Bad");
-                    BattleManager.current.ProcessHit(false);
-                    defenseInputOpen = false;
-                }
-            }
-        }
-    }
+    //             }
+    //             else
+    //             {
+    //                 BattleManager.current.ProcessHit(false);
+    //                 UIManager.current.SpawnFeedBackText(false);
+    //                 print("Bad");
+    //             }
+    //         }
+    //         else if (BattleManager.current.battleMode == "defense")
+    //         {
+    //             //check if we're currently in a window to accept an input
+    //             if (defenseInputOpen && BattleManager.current.currentDefense)
+    //             {
+    //                 Debug.Log("Good");
+    //                 UIManager.current.SpawnFeedBackText(true);
+    //                 defenseInputOpen = false;
+
+    //                 BattleManager.current.ProcessHit(true);
+    //             }
+    //             else
+    //             {
+    //                 Debug.Log("Bad");
+    //                 BattleManager.current.ProcessHit(false);
+    //                 UIManager.current.SpawnFeedBackText(false);
+    //                 defenseInputOpen = false;
+    //             }
+    //         }
+    //     }
+    // }
 
     public void TwoButtonInput()
     {
@@ -131,28 +135,32 @@ public class InputManager : MonoBehaviour
 
             if (Input.GetKeyDown(twoButtonBindOne))
             {
+                gotInputLastDefense = true;
                 if (defenseInputOpen && BattleManager.current.currentDefense)
                 {
                     Debug.Log("Good");
-                    UIManager.current.SpawnFeedBackText();
+                    UIManager.current.SpawnFeedBackText(true);
                     defenseInputOpen = false;
                     BattleManager.current.ProcessHit(true);
                 }
                 else
                 {
+                    UIManager.current.SpawnFeedBackText(false);
                     BattleManager.current.ProcessHit(false);
                 }
             }
             else if (Input.GetKeyDown(twoButtonBindTwo))
             {
+                gotInputLastDefense = true;
                 if (defenseInputOpen && !BattleManager.current.currentDefense)
                 {
                     Debug.Log("Good");
-                    UIManager.current.SpawnFeedBackText();
+                    UIManager.current.SpawnFeedBackText(true);
                     defenseInputOpen = false;
                 }
                 else
                 {
+                    UIManager.current.SpawnFeedBackText(false);
                     BattleManager.current.ProcessHit(false);
                 }
             }
@@ -173,12 +181,21 @@ public class InputManager : MonoBehaviour
         defenseInputOpen = toggle;
 
 
+
         //so this needs to check if a correct input was already recieved
-        if (toggle == false && BattleManager.current.currentDefense && !gotGoodDefenseInput)
+        // if (toggle == false && BattleManager.current.currentDefense && !gotGoodDefenseInput && inputMode == "one")
+        // {
+        //     //check if we missed a true window 
+        //     BattleManager.current.ProcessHit(false);
+        // }
+
+        if (toggle == false && !gotInputLastDefense)
         {
-            //check if we missed a true window 
             BattleManager.current.ProcessHit(false);
+            UIManager.current.SpawnFeedBackText(false);
         }
+
+        //so we're specifically doing two input now, so if you do no input at all in an input when it closes then you gotta take damage
 
         //so we're also in here going to need to have the ui manager indicate that its opened
         //just flash it green for now

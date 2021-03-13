@@ -110,7 +110,7 @@ public class MusicManager : MonoBehaviour
                 BattleManager.current.DequeuDefensePrompt();
 
                 //reset if we got an input from the last defense
-                InputManager.current.gotGoodDefenseInput = false;
+                InputManager.current.gotInputLastDefense = false;
 
             }
             else

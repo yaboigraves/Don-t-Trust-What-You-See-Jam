@@ -25,6 +25,9 @@ public class UIManager : MonoBehaviour
     public GameObject winLoseContainer;
 
     public TextMeshProUGUI streakText;
+
+    public GameObject otherDefenseContainer;
+
     private void Awake()
     {
         current = this;
@@ -61,9 +64,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SpawnFeedBackText()
+    public void SpawnFeedBackText(bool didHit)
     {
-        Instantiate(feedbackText, feedbackContainer.transform.position, Quaternion.identity, feedbackContainer);
+        FeedbackText fText = Instantiate(feedbackText, feedbackContainer.transform.position, Quaternion.identity, feedbackContainer).GetComponent<FeedbackText>();
+        fText.SetText(didHit);
+
     }
 
     public void SpawnDefensePrompt(bool b)
@@ -93,8 +98,6 @@ public class UIManager : MonoBehaviour
     {
         streakText.text = "Streak X " + streak.ToString();
     }
-
-
 
     public void ToggleOneButtonDefenseInput()
     {
