@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject defenseUIContainer, offenseUIContainer;
 
+    public Slider vibeBarSlider;
 
     public GameObject winLoseContainer;
     private void Awake()
@@ -40,12 +41,9 @@ public class UIManager : MonoBehaviour
         //assuming every beat is based on the ratio, plop them down
         for (int i = 0; i < info.indicatorOneInfo.Count; i++)
         {
-
-            // Debug.Break();
             Vector3 indicPos = indicatorContainer.transform.position + new Vector3((float)info.indicatorOneInfo[i] / 1000 * pixelToSeconds, 0, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
             indic.SetIndicatorTime((float)info.indicatorOneInfo[i], indicatorDestination);
-
 
             // Debug.Log(info.indicatorDict);
             //map the indicator at this time in the song info dictionary
@@ -75,6 +73,18 @@ public class UIManager : MonoBehaviour
     {
         //turn on the white bar or turn it off
         defenseCenterPointIndicator.enabled = !defenseCenterPointIndicator.enabled;
+    }
+
+    //vibe slider stuff
+    public void InitVibeSlider(int maxVibe, int currentVibe)
+    {
+        vibeBarSlider.maxValue = maxVibe;
+        vibeBarSlider.value = currentVibe;
+    }
+
+    public void UpdateVibeBarSlider(int curVibe)
+    {
+        vibeBarSlider.value = curVibe;
     }
 
 

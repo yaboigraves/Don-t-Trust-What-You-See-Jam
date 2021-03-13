@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,9 +31,9 @@ public class BattleManager : MonoBehaviour
     {
 
         currentLevelSongInfo = Instantiate(currentLevelSongInfo);
-                            // GameObject lo = Instantiate(levelO
-                                        
-                            // currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
+        // GameObject lo = Instantiate(levelObject, trans
+
+        // currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
 
         // SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
         currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
@@ -53,7 +53,7 @@ public class BattleManager : MonoBehaviour
         UIManager.current.SetupIndicators();
 
         UIManager.current.EnableDefenseModeUi();
-
+        UIManager.current.InitVibeSlider(statusInfo.maxVibe, statusInfo.currentVibe);
         //init the input mode
     }
 
@@ -133,6 +133,8 @@ public class BattleManager : MonoBehaviour
             statusInfo.currentVibe += statusInfo.vibeDecreaseRate;
             statusInfo.streak = 0;
         }
+
+        UIManager.current.UpdateVibeBarSlider(statusInfo.currentVibe);
     }
 
     //call this in the music manager every beat

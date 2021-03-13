@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
     //one or two
     public string inputMode = "one";
 
-
+    public bool gotGoodDefenseInput = false;
 
     private void Awake()
     {
@@ -109,7 +109,7 @@ public class InputManager : MonoBehaviour
                     Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText();
                     defenseInputOpen = false;
-
+                    gotGoodDefenseInput = true;
                     BattleManager.current.ProcessHit(true);
                 }
                 else
@@ -165,12 +165,15 @@ public class InputManager : MonoBehaviour
         StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 + defenseTolerance) * (60f / 80f) * 1000), false));
     }
 
+
     public IEnumerator openWindowRoutine(double time, bool toggle)
     {
         yield return new WaitUntil(() => MusicManager.current.timelineInfo.currentPosition >= time);
         defenseInputOpen = toggle;
 
-        if (toggle == false && BattleManager.current.currentDefense)
+
+        //so this needs to check if a correct input was already recieved
+        if (toggle == false && BattleManager.current.currentDefense && !gotGoodDefenseInput)
         {
             //check if we missed a true window 
             BattleManager.current.ProcessHit(false);
