@@ -116,8 +116,11 @@ public class UIManager : MonoBehaviour
         offenseUIContainer.SetActive(false);
         defenseUIContainer.SetActive(true);
     }
+
+
     public void EnableOffenseModeUi()
     {
+        otherDefenseContainer.SetActive(false);
         offenseUIContainer.SetActive(true);
         defenseUIContainer.SetActive(false);
     }
