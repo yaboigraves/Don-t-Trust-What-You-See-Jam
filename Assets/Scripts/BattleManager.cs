@@ -30,12 +30,15 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
 
-        GameObject lo = Instantiate(levelObject, transform.position, Quaternion.identity, transform);
-
-        currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
+        currentLevelSongInfo = Instantiate(currentLevelSongInfo);
+                            // GameObject lo = Instantiate(levelO
+                                        
+                            // currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
 
         // SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
         currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
+
+
         SongInfo info = currentLevelSongInfo.songInfo;
 
 
