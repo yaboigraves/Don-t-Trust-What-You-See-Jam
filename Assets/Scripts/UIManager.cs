@@ -80,7 +80,6 @@ public class UIManager : MonoBehaviour
         }
         else if (prompt.model)
         {
-
             //instantiate the model
             GameObject promptModel = Instantiate(prompt.model, defensePromptAssetContainer.transform.position, Quaternion.identity, defensePromptAssetContainer.transform);
 
@@ -96,6 +95,7 @@ public class UIManager : MonoBehaviour
 
     public void ClearDefenseAssets()
     {
+        defensePromptText.text = "";
         for (int i = 0; i < defensePromptAssetContainer.transform.childCount; i++)
         {
             Destroy(defensePromptAssetContainer.transform.GetChild(i).gameObject);
@@ -166,6 +166,28 @@ public class UIManager : MonoBehaviour
         {
             // winLoseContainer.GetComponent<TextMeshProUGUI>().text = "You Lose!";
         }
+    }
+
+    public TextMeshProUGUI padText1, padText2;
+
+    //new functions for toggling offense/defense just ignore the old ones
+
+    public void EnableOffenseUI()
+    {
+        //so this is going to need to disable the prompt text, and disable the true/false text on the pads
+
+        defensePromptText.text = "";
+        padText1.text = "";
+        padText2.text = "";
+
+
+
+    }
+
+    public void EnableDefenseUI()
+    {
+        padText1.text = "Yah!";
+        padText2.text = "Nah!";
     }
 
 }

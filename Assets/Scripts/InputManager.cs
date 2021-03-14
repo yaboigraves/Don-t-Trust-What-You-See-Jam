@@ -176,6 +176,7 @@ public class InputManager : MonoBehaviour
         if (toggle == false)
         {
             UIManager.current.ClearDefenseAssets();
+            //clear the text as well
         }
 
         if (toggle == false && !gotInputLastDefense)

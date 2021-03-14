@@ -159,6 +159,7 @@ public class BattleManager : MonoBehaviour
                 // UIManager.current.EnableOffenseModeUi();
                 battleMode = "offense";
                 currentBeatCounter = 0;
+                UIManager.current.EnableOffenseUI();
 
             }
         }
@@ -171,6 +172,7 @@ public class BattleManager : MonoBehaviour
                 battleMode = "defense";
                 //UIManager.current.EnableDefenseModeUi();
                 currentBeatCounter = 0;
+                UIManager.current.EnableDefenseUI();
             }
         }
     }
