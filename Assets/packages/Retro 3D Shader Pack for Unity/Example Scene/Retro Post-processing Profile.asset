@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 4
   FixedVerticalResolution:
     overrideState: 1
-    value: 140
+    value: 180
   ColorDepth:
     overrideState: 1
     value: 0.102

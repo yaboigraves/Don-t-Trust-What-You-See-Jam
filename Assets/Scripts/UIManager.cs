@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
         {
-            Vector3 indicPos = indicatorContainer.transform.position - new Vector3(0, (float)info.indicatorTwoInfo[i] / 1000 * pixelToSeconds, 0);
+            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorTwoInfo[i] / 1000 * pixelToSeconds, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
             indic.SetIndicatorTime((float)info.indicatorTwoInfo[i], indicatorTwoDestination);
             info.indicatorDict[info.indicatorTwoInfo[i]] = indic;

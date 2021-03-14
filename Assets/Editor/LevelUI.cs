@@ -14,6 +14,8 @@ public class LevelUI : Editor
         if (GUILayout.Button("Build Midi", GUILayout.Height(40)))
         {
             script.buildSongInfo();
+            UnityEditor.EditorUtility.SetDirty(script);
+
         }
 
     }
