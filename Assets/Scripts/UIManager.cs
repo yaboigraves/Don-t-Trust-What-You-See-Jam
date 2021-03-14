@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     public static UIManager current;
     public GameObject indicator;
     public Transform indicatorContainer;
-    public Transform indicatorDestination;
+    public Transform indicatorOneDestination, indicatorTwoDestination;
     //100 pixels for every beat
     public int pixelToSeconds = 100;
     public GameObject feedbackText;
@@ -37,18 +37,23 @@ public class UIManager : MonoBehaviour
 
     }
 
-    //so this is just gonna rig up a bunch of indicators pre-compiled
+    //so big sprint time
+    //cocks out
+
+    //ok
+
+    //indicators are going to have different destinations depending on which lane they are set in here
+    //we can set that when we set the indicatoe time
     public void SetupIndicators()
     {
-
         SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
         //so when we spawn in the songinfo stuff, we should map the times to the indicators to reference them
         //assuming every beat is based on the ratio, plop them down
         for (int i = 0; i < info.indicatorOneInfo.Count; i++)
         {
-            Vector3 indicPos = indicatorContainer.transform.position + new Vector3((float)info.indicatorOneInfo[i] / 1000 * pixelToSeconds, 0, 0);
+            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorOneInfo[i] / 1000 * pixelToSeconds, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
-            indic.SetIndicatorTime((float)info.indicatorOneInfo[i], indicatorDestination);
+            indic.SetIndicatorTime((float)info.indicatorOneInfo[i], indicatorOneDestination);
 
             // Debug.Log(info.indicatorDict);
             //map the indicator at this time in the song info dictionary
@@ -57,9 +62,9 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
         {
-            Vector3 indicPos = indicatorContainer.transform.position - new Vector3((float)info.indicatorTwoInfo[i] / 1000 * pixelToSeconds, 0, 0);
+            Vector3 indicPos = indicatorContainer.transform.position - new Vector3(0, (float)info.indicatorTwoInfo[i] / 1000 * pixelToSeconds, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
-            indic.SetIndicatorTime((float)info.indicatorTwoInfo[i], indicatorDestination);
+            indic.SetIndicatorTime((float)info.indicatorTwoInfo[i], indicatorTwoDestination);
             info.indicatorDict[info.indicatorTwoInfo[i]] = indic;
         }
     }

@@ -2081,9 +2081,9 @@ MonoBehaviour:
     maxVibe: 200
     streak: 0
     currentVibe: 100
-    minVibe: 50
+    minVibe: 0
     vibeIncreaseRate: 2
-    vibeDecreaseRate: -4
+    vibeDecreaseRate: -1
   levelObject: {fileID: 3313923100036815364, guid: e254717a415855d4ab50356c78e52179,
     type: 3}
   currentBeatCounter: 0
@@ -2487,7 +2487,7 @@ MonoBehaviour:
   m_Path: {fileID: 709579509}
   m_UpdateMethod: 0
   m_PositionUnits: 1
-  m_Speed: 2
+  m_Speed: 4
   m_Position: 0
 --- !u!114 &1045665872
 MonoBehaviour:
@@ -2606,7 +2606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1167491994
 Transform:
   m_ObjectHideFlags: 0
@@ -8540,7 +8540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1778817234
 Transform:
   m_ObjectHideFlags: 0
@@ -9043,7 +9043,8 @@ MonoBehaviour:
   indicator: {fileID: 2453562327167640563, guid: 27f7c0a1644a5f84c8188735492f7bb6,
     type: 3}
   indicatorContainer: {fileID: 1418628809}
-  indicatorDestination: {fileID: 1647317353}
+  indicatorOneDestination: {fileID: 399288598}
+  indicatorTwoDestination: {fileID: 1861637914}
   pixelToSeconds: 1
   feedbackText: {fileID: 1458253659545997217, guid: b2d17b27c3cc24d47b935b8ee8cd61f0,
     type: 3}

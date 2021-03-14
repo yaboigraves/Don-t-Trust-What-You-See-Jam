@@ -82,51 +82,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    // public void OneButtonInput()
-    // {
-    //     if (Input.GetKeyDown(oneButtonBind))
-    //     {
-    //         //check if we hit on the right time
-    //         if (BattleManager.current.battleMode == "offense")
-    //         {
-    //             if (CheckInput(MusicManager.current.timelineInfo.currentPosition))
-    //             {
-    //                 print("Good");
-    //                 //spawn a good feedback
-    //                 UIManager.current.SpawnFeedBackText(true);
-    //                 BattleManager.current.ProcessHit(true);
-
-
-    //             }
-    //             else
-    //             {
-    //                 BattleManager.current.ProcessHit(false);
-    //                 UIManager.current.SpawnFeedBackText(false);
-    //                 print("Bad");
-    //             }
-    //         }
-    //         else if (BattleManager.current.battleMode == "defense")
-    //         {
-    //             //check if we're currently in a window to accept an input
-    //             if (defenseInputOpen && BattleManager.current.currentDefense)
-    //             {
-    //                 Debug.Log("Good");
-    //                 UIManager.current.SpawnFeedBackText(true);
-    //                 defenseInputOpen = false;
-
-    //                 BattleManager.current.ProcessHit(true);
-    //             }
-    //             else
-    //             {
-    //                 Debug.Log("Bad");
-    //                 BattleManager.current.ProcessHit(false);
-    //                 UIManager.current.SpawnFeedBackText(false);
-    //                 defenseInputOpen = false;
-    //             }
-    //         }
-    //     }
-    // }
-
     public void TwoButtonInput()
     {
         if (BattleManager.current.battleMode == "defense")
@@ -165,6 +120,44 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
+        else if (BattleManager.current.battleMode == "offense")
+        {
+            if (Input.GetKeyDown(twoButtonBindOne))
+            {
+                //check and see if theres currently an indicator in lane one that is ready to be hit
+
+                if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
+                {
+                    //time to do a hit
+                    //destroy the indicator attacked to the time
+                    UIManager.current.SpawnFeedBackText(true);
+                    Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]].gameObject);
+                    //remove it from the dictioanry as well
+
+                    BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]);
+                    //remove the array entry as well
+                    BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo.RemoveAt(0);
+
+                    Debug.Log("hit!");
+                    BattleManager.current.ProcessHit(true);
+
+                }
+
+            }
+            else if (Input.GetKeyDown(twoButtonBindTwo))
+            {
+                //check and see if theres currently an indicator in lane two that is ready to be hit
+                UIManager.current.SpawnFeedBackText(true);
+                Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+
+                BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
+                //remove the array entry as well
+                BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
+
+                Debug.Log("hit!");
+                BattleManager.current.ProcessHit(true);
+            }
+        }
     }
 
 
@@ -181,24 +174,12 @@ public class InputManager : MonoBehaviour
         defenseInputOpen = toggle;
 
 
-
-        //so this needs to check if a correct input was already recieved
-        // if (toggle == false && BattleManager.current.currentDefense && !gotGoodDefenseInput && inputMode == "one")
-        // {
-        //     //check if we missed a true window 
-        //     BattleManager.current.ProcessHit(false);
-        // }
-
         if (toggle == false && !gotInputLastDefense)
         {
             BattleManager.current.ProcessHit(false);
             UIManager.current.SpawnFeedBackText(false);
         }
 
-        //so we're specifically doing two input now, so if you do no input at all in an input when it closes then you gotta take damage
-
-        //so we're also in here going to need to have the ui manager indicate that its opened
-        //just flash it green for now
         UIManager.current.ToggleDefenseInputUi();
     }
 
@@ -209,6 +190,7 @@ public class InputManager : MonoBehaviour
             Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorOneInfo[0]].gameObject);
             BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
 
+            UIManager.current.SpawnFeedBackText(false);
             //delete the indicator too
             Debug.Log("missed a kick");
             BattleManager.current.ProcessHit(false);

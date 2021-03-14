@@ -120,26 +120,6 @@ public class MusicManager : MonoBehaviour
 
         }
 
-
-
-
-        //do stuff every beat
-        // if (timelineInfo.currentBeat == 2)
-        // {
-        //     //recalculate the next 1
-
-        //     //so the next 1 is the current time + (4 * seconds per beat)
-        //     nextOneTime = timelineInfo.currentPosition + (int)(3 * (60 / timelineInfo.currentTempo) * 1000);
-        // }
-
-
-        // beatsPerLoop++;
-        // if (beatsPerLoop >= maxBeatsPerLoop)
-        // {
-
-        //     musicPlayEvent.setParameterByName("nextTrack", UnityEngine.Random.Range(1, 3));
-        //     beatsPerLoop = 0;
-        // }
     }
 
 

@@ -8,7 +8,6 @@ public class Indicator : MonoBehaviour
     //TODO: so indicators need to go a little bit past the center point
     //after the first lerp is finished we can add a second lerp that lerps over a beat duration (as to be reflexive with speed)
 
-
     public float indicatorTime;
     public Transform destinationPoint;
     public Vector3 startPosition;

@@ -160,7 +160,7 @@ public class BattleManager : MonoBehaviour
             {
                 //switch the ui to offense mode
 
-                UIManager.current.EnableOffenseModeUi();
+                // UIManager.current.EnableOffenseModeUi();
                 battleMode = "offense";
                 currentBeatCounter = 0;
 
@@ -173,7 +173,7 @@ public class BattleManager : MonoBehaviour
                 //requeue a bunch more defense prompts into the queue
                 FillDefenseQueue();
                 battleMode = "defense";
-                UIManager.current.EnableDefenseModeUi();
+                //UIManager.current.EnableDefenseModeUi();
                 currentBeatCounter = 0;
             }
         }
