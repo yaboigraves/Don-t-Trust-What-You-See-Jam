@@ -94,13 +94,13 @@ public class InputManager : MonoBehaviour
                 if (defenseInputOpen && BattleManager.current.currentDefense.trueOrFalse)
                 {
                     Debug.Log("Good");
-                    UIManager.current.SpawnFeedBackText(true);
+                    UIManager.current.SpawnFeedBackText(true, 1);
                     defenseInputOpen = false;
                     BattleManager.current.ProcessHit(true);
                 }
                 else
                 {
-                    UIManager.current.SpawnFeedBackText(false);
+                    UIManager.current.SpawnFeedBackText(false, 1);
                     BattleManager.current.ProcessHit(false);
                 }
             }
@@ -110,12 +110,12 @@ public class InputManager : MonoBehaviour
                 if (defenseInputOpen && !BattleManager.current.currentDefense.trueOrFalse)
                 {
                     Debug.Log("Good");
-                    UIManager.current.SpawnFeedBackText(true);
+                    UIManager.current.SpawnFeedBackText(true, 2);
                     defenseInputOpen = false;
                 }
                 else
                 {
-                    UIManager.current.SpawnFeedBackText(false);
+                    UIManager.current.SpawnFeedBackText(false, 2);
                     BattleManager.current.ProcessHit(false);
                 }
             }
@@ -130,7 +130,7 @@ public class InputManager : MonoBehaviour
                 {
                     //time to do a hit
                     //destroy the indicator attacked to the time
-                    UIManager.current.SpawnFeedBackText(true);
+                    UIManager.current.SpawnFeedBackText(true, 1);
                     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]].gameObject);
                     //remove it from the dictioanry as well
 
@@ -147,7 +147,7 @@ public class InputManager : MonoBehaviour
             else if (Input.GetKeyDown(twoButtonBindTwo))
             {
                 //check and see if theres currently an indicator in lane two that is ready to be hit
-                UIManager.current.SpawnFeedBackText(true);
+                UIManager.current.SpawnFeedBackText(true, 2);
                 Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
 
                 BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
@@ -182,7 +182,7 @@ public class InputManager : MonoBehaviour
         if (toggle == false && !gotInputLastDefense)
         {
             BattleManager.current.ProcessHit(false);
-            UIManager.current.SpawnFeedBackText(false);
+            UIManager.current.SpawnFeedBackText(false, 0);
         }
 
         UIManager.current.ToggleDefenseInputUi();
@@ -195,7 +195,7 @@ public class InputManager : MonoBehaviour
             Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorOneInfo[0]].gameObject);
             BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
 
-            UIManager.current.SpawnFeedBackText(false);
+            UIManager.current.SpawnFeedBackText(false, 0);
             //delete the indicator too
             Debug.Log("missed a kick");
             BattleManager.current.ProcessHit(false);

@@ -65,10 +65,30 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SpawnFeedBackText(bool didHit)
+    //spawn this at the pad location
+    public void SpawnFeedBackText(bool didHit, int spawnPos = 0)
     {
-        FeedbackText fText = Instantiate(feedbackText, feedbackContainer.transform.position, Quaternion.identity, feedbackContainer).GetComponent<FeedbackText>();
+        Vector3 feedbackSpawnPos = Vector3.zero;
+        if (spawnPos == 0)
+        {
+            //default spot no pad hit
+            feedbackSpawnPos = defensePromptText.transform.position;
+
+        }
+        else if (spawnPos == 1)
+        {
+            //left pad 
+            feedbackSpawnPos = padText1.transform.position;
+        }
+        else if (spawnPos == 2)
+        {
+            //right pad
+            feedbackSpawnPos = padText2.transform.position;
+        }
+
+        FeedbackText fText = Instantiate(feedbackText, feedbackSpawnPos, Quaternion.identity, feedbackContainer).GetComponent<FeedbackText>();
         fText.SetText(didHit);
+        // fText.startPosition = Vector3.zero;
 
     }
 

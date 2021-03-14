@@ -9,12 +9,17 @@ public class FeedbackText : MonoBehaviour
     public Vector3 destination;
     public Vector3 startPosition;
 
+    public float speed = 0.3f;
+
+    public float range = 100f;
+
     public TextMeshProUGUI fText;
     private void Start()
     {
         fText = GetComponent<TextMeshProUGUI>();
         startPosition = transform.position;
-        destination = new Vector3(Random.Range(-1, 1), Random.Range(0, 1), Random.Range(-1, 1));
+
+        destination = transform.position + new Vector3(Random.Range(-range, range + 1), Random.Range(range / 10, range), Random.Range(-range, range + 1));
         StartCoroutine(spawnFeedback());
     }
 
@@ -26,7 +31,7 @@ public class FeedbackText : MonoBehaviour
 
     private void Update()
     {
-        lifetime += Time.deltaTime;
+        lifetime += Time.deltaTime * speed;
         transform.position = Vector3.Lerp(startPosition, destination, lifetime / maxLifetime);
     }
 
@@ -35,10 +40,12 @@ public class FeedbackText : MonoBehaviour
         if (didHit)
         {
             fText.text = "Good!";
+            fText.color = Color.green;
         }
         else
         {
             fText.text = "Miss!";
+            fText.color = Color.red;
         }
 
     }
