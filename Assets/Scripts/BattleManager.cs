@@ -6,15 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
-
     public static BattleManager current;
     public string currentBattleSongName;
     public SongInfo currentSongInfo;
     //defense mode queue 
     public int defenseQueueLength = 8;
-    public Queue<bool> defenseQueue;
+
+    public DefensePrompt[] defensePromptOptions;
+    public Queue<DefensePrompt> defenseQueue;
     public string battleMode = "defense";
-    public bool currentDefense;
+    public DefensePrompt currentDefense;
 
     public Level currentLevelSongInfo;
 
@@ -32,23 +33,18 @@ public class BattleManager : MonoBehaviour
 
         currentLevelSongInfo = Instantiate(currentLevelSongInfo);
         // GameObject lo = Instantiate(levelObject, trans
-
         // currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
 
         // SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
         currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
 
-
         SongInfo info = currentLevelSongInfo.songInfo;
 
-
-
-        defenseQueue = new Queue<bool>();
+        defenseQueue = new Queue<DefensePrompt>();
 
         FillDefenseQueue();
 
         currentSongInfo = info;
-
 
         UIManager.current.SetupIndicators();
 
@@ -62,7 +58,7 @@ public class BattleManager : MonoBehaviour
         defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
         for (int i = 0; i < defenseQueueLength; i++)
         {
-            defenseQueue.Enqueue(Random.Range(0, 2) == 0);
+            defenseQueue.Enqueue(defensePromptOptions[Random.Range(0, defensePromptOptions.Length)]);
         }
     }
 
@@ -192,4 +188,17 @@ public class StatusInfo
     public int vibeIncreaseRate, vibeDecreaseRate;
 
 
+}
+
+
+//for now we're just going to have these simple options, if theres no sprite or model its just text
+[System.Serializable]
+public class DefensePrompt
+{
+    public bool trueOrFalse;
+    public bool colorModel = false;
+    public string text;
+    public GameObject sprite;
+    public GameObject model;
+    public Color textColor, assetColor;
 }

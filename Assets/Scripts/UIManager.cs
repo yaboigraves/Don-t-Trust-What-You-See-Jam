@@ -17,16 +17,12 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI defensePromptText;
     public SpriteRenderer defenseCenterPointIndicator;
     public GameObject oneButtonDefenseUI, twoButtonDefenseUI;
-
     public GameObject defenseUIContainer, offenseUIContainer;
-
     public Slider vibeBarSlider;
-
     public GameObject winLoseContainer;
-
     public TextMeshProUGUI streakText;
-
     public GameObject otherDefenseContainer;
+    public GameObject defensePromptAssetContainer;
 
     private void Awake()
     {
@@ -76,9 +72,34 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void SpawnDefensePrompt(bool b)
+    public void SpawnDefensePrompt(DefensePrompt prompt)
     {
-        defensePromptText.text = b.ToString();
+        if (prompt.sprite)
+        {
+            //instantiate the sprite
+        }
+        else if (prompt.model)
+        {
+
+            //instantiate the model
+            GameObject promptModel = Instantiate(prompt.model, defensePromptAssetContainer.transform.position, Quaternion.identity, defensePromptAssetContainer.transform);
+
+            if (prompt.colorModel)
+            {
+                promptModel.GetComponentInChildren<MeshRenderer>().material.color = prompt.assetColor;
+            }
+        }
+
+        defensePromptText.text = prompt.text;
+        defensePromptText.color = prompt.textColor;
+    }
+
+    public void ClearDefenseAssets()
+    {
+        for (int i = 0; i < defensePromptAssetContainer.transform.childCount; i++)
+        {
+            Destroy(defensePromptAssetContainer.transform.GetChild(i).gameObject);
+        }
     }
 
     public void ToggleDefenseInputUi()

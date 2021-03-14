@@ -91,7 +91,7 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyDown(twoButtonBindOne))
             {
                 gotInputLastDefense = true;
-                if (defenseInputOpen && BattleManager.current.currentDefense)
+                if (defenseInputOpen && BattleManager.current.currentDefense.trueOrFalse)
                 {
                     Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText(true);
@@ -107,7 +107,7 @@ public class InputManager : MonoBehaviour
             else if (Input.GetKeyDown(twoButtonBindTwo))
             {
                 gotInputLastDefense = true;
-                if (defenseInputOpen && !BattleManager.current.currentDefense)
+                if (defenseInputOpen && !BattleManager.current.currentDefense.trueOrFalse)
                 {
                     Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText(true);
@@ -173,6 +173,10 @@ public class InputManager : MonoBehaviour
         yield return new WaitUntil(() => MusicManager.current.timelineInfo.currentPosition >= time);
         defenseInputOpen = toggle;
 
+        if (toggle == false)
+        {
+            UIManager.current.ClearDefenseAssets();
+        }
 
         if (toggle == false && !gotInputLastDefense)
         {
