@@ -25,6 +25,7 @@ public class LevelSelectManager : MonoBehaviour
     {
         if (isMoving)
         {
+            //TODO: redo this with lerp
             //check if we've reached the destination
             if (Mathf.Abs(targetPosition - cart.m_Position) < 0.3f)
             {
