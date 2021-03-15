@@ -8,11 +8,8 @@ public class FeedbackText : MonoBehaviour
     public float maxLifetime = 2, lifetime = 0;
     public Vector3 destination;
     public Vector3 startPosition;
-
     public float speed = 0.1f;
-
     public float range = 35f;
-
     public TextMeshProUGUI fText;
     private void Start()
     {
@@ -47,6 +44,5 @@ public class FeedbackText : MonoBehaviour
             fText.text = "Miss!";
             fText.color = Color.red;
         }
-
     }
 }

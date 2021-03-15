@@ -70,7 +70,7 @@ public class InputManager : MonoBehaviour
         TwoButtonInput();
 
 
-        //only do this if we're in offense mode
+
 
         if (BattleManager.current.battleMode == "offense")
         {
@@ -80,6 +80,11 @@ public class InputManager : MonoBehaviour
         {
 
         }
+    }
+
+    public void EndBattle()
+    {
+        this.enabled = false;
     }
 
     public void TwoButtonInput()
@@ -140,7 +145,6 @@ public class InputManager : MonoBehaviour
 
                     Debug.Log("hit!");
                     BattleManager.current.ProcessHit(true);
-
                 }
 
             }

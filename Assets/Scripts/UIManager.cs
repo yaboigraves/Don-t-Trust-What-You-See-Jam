@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -194,6 +196,17 @@ public class UIManager : MonoBehaviour
         {
             // winLoseContainer.GetComponent<TextMeshProUGUI>().text = "You Lose!";
         }
+
+        //clear all the indicators
+        ClearIndicators();
+    }
+
+    public void ClearIndicators()
+    {
+        for (int i = 0; i < indicatorContainer.transform.childCount; i++)
+        {
+            Destroy(indicatorContainer.GetChild(i).gameObject);
+        }
     }
 
     public TextMeshProUGUI padText1, padText2;
@@ -207,9 +220,6 @@ public class UIManager : MonoBehaviour
         defensePromptText.text = "";
         padText1.text = "";
         padText2.text = "";
-
-
-
     }
 
     public void EnableDefenseUI()
@@ -231,7 +241,18 @@ public class UIManager : MonoBehaviour
         {
             battlePhaseIcon.sprite = defenseIcon;
         }
-
     }
 
+
+    //reload the scene
+    public void RetryButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //go back to level select
+    public void MenuButton()
+    {
+        SceneManager.LoadScene("LevelSelect");
+    }
 }

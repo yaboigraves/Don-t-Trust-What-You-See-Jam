@@ -77,6 +77,11 @@ public class MusicManager : MonoBehaviour
 
     }
 
+    public void EndBattle()
+    {
+        musicPlayEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
     private void Update()
     {
         musicPlayEvent.getTimelinePosition(out timelineInfo.currentPosition);

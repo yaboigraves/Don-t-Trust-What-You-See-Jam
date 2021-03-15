@@ -51,8 +51,6 @@ public class BattleManager : MonoBehaviour
         UIManager.current.EnableDefenseModeUi();
         UIManager.current.InitVibeSlider(statusInfo.maxVibe, statusInfo.currentVibe);
         //init the input mode
-
-
     }
 
     public void FillDefenseQueue()
@@ -110,9 +108,18 @@ public class BattleManager : MonoBehaviour
         if (statusInfo.currentVibe < statusInfo.minVibe)
         {
             //lose state
-            UIManager.current.EnableWinLoseUI(false);
-            InputManager.current.enabled = false;
+            // UIManager.current.EnableWinLoseUI(false);
+            // InputManager.current.enabled = false;
+
+            EndBattle();
         }
+    }
+
+    public void EndBattle()
+    {
+        UIManager.current.EnableWinLoseUI(false);
+        InputManager.current.EndBattle();
+        MusicManager.current.EndBattle();
     }
 
     public void ProcessHit(bool hit)
