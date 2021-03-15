@@ -51,6 +51,8 @@ public class BattleManager : MonoBehaviour
         UIManager.current.EnableDefenseModeUi();
         UIManager.current.InitVibeSlider(statusInfo.maxVibe, statusInfo.currentVibe);
         //init the input mode
+
+
     }
 
     public void FillDefenseQueue()
@@ -160,6 +162,7 @@ public class BattleManager : MonoBehaviour
                 battleMode = "offense";
                 currentBeatCounter = 0;
                 UIManager.current.EnableOffenseUI();
+                UIManager.current.SwapPhaseIcon(battleMode);
 
             }
         }
@@ -173,6 +176,7 @@ public class BattleManager : MonoBehaviour
                 //UIManager.current.EnableDefenseModeUi();
                 currentBeatCounter = 0;
                 UIManager.current.EnableDefenseUI();
+                UIManager.current.SwapPhaseIcon(battleMode);
             }
         }
     }

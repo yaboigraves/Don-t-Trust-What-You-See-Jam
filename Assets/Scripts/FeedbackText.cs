@@ -9,9 +9,9 @@ public class FeedbackText : MonoBehaviour
     public Vector3 destination;
     public Vector3 startPosition;
 
-    public float speed = 0.3f;
+    public float speed = 0.1f;
 
-    public float range = 100f;
+    public float range = 35f;
 
     public TextMeshProUGUI fText;
     private void Start()
@@ -19,7 +19,7 @@ public class FeedbackText : MonoBehaviour
         fText = GetComponent<TextMeshProUGUI>();
         startPosition = transform.position;
 
-        destination = transform.position + new Vector3(Random.Range(-range, range + 1), Random.Range(range / 10, range), Random.Range(-range, range + 1));
+        destination = transform.position + new Vector3(Random.Range(-range, range + 1), Random.Range(range / 10, range / 2), Random.Range(-range, range + 1));
         StartCoroutine(spawnFeedback());
     }
 

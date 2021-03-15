@@ -23,6 +23,11 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI streakText;
     public GameObject otherDefenseContainer;
     public GameObject defensePromptAssetContainer;
+    public VibeBar vibeBarController;
+
+    public Sprite defenseIcon, offenseIcon;
+
+    public Image battlePhaseIcon;
 
     private void Awake()
     {
@@ -133,11 +138,14 @@ public class UIManager : MonoBehaviour
     {
         vibeBarSlider.maxValue = maxVibe;
         vibeBarSlider.value = currentVibe;
+        vibeBarController.EvaluateFillAreaColor(vibeBarSlider.value / vibeBarSlider.maxValue);
+
     }
 
     public void UpdateVibeBarSlider(int curVibe)
     {
         vibeBarSlider.value = curVibe;
+        vibeBarController.EvaluateFillAreaColor(curVibe / vibeBarSlider.maxValue);
     }
 
     public void UpdateStreakText(int streak)
@@ -208,6 +216,22 @@ public class UIManager : MonoBehaviour
     {
         padText1.text = "Yah!";
         padText2.text = "Nah!";
+    }
+
+    public TextMeshProUGUI phaseText;
+    public void SwapPhaseIcon(string phase)
+    {
+        phaseText.text = phase;
+        if (phase == "offense")
+        {
+            battlePhaseIcon.sprite = offenseIcon;
+
+        }
+        else if (phase == "defense")
+        {
+            battlePhaseIcon.sprite = defenseIcon;
+        }
+
     }
 
 }
