@@ -11,63 +11,109 @@ public class LevelSelectManager : MonoBehaviour
     public CinemachineDollyCart cart;
     public CinemachineSmoothPath path;
     public GameObject[] objectsToLookAt;
-    public int currentLookAt;
 
+    public int currentlyLookingAT;
     public CinemachineVirtualCamera cam;
-
     public bool isMoving;
+    public float desiredMovement;
+    public float movement;
+    float lastFramePos;
 
-    public float targetPosition;
+    private void Start()
+    {
 
-    public int direction;
-    // Update is called once per frame
+    }
+
+
+
     void Update()
     {
         if (isMoving)
         {
-            //TODO: redo this with lerp
-            //check if we've reached the destination
-            if (Mathf.Abs(targetPosition - cart.m_Position) < 0.3f)
+
+            //check and see if we did a lap
+            if (checkLap())
             {
-                isMoving = false;
+
+                if (lastFramePos > cart.m_Position)
+                {
+                    movement += Mathf.Abs(cart.m_Position + (path.PathLength - lastFramePos));
+                    cart.m_Speed = 0;
+                    isMoving = false;
+                    movement = 0;
+                }
+                else
+                {
+                    movement += Mathf.Abs((cart.m_Position - lastFramePos) + lastFramePos);
+                    cart.m_Speed = 0;
+                    isMoving = false;
+                    movement = 0;
+                }
             }
             else
             {
-                cart.m_Position += Time.deltaTime * spinSpeed * direction;
+                movement += Mathf.Abs(cart.m_Position - lastFramePos);
+
+                if (movement > desiredMovement)
+                {
+                    cart.m_Speed = 0;
+                    isMoving = false;
+                    movement = 0;
+                }
             }
 
+            lastFramePos = cart.m_Position;
+
         }
+    }
+
+    public bool checkLap()
+    {
+        if (cart.m_Position < 10 && lastFramePos > path.PathLength - 10)
+        {
+            return true;
+        }
+        if (cart.m_Position > path.PathLength - 10 && lastFramePos < 10)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void MoveRight()
     {
-        targetPosition = cart.m_Position + path.PathLength / 4;
-        direction = 1;
-        currentLookAt++;
-        if (currentLookAt >= objectsToLookAt.Length)
+        if (!isMoving)
         {
-            currentLookAt = 0;
+            cart.m_Speed = spinSpeed;
+            desiredMovement = path.PathLength / 4.0f;
+            isMoving = true;
+
+            //change the look at
+            currentlyLookingAT++;
+            currentlyLookingAT = currentlyLookingAT % objectsToLookAt.Length;
+            cam.m_LookAt = objectsToLookAt[currentlyLookingAT].transform;
         }
-        cam.m_LookAt = objectsToLookAt[currentLookAt].transform;
-        isMoving = true;
+
+
 
     }
     public void MoveLeft()
     {
-        targetPosition = cart.m_Position - path.PathLength / 4;
-
-        if (targetPosition < 0)
+        if (!isMoving)
         {
-            targetPosition = path.PathLength + targetPosition;
-        }
-        direction = -1;
-        currentLookAt--;
-        if (currentLookAt < 0)
-        {
-            currentLookAt = objectsToLookAt.Length - 1;
-        }
-        cam.m_LookAt = objectsToLookAt[currentLookAt].transform;
-        isMoving = true;
+            cart.m_Speed = -spinSpeed;
+            desiredMovement = path.PathLength / 4.0f;
+            isMoving = true;
 
+            //change the lookat
+
+            currentlyLookingAT--;
+            if (currentlyLookingAT < 0)
+            {
+                currentlyLookingAT = objectsToLookAt.Length - 1;
+            }
+            cam.m_LookAt = objectsToLookAt[currentlyLookingAT].transform;
+
+        }
     }
 }

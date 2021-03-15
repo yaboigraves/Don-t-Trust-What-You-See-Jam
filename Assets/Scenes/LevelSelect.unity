@@ -150,16 +150,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5f53f7061096c48ad560ff0f5cbb89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 30
+  spinSpeed: 10
   cart: {fileID: 1876635695}
   path: {fileID: 1639391225}
   objectsToLookAt:
-  - {fileID: 473037229}
-  currentLookAt: 0
+  - {fileID: 2099128298}
+  - {fileID: 1164612722}
+  - {fileID: 1077966016}
+  - {fileID: 806170432}
+  currentlyLookingAT: 0
   cam: {fileID: 1876635696}
   isMoving: 0
-  targetPosition: 0
-  direction: 0
+  desiredMovement: 0
+  movement: 0
 --- !u!4 &46616199
 Transform:
   m_ObjectHideFlags: 0
@@ -362,8 +365,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1164612723}
   - {fileID: 2099128302}
+  - {fileID: 1164612723}
   - {fileID: 1077966017}
   - {fileID: 806170433}
   m_Father: {fileID: 0}
@@ -1224,7 +1227,7 @@ Transform:
   - {fileID: 131844980}
   - {fileID: 1260578211}
   m_Father: {fileID: 333318812}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1164612724
 MonoBehaviour:
@@ -2173,7 +2176,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 333318812}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2099128303
 MonoBehaviour:
