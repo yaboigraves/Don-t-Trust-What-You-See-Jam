@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+
+
 
 public class LevelSelectManager : MonoBehaviour
 {
     //so we need a function so when you hit a ui button you move left or right through the circle
-
     public Transform levelsContainer;
     public bool rotating;
-
     Quaternion startRotation, endRotation;
-
     public float rotateTime = 0, maxRotateTime = 2;
+
+    //ui stuff
+    public TextMeshProUGUI levelTitleText;
+    public Button loadButton;
+    public string[] levelNames;
+    int levelIndex = 0;
 
     private void Start()
     {
-
+        levelTitleText.text = levelNames[levelIndex];
     }
 
     private void Update()
@@ -34,8 +41,20 @@ public class LevelSelectManager : MonoBehaviour
                 rotateTime = 0;
                 levelsContainer.transform.rotation = endRotation;
                 startRotation = levelsContainer.transform.rotation;
+
+                //update the ui
+                UpdateUI();
             }
         }
+    }
+
+    void UpdateUI()
+    {
+        levelTitleText.text = levelNames[levelIndex];
+
+        //turn off the level text
+        levelTitleText.enabled = true;
+        loadButton.interactable = true;
     }
 
 
@@ -45,11 +64,21 @@ public class LevelSelectManager : MonoBehaviour
         {
             return;
         }
+
         rotating = true;
         startRotation = levelsContainer.transform.rotation;
         endRotation = Quaternion.Euler(levelsContainer.transform.rotation.eulerAngles + Quaternion.Euler(0, 90, 0).eulerAngles);
-    }
 
+        levelIndex++;
+        if (levelIndex >= levelNames.Length)
+        {
+            levelIndex = 0;
+        }
+
+        //turn off the level text
+        levelTitleText.enabled = false;
+        loadButton.interactable = false;
+    }
 
     public void MoveLeft()
     {
@@ -60,6 +89,30 @@ public class LevelSelectManager : MonoBehaviour
         rotating = true;
         startRotation = levelsContainer.transform.rotation;
         endRotation = Quaternion.Euler(levelsContainer.transform.rotation.eulerAngles - Quaternion.Euler(0, 90, 0).eulerAngles);
+
+        levelIndex--;
+        if (levelIndex < 0)
+        {
+            levelIndex = levelNames.Length - 1;
+        }
+
+        //turn off the level text
+        levelTitleText.enabled = false;
+        loadButton.interactable = false;
+
     }
+
+    public void LoadLevel()
+    {
+        //look at what name is currently selected and load that level
+
+        //TODO: so this is going to need a scene manager tool that can dynamically load in scenes that just have the assets in them
+        //then we can link up the manager assets with all the stuff it needs to manage in the actual scene
+        //can basically do this by just loading everyhing on top of this scene additively and culling with loading screens
+
+        Debug.Log("loading " + levelNames[levelIndex]);
+
+    }
+
 
 }
