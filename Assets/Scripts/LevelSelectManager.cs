@@ -7,113 +7,59 @@ using UnityEngine.UI;
 public class LevelSelectManager : MonoBehaviour
 {
     //so we need a function so when you hit a ui button you move left or right through the circle
-    public float spinSpeed;
-    public CinemachineDollyCart cart;
-    public CinemachineSmoothPath path;
-    public GameObject[] objectsToLookAt;
 
-    public int currentlyLookingAT;
-    public CinemachineVirtualCamera cam;
-    public bool isMoving;
-    public float desiredMovement;
-    public float movement;
-    float lastFramePos;
+    public Transform levelsContainer;
+    public bool rotating;
+
+    Quaternion startRotation, endRotation;
+
+    public float rotateTime = 0, maxRotateTime = 2;
 
     private void Start()
     {
 
     }
 
-
-
-    void Update()
+    private void Update()
     {
-        if (isMoving)
+
+        if (rotating)
         {
+            rotateTime += Time.deltaTime;
+            levelsContainer.transform.rotation = Quaternion.Lerp(startRotation, endRotation, rotateTime / maxRotateTime);
 
-            //check and see if we did a lap
-            if (checkLap())
+            if (rotateTime >= maxRotateTime)
             {
-
-                if (lastFramePos > cart.m_Position)
-                {
-                    movement += Mathf.Abs(cart.m_Position + (path.PathLength - lastFramePos));
-                    cart.m_Speed = 0;
-                    isMoving = false;
-                    movement = 0;
-                }
-                else
-                {
-                    movement += Mathf.Abs((cart.m_Position - lastFramePos) + lastFramePos);
-                    cart.m_Speed = 0;
-                    isMoving = false;
-                    movement = 0;
-                }
+                rotating = false;
+                rotateTime = 0;
+                levelsContainer.transform.rotation = endRotation;
+                startRotation = levelsContainer.transform.rotation;
             }
-            else
-            {
-                movement += Mathf.Abs(cart.m_Position - lastFramePos);
-
-                if (movement > desiredMovement)
-                {
-                    cart.m_Speed = 0;
-                    isMoving = false;
-                    movement = 0;
-                }
-            }
-
-            lastFramePos = cart.m_Position;
-
         }
     }
 
-    public bool checkLap()
-    {
-        if (cart.m_Position < 10 && lastFramePos > path.PathLength - 10)
-        {
-            return true;
-        }
-        if (cart.m_Position > path.PathLength - 10 && lastFramePos < 10)
-        {
-            return true;
-        }
-        return false;
-    }
 
     public void MoveRight()
     {
-        if (!isMoving)
+        if (rotating)
         {
-            cart.m_Speed = spinSpeed;
-            desiredMovement = path.PathLength / 4.0f;
-            isMoving = true;
-
-            //change the look at
-            currentlyLookingAT++;
-            currentlyLookingAT = currentlyLookingAT % objectsToLookAt.Length;
-            cam.m_LookAt = objectsToLookAt[currentlyLookingAT].transform;
+            return;
         }
-
-
-
+        rotating = true;
+        startRotation = levelsContainer.transform.rotation;
+        endRotation = Quaternion.Euler(levelsContainer.transform.rotation.eulerAngles + Quaternion.Euler(0, 90, 0).eulerAngles);
     }
+
+
     public void MoveLeft()
     {
-        if (!isMoving)
+        if (rotating)
         {
-            cart.m_Speed = -spinSpeed;
-            desiredMovement = path.PathLength / 4.0f;
-            isMoving = true;
-
-            //change the lookat
-
-            currentlyLookingAT--;
-            if (currentlyLookingAT < 0)
-            {
-                currentlyLookingAT = objectsToLookAt.Length - 1;
-            }
-            cam.m_LookAt = objectsToLookAt[currentlyLookingAT].transform;
-
+            return;
         }
+        rotating = true;
+        startRotation = levelsContainer.transform.rotation;
+        endRotation = Quaternion.Euler(levelsContainer.transform.rotation.eulerAngles - Quaternion.Euler(0, 90, 0).eulerAngles);
     }
+
 }
