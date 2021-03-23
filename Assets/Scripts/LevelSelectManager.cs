@@ -122,22 +122,25 @@ public class LevelSelectManager : MonoBehaviour
 
 
         //later throw together a loading screen here
-        StartCoroutine(loadBattleScenesAsync());
+        StartCoroutine(loadBattleScenesAsync(levelNames[levelIndex]));
 
 
 
     }
 
-    IEnumerator loadBattleScenesAsync()
+    IEnumerator loadBattleScenesAsync(string sceneName)
     {
         AsyncOperation asyncLoad1 = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
-        AsyncOperation asyncLoad2 = SceneManager.LoadSceneAsync("JungleCube", LoadSceneMode.Additive);
+        AsyncOperation asyncLoad2 = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
         while (!asyncLoad1.isDone || !asyncLoad2.isDone)
         {
             yield return null;
         }
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("JungleCube"));
+
+        //wait a frame
+        yield return null;
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
         SceneManager.UnloadSceneAsync("LevelSelect");
     }
 

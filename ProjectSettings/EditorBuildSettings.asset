@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JungleCube.unity
     guid: f1ad2fab760465045a2c88e64f30b3a2
+  - enabled: 1
+    path: Assets/Scenes/SkyCube.unity
+    guid: 3752c32cfd63ca14b81a18cfdc3647f5
   m_configObjects: {}
