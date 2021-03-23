@@ -23,6 +23,8 @@ public class BattleManager : MonoBehaviour
 
     public GameObject levelObject;
 
+    public bool started;
+
     private void Awake()
     {
         current = this;
@@ -98,6 +100,11 @@ public class BattleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !started)
+        {
+            MusicManager.current.StartBattle();
         }
 
         CheckStatus();

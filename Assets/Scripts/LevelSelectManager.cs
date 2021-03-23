@@ -112,7 +112,33 @@ public class LevelSelectManager : MonoBehaviour
 
         Debug.Log("loading " + levelNames[levelIndex]);
 
+        //so for now we're going to load in the battle scene and then load in the environment scene on top of that, then tie them toegther 
+        // //make sure to de load this scene as well after those load
+        // SceneManager.LoadScene("BattleScene", LoadSceneMode.Additive);
+
+        // //so then we need to also load on top the environment scene
+        // //once both of those are loaded deload this scene
+        // SceneManager.LoadScene("JungleCube", LoadSceneMode.Additive);
+
+
+        //later throw together a loading screen here
+        StartCoroutine(loadBattleScenesAsync());
+
+
+
     }
 
+    IEnumerator loadBattleScenesAsync()
+    {
+        AsyncOperation asyncLoad1 = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
+        AsyncOperation asyncLoad2 = SceneManager.LoadSceneAsync("JungleCube", LoadSceneMode.Additive);
+
+        while (!asyncLoad1.isDone || !asyncLoad2.isDone)
+        {
+            yield return null;
+        }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("JungleCube"));
+        SceneManager.UnloadSceneAsync("LevelSelect");
+    }
 
 }

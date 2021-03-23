@@ -58,7 +58,7 @@ public class MusicManager : MonoBehaviour
         //musicPlayEvent.setParameterByName("testParam", 1.0f);
 
 
-        musicPlayEvent.start();
+        // musicPlayEvent.start();
     }
 
     private void Start()
@@ -75,6 +75,11 @@ public class MusicManager : MonoBehaviour
 
         timelineInfo.songLength = length;
 
+    }
+
+    public void StartBattle()
+    {
+        musicPlayEvent.start();
     }
 
     public void EndBattle()

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelSelect.unity
     guid: c84187560dfb10e43a2964dfab0f8eee
+  - enabled: 1
+    path: Assets/Scenes/JungleCube.unity
+    guid: f1ad2fab760465045a2c88e64f30b3a2
   m_configObjects: {}
