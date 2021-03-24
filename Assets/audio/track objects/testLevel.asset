@@ -60,3 +60,4 @@ MonoBehaviour:
   defensePhaseLength: 16
   offensePhaseLength: 16
   songLengthInBeats: 64
+  fmodSongName: event:/omariTest

@@ -50,19 +50,30 @@ public class MusicManager : MonoBehaviour
     private void Awake()
     {
         current = this;
-
-        musicPlayEvent = RuntimeManager.CreateInstance(music);
-
-        //ok so using the current event we can just set parameters based on trhe transitions
-
-        //musicPlayEvent.setParameterByName("testParam", 1.0f);
-
-
-        // musicPlayEvent.start();
+        this.enabled = false;
+        //musicPlayEvent = RuntimeManager.CreateInstance(music);
     }
 
     private void Start()
     {
+        // timelineInfo = new TimelineInfo();
+        // beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
+
+        // timelineHandle = GCHandle.Alloc(timelineInfo, GCHandleType.Pinned);
+        // musicPlayEvent.setUserData(GCHandle.ToIntPtr(timelineHandle));
+        // musicPlayEvent.setCallback(beatCallback, FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_BEAT | FMOD.Studio.EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
+
+        // musicPlayEvent.getDescription(out descriptionCallback);
+        // descriptionCallback.getLength(out int length);
+
+        // timelineInfo.songLength = length;
+
+    }
+
+    public void LoadSong(string fmodSongName)
+    {
+        musicPlayEvent = RuntimeManager.CreateInstance(music);
+
         timelineInfo = new TimelineInfo();
         beatCallback = new FMOD.Studio.EVENT_CALLBACK(BeatEventCallback);
 
@@ -75,11 +86,13 @@ public class MusicManager : MonoBehaviour
 
         timelineInfo.songLength = length;
 
+        this.enabled = true;
     }
 
     public void StartBattle()
     {
         musicPlayEvent.start();
+
     }
 
     public void EndBattle()

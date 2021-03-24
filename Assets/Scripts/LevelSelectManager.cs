@@ -140,6 +140,8 @@ public class LevelSelectManager : MonoBehaviour
 
         //wait a frame
         yield return null;
+
+        BattleManager.current.LoadLevelInfo();
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
         SceneManager.UnloadSceneAsync("LevelSelect");
     }

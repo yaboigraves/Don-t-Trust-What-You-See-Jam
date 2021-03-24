@@ -11,12 +11,11 @@ public class Level : ScriptableObject
     public SongInfo songInfo;
     public string midiFileName;
     public float bpm;
-
     //in beats
     public int defensePhaseLength = 16;
     public int offensePhaseLength = 16;
-
     public int songLengthInBeats = 64;
+    public string fmodSongName;
 
     public void buildSongInfo()
     {

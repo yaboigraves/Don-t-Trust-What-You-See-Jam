@@ -55,6 +55,11 @@ public class BattleManager : MonoBehaviour
         //init the input mode
     }
 
+    public void LoadLevelInfo()
+    {
+        MusicManager.current.LoadSong(currentLevelSongInfo.fmodSongName);
+    }
+
     public void FillDefenseQueue()
     {
         defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;

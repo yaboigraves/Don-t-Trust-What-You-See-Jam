@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/sourpunchv1
   guid: a15dd662733ad447b03816ce0c52313b
-  Banks:
-  - {fileID: 6643916884609311788}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -57,7 +56,7 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637510094623257717
+  lastModified: 637521243869048522
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -76,11 +75,11 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637510094623277417
+  lastModified: 637521243869068469
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 848
+    Value: 850
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -99,15 +98,38 @@ MonoBehaviour:
   - {fileID: -4962644259976623053}
   - {fileID: 6643916884609311788}
   EditorEvents:
-  - {fileID: -7605947241426354027}
   - {fileID: 3221954066816181366}
+  - {fileID: 2472231579786655101}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4962644259976623053}
   StringsBanks:
   - {fileID: -4191745310697559331}
-  stringsBankWriteTime: 637510094623277417
+  stringsBankWriteTime: 637521243869068469
   cacheVersion: 6
+--- !u!114 &2472231579786655101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/cruiseControl
+  m_EditorClassIdentifier: 
+  Path: event:/cruiseControl
+  guid: 605cd2869d383f43a9732ce1156a7324
+  Banks:
+  - {fileID: 6643916884609311788}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 192610
 --- !u!114 &3221954066816181366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +208,7 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Songs.bank
   Name: Songs
   StudioPath: bank:/Songs
-  lastModified: 637510094623537576
+  lastModified: 637521243905963031
   LoadResult: 0
   FileSizes: []
   Exists: 1

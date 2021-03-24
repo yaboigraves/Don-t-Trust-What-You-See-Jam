@@ -47,12 +47,15 @@ public class Indicator : MonoBehaviour
     void Update()
     {
 
-
-        if (lerpProgress < 1)
+        if (MusicManager.current.enabled)
         {
-            lerpProgress = MusicManager.current.timelineInfo.currentPosition / indicatorTime;
-            transform.position = Vector3.Lerp(startPosition, destinationPoint.position, lerpProgress);
+            if (lerpProgress < 1)
+            {
+                lerpProgress = MusicManager.current.timelineInfo.currentPosition / indicatorTime;
+                transform.position = Vector3.Lerp(startPosition, destinationPoint.position, lerpProgress);
+            }
         }
+
         //TODO: reimpliment this
         // else if (postLerpProgress < 1)
         // {
