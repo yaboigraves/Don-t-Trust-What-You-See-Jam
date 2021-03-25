@@ -20,7 +20,12 @@ public class LevelSelectManager : MonoBehaviour
     public TextMeshProUGUI levelTitleText;
     public Button loadButton;
     public string[] levelNames;
+
+    //this is bad maybe do this dif later
+    public Level[] levelObjects;
     int levelIndex = 0;
+
+
 
     private void Start()
     {
@@ -137,6 +142,10 @@ public class LevelSelectManager : MonoBehaviour
         {
             yield return null;
         }
+        BattleManager.current.debugMode = false;
+
+        //set the track in the battle manager
+        BattleManager.current.currentLevelSongInfo = levelObjects[levelIndex];
 
         //wait a frame
         yield return null;

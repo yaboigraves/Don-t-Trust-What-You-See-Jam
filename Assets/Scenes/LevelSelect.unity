@@ -295,6 +295,11 @@ MonoBehaviour:
   - JungleCube
   - SkyCube
   - ?????
+  levelObjects:
+  - {fileID: 11400000, guid: 055fe0fdae771da439c079ce40023f64, type: 2}
+  - {fileID: 11400000, guid: 055fe0fdae771da439c079ce40023f64, type: 2}
+  - {fileID: 11400000, guid: c7fbb598858184b4488b5f3433ef036b, type: 2}
+  - {fileID: 11400000, guid: 055fe0fdae771da439c079ce40023f64, type: 2}
 --- !u!4 &46616199
 Transform:
   m_ObjectHideFlags: 0

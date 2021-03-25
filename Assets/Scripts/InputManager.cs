@@ -152,7 +152,13 @@ public class InputManager : MonoBehaviour
             {
                 //check and see if theres currently an indicator in lane two that is ready to be hit
                 UIManager.current.SpawnFeedBackText(true, 2);
-                Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+
+                //TODO: debug why this causes a reference not foun
+                if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]] != null)
+                {
+                    Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+
+                }
 
                 BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
                 //remove the array entry as well

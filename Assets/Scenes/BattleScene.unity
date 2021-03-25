@@ -2186,7 +2186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa08b931ed461e4496b12297045461f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBattleSongName: omariTest
+  currentBattleSongName: cruiseControl
   currentSongInfo:
     indicatorOneInfo: []
     indicatorTwoInfo: []
@@ -2236,7 +2236,7 @@ MonoBehaviour:
     model: {fileID: 0}
     textColor: {r: 0, g: 0, b: 0, a: 0}
     assetColor: {r: 0, g: 0, b: 0, a: 0}
-  currentLevelSongInfo: {fileID: 11400000, guid: f333b6c268742974298a19a6442e8ed5,
+  currentLevelSongInfo: {fileID: 11400000, guid: 055fe0fdae771da439c079ce40023f64,
     type: 2}
   statusInfo:
     maxVibe: 200
@@ -2248,6 +2248,7 @@ MonoBehaviour:
   levelObject: {fileID: 3313923100036815364, guid: e254717a415855d4ab50356c78e52179,
     type: 3}
   started: 0
+  debugMode: 1
   currentBeatCounter: 0
   totalBeatCounter: 0
 --- !u!1 &934761515

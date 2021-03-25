@@ -72,6 +72,7 @@ public class MusicManager : MonoBehaviour
 
     public void LoadSong(string fmodSongName)
     {
+        music = fmodSongName;
         musicPlayEvent = RuntimeManager.CreateInstance(music);
 
         timelineInfo = new TimelineInfo();
@@ -91,8 +92,8 @@ public class MusicManager : MonoBehaviour
 
     public void StartBattle()
     {
+        Debug.Log("starting battle");
         musicPlayEvent.start();
-
     }
 
     public void EndBattle()

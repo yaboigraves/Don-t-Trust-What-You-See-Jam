@@ -21,9 +21,10 @@ public class BattleManager : MonoBehaviour
 
     public StatusInfo statusInfo;
 
-    public GameObject levelObject;
 
     public bool started;
+
+    public bool debugMode = true;
 
     private void Awake()
     {
@@ -53,10 +54,16 @@ public class BattleManager : MonoBehaviour
         UIManager.current.EnableDefenseModeUi();
         UIManager.current.InitVibeSlider(statusInfo.maxVibe, statusInfo.currentVibe);
         //init the input mode
+
+        if (debugMode)
+        {
+            LoadLevelInfo();
+        }
     }
 
     public void LoadLevelInfo()
     {
+        Debug.Log("loading song info for " + currentLevelSongInfo.fmodSongName);
         MusicManager.current.LoadSong(currentLevelSongInfo.fmodSongName);
     }
 
@@ -110,6 +117,7 @@ public class BattleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !started)
         {
             MusicManager.current.StartBattle();
+            started = true;
         }
 
         CheckStatus();
