@@ -71,10 +71,10 @@ public class UIManager : MonoBehaviour
             info.indicatorDict[info.indicatorTwoInfo[i]] = indic;
         }
 
-        //this might be a dumb fix
-        //Debug.Log(info.indicatorDict.Count);
-        BattleManager.current.currentSongInfo.indicatorDict = info.indicatorDict;
-        //Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Count);
+        BattleManager.current.currentSongInfo = info;
+
+        //this is a patch fix fixing some sphaget dont mind me :))
+
 
     }
 

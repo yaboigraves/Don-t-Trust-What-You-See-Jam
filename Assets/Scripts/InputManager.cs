@@ -229,6 +229,7 @@ public class InputManager : MonoBehaviour
 
             //delete the indicator too
             //Debug.Log("missed a snare");
+            UIManager.current.SpawnFeedBackText(false, 0);
             BattleManager.current.ProcessHit(false);
 
         }
