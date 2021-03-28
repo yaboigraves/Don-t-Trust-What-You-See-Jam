@@ -37,6 +37,8 @@ public class InputManager : MonoBehaviour
         }
 
         InitInputs();
+
+        this.enabled = false;
     }
 
     public void InitInputs()
@@ -69,8 +71,15 @@ public class InputManager : MonoBehaviour
 
 
 
-        if (BattleManager.current.battleMode == "offense")
+
+        //TODO: need to delay this from stopping for like one more beat?
+        // Debug.Log(BattleManager.current);
+        // Debug.Log(BattleManager.current.totalBeatCounter);
+        // Debug.Break();
+
+        if (BattleManager.current.battleMode == "offense" || BattleManager.current.currentBeatCounter <= 1)
         {
+
             CheckIndicatorStatus();
         }
         else

@@ -145,7 +145,7 @@ public class LevelSelectManager : MonoBehaviour
         BattleManager.current.debugMode = false;
 
         //set the track in the battle manager
-        BattleManager.current.currentLevelSongInfo = levelObjects[levelIndex];
+        BattleManager.current.currentLevelSongInfo = Instantiate(levelObjects[levelIndex]);
 
         //wait a frame
         yield return null;

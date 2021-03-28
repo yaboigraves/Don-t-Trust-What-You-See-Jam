@@ -69,6 +69,8 @@ public class BattleManager : MonoBehaviour
         // Debug.Log("loading song info for " + currentLevelSongInfo.fmodSongName);
         MusicManager.current.LoadSong(currentLevelSongInfo.fmodSongName);
         //currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
+
+        //so before we do shit, we gotta instnatiate the currentsonginfo 
         UIManager.current.SetupIndicators();
     }
 
@@ -122,6 +124,7 @@ public class BattleManager : MonoBehaviour
         {
             MusicManager.current.StartBattle();
             started = true;
+            InputManager.current.enabled = true;
         }
 
         if (Input.GetKeyDown(KeyCode.F))

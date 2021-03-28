@@ -71,7 +71,10 @@ public class UIManager : MonoBehaviour
             info.indicatorDict[info.indicatorTwoInfo[i]] = indic;
         }
 
+        //instnatiate the object 
         BattleManager.current.currentSongInfo = info;
+
+
 
         //this is a patch fix fixing some sphaget dont mind me :))
 
