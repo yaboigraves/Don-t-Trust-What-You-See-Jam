@@ -7,11 +7,8 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     public static InputManager current;
     public float tolerance;
-    public KeyCode oneButtonBind = KeyCode.Space;
-    //so going to need to maintain two lists for the indicators 
 
     public KeyCode twoButtonBindOne = KeyCode.A, twoButtonBindTwo = KeyCode.D;
-    public RotateOn cubeTest;
 
     public bool defenseInputOpen = false;
 
@@ -136,6 +133,10 @@ public class InputManager : MonoBehaviour
                     //time to do a hit
                     //destroy the indicator attacked to the time
                     UIManager.current.SpawnFeedBackText(true, 1);
+
+                    //TODO: debug this shit
+
+                    Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
                     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]].gameObject);
                     //remove it from the dictioanry as well
 
@@ -209,7 +210,7 @@ public class InputManager : MonoBehaviour
             //delete the indicator too
             Debug.Log("missed a kick");
             BattleManager.current.ProcessHit(false);
-            cubeTest.rotate(0);
+
         }
 
         if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorTwoInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
@@ -220,7 +221,7 @@ public class InputManager : MonoBehaviour
             //delete the indicator too
             Debug.Log("missed a snare");
             BattleManager.current.ProcessHit(false);
-            cubeTest.rotate(1);
+
         }
 
         //if theres no indicators left turn off the input

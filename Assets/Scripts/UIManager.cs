@@ -50,16 +50,14 @@ public class UIManager : MonoBehaviour
     public void SetupIndicators()
     {
         SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
-        //so when we spawn in the songinfo stuff, we should map the times to the indicators to reference them
-        //assuming every beat is based on the ratio, plop them down
+
+        Debug.Log("setting up indicators for song " + BattleManager.current.currentLevelSongInfo.name);
+
         for (int i = 0; i < info.indicatorOneInfo.Count; i++)
         {
             Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorOneInfo[i] / 1000 * pixelToSeconds, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
             indic.SetIndicatorTime((float)info.indicatorOneInfo[i], indicatorOneDestination);
-
-            // Debug.Log(info.indicatorDict);
-            //map the indicator at this time in the song info dictionary
             info.indicatorDict[info.indicatorOneInfo[i]] = indic;
         }
 

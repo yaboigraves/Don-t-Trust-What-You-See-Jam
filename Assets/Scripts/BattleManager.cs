@@ -21,7 +21,6 @@ public class BattleManager : MonoBehaviour
 
     public StatusInfo statusInfo;
 
-
     public bool started;
 
     public bool debugMode = true;
@@ -49,7 +48,7 @@ public class BattleManager : MonoBehaviour
 
         currentSongInfo = info;
 
-        UIManager.current.SetupIndicators();
+        // UIManager.current.SetupIndicators();
 
         UIManager.current.EnableDefenseModeUi();
         UIManager.current.InitVibeSlider(statusInfo.maxVibe, statusInfo.currentVibe);
@@ -58,6 +57,8 @@ public class BattleManager : MonoBehaviour
         if (debugMode)
         {
             LoadLevelInfo();
+            currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
+            UIManager.current.SetupIndicators();
         }
     }
 
@@ -65,6 +66,8 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("loading song info for " + currentLevelSongInfo.fmodSongName);
         MusicManager.current.LoadSong(currentLevelSongInfo.fmodSongName);
+        currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
+        UIManager.current.SetupIndicators();
     }
 
     public void FillDefenseQueue()
@@ -94,7 +97,6 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))

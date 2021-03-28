@@ -2244,11 +2244,9 @@ MonoBehaviour:
     currentVibe: 100
     minVibe: 0
     vibeIncreaseRate: 2
-    vibeDecreaseRate: -20
-  levelObject: {fileID: 3313923100036815364, guid: e254717a415855d4ab50356c78e52179,
-    type: 3}
+    vibeDecreaseRate: 0
   started: 0
-  debugMode: 1
+  debugMode: 0
   currentBeatCounter: 0
   totalBeatCounter: 0
 --- !u!1 &934761515
@@ -4244,10 +4242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tolerance: 150
-  oneButtonBind: 32
   twoButtonBindOne: 97
   twoButtonBindTwo: 100
-  cubeTest: {fileID: 0}
   defenseInputOpen: 0
   defenseTolerance: 0.2
   inputMode: two
