@@ -35,7 +35,7 @@ public class Level : ScriptableObject
         }
 
 
-        // UnityEditor.EditorUtility.SetDirty(this);
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 
 

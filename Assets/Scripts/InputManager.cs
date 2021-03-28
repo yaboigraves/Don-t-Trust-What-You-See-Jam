@@ -95,7 +95,7 @@ public class InputManager : MonoBehaviour
                 gotInputLastDefense = true;
                 if (defenseInputOpen && BattleManager.current.currentDefense.trueOrFalse)
                 {
-                    Debug.Log("Good");
+                    //Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText(true, 1);
                     defenseInputOpen = false;
                     BattleManager.current.ProcessHit(true);
@@ -165,7 +165,7 @@ public class InputManager : MonoBehaviour
                 //remove the array entry as well
                 BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
 
-                Debug.Log("hit!");
+                // Debug.Log("hit!");
                 BattleManager.current.ProcessHit(true);
             }
         }
@@ -203,23 +203,32 @@ public class InputManager : MonoBehaviour
     {
         if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
         {
-            Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorOneInfo[0]].gameObject);
+
+            //so before we destroy these, check and make sure they're actually in the dictionary
+            if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.indicatorOneInfo[0]))
+            {
+                Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorOneInfo[0]].gameObject);
+            }
+
             BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
 
             UIManager.current.SpawnFeedBackText(false, 0);
             //delete the indicator too
-            Debug.Log("missed a kick");
+            //Debug.Log("missed a kick");
             BattleManager.current.ProcessHit(false);
 
         }
 
         if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorTwoInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
         {
-            Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorTwoInfo[0]].gameObject);
+            if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.indicatorTwoInfo[0]))
+            {
+                Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorTwoInfo[0]].gameObject);
+            }
             BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
 
             //delete the indicator too
-            Debug.Log("missed a snare");
+            //Debug.Log("missed a snare");
             BattleManager.current.ProcessHit(false);
 
         }
@@ -231,98 +240,98 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public bool CheckInput(int time)
-    {
+    // public bool CheckInput(int time)
+    // {
 
 
-        //TODO: this is extremely ugly and messy refactor this later, at least its evil is contained for now
+    //     //TODO: this is extremely ugly and messy refactor this later, at least its evil is contained for now
 
-        double nextIndicatorTime = 0;
+    //     double nextIndicatorTime = 0;
 
-        double indicatorOnePeek = -1, indicatorTwoPeek = -1;
+    //     double indicatorOnePeek = -1, indicatorTwoPeek = -1;
 
-        int indicatorNext = 0;
-
-
-        if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0)
-        {
-            indicatorOnePeek = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
-        }
-        if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0)
-        {
-            indicatorTwoPeek = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
-        }
+    //     int indicatorNext = 0;
 
 
-        if (indicatorOnePeek != -1 && indicatorTwoPeek == -1)
-        {
-            //theres still at least one indicator one left
-            nextIndicatorTime = indicatorOnePeek;
-            indicatorNext = 1;
-        }
-        else if (indicatorTwoPeek != -1 && indicatorOnePeek == -1)
-        {
-            //theres still at least one indicator two left
-            nextIndicatorTime = indicatorTwoPeek;
-            indicatorNext = 2;
-        }
-        else
-        {
-            if (BattleManager.current.currentSongInfo.indicatorOneInfo[0] < BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
-            {
-                //indicator 1 is the next one
-                nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
-                indicatorNext = 1;
+    //     if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0)
+    //     {
+    //         indicatorOnePeek = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
+    //     }
+    //     if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0)
+    //     {
+    //         indicatorTwoPeek = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
+    //     }
 
-            }
-            //account for floating point fuckery (ignore the lazy casts lol)
-            else if (Mathf.Abs((float)BattleManager.current.currentSongInfo.indicatorOneInfo[0] - (float)BattleManager.current.currentSongInfo.indicatorTwoInfo[0]) < 0.01f)
-            {
-                //same time, dequeue both
-                nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
-                indicatorNext = 1;
 
-            }
-            else if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 1 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] > BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
-            {
-                //indicator 2 is the next one
-                nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
-                indicatorNext = 2;
+    //     if (indicatorOnePeek != -1 && indicatorTwoPeek == -1)
+    //     {
+    //         //theres still at least one indicator one left
+    //         nextIndicatorTime = indicatorOnePeek;
+    //         indicatorNext = 1;
+    //     }
+    //     else if (indicatorTwoPeek != -1 && indicatorOnePeek == -1)
+    //     {
+    //         //theres still at least one indicator two left
+    //         nextIndicatorTime = indicatorTwoPeek;
+    //         indicatorNext = 2;
+    //     }
+    //     else
+    //     {
+    //         if (BattleManager.current.currentSongInfo.indicatorOneInfo[0] < BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
+    //         {
+    //             //indicator 1 is the next one
+    //             nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
+    //             indicatorNext = 1;
 
-            }
-            else
-            {
-                Debug.LogWarning("SOMETHING IS FUCKED UP  :)");
-            }
-        }
+    //         }
+    //         //account for floating point fuckery (ignore the lazy casts lol)
+    //         else if (Mathf.Abs((float)BattleManager.current.currentSongInfo.indicatorOneInfo[0] - (float)BattleManager.current.currentSongInfo.indicatorTwoInfo[0]) < 0.01f)
+    //         {
+    //             //same time, dequeue both
+    //             nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
+    //             indicatorNext = 1;
 
-        //so now that we know the next indicator lets see if you hit it on time or you suck
-        //again lazy casts
-        if (Mathf.Abs(time - (float)nextIndicatorTime) < tolerance)
-        {
-            //Debug.Log("got it with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
+    //         }
+    //         else if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 1 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] > BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
+    //         {
+    //             //indicator 2 is the next one
+    //             nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
+    //             indicatorNext = 2;
 
-            //delete the indicator object
-            Destroy(BattleManager.current.currentSongInfo.indicatorDict[nextIndicatorTime].gameObject);
+    //         }
+    //         else
+    //         {
+    //             Debug.LogWarning("SOMETHING IS FUCKED UP  :)");
+    //         }
+    //     }
 
-            if (indicatorNext == 1)
-            {
-                BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
-            }
-            else if (indicatorNext == 2)
-            {
-                BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
-            }
+    //     //so now that we know the next indicator lets see if you hit it on time or you suck
+    //     //again lazy casts
+    //     if (Mathf.Abs(time - (float)nextIndicatorTime) < tolerance)
+    //     {
+    //         //Debug.Log("got it with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
 
-            return true;
-        }
-        else
-        {
-            //Debug.Log("missed with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
-            return false;
-        }
+    //         //delete the indicator object
+    //         Destroy(BattleManager.current.currentSongInfo.indicatorDict[nextIndicatorTime].gameObject);
 
-    }
+    //         if (indicatorNext == 1)
+    //         {
+    //             BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
+    //         }
+    //         else if (indicatorNext == 2)
+    //         {
+    //             BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
+    //         }
+
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         //Debug.Log("missed with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
+    //         return false;
+    //     }
+
+    // }
 
 
 

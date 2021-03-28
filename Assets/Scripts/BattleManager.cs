@@ -8,6 +8,8 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager current;
     public string currentBattleSongName;
+
+    //ok so my sphaget has failed me here, this variable should be the one everyone is referencing ,not the imported one from the level info object
     public SongInfo currentSongInfo;
     //defense mode queue 
     public int defenseQueueLength = 8;
@@ -38,7 +40,7 @@ public class BattleManager : MonoBehaviour
         // currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
 
         // SongInfo info = MusicManager.current.getMidiInfo(currentBattleSongName);
-        currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
+        //currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
 
         SongInfo info = currentLevelSongInfo.songInfo;
 
@@ -57,16 +59,16 @@ public class BattleManager : MonoBehaviour
         if (debugMode)
         {
             LoadLevelInfo();
-            currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
+            //currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
             UIManager.current.SetupIndicators();
         }
     }
 
     public void LoadLevelInfo()
     {
-        Debug.Log("loading song info for " + currentLevelSongInfo.fmodSongName);
+        // Debug.Log("loading song info for " + currentLevelSongInfo.fmodSongName);
         MusicManager.current.LoadSong(currentLevelSongInfo.fmodSongName);
-        currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
+        //currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
         UIManager.current.SetupIndicators();
     }
 
@@ -122,7 +124,40 @@ public class BattleManager : MonoBehaviour
             started = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            DictionaryIndicatorsDebug();
+        }
+
         CheckStatus();
+    }
+
+
+    public void DictionaryIndicatorsDebug()
+    {
+        Debug.Log("dictionary of times to indicators");
+        Debug.Log(currentSongInfo.indicatorDict.Count);
+        Debug.Log("-----------------------------------");
+        foreach (KeyValuePair<double, Indicator> pair in currentSongInfo.indicatorDict)
+        {
+            Debug.Log(pair.Key);
+        }
+        Debug.Log("-----------------------------------");
+
+
+        Debug.Log("\n array 1 of indicators");
+
+        foreach (double d in currentSongInfo.indicatorOneInfo)
+        {
+            Debug.Log(d);
+        }
+
+        Debug.Log("\n array 2 of indicators");
+
+        foreach (double d in currentSongInfo.indicatorTwoInfo)
+        {
+            Debug.Log(d);
+        }
     }
 
     public void CheckStatus()

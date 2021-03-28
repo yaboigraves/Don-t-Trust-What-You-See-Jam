@@ -49,9 +49,11 @@ public class UIManager : MonoBehaviour
     //we can set that when we set the indicatoe time
     public void SetupIndicators()
     {
-        SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
 
-        Debug.Log("setting up indicators for song " + BattleManager.current.currentLevelSongInfo.name);
+
+        SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
+        info.indicatorDict = new Dictionary<double, Indicator>();
+
 
         for (int i = 0; i < info.indicatorOneInfo.Count; i++)
         {
@@ -68,6 +70,12 @@ public class UIManager : MonoBehaviour
             indic.SetIndicatorTime((float)info.indicatorTwoInfo[i], indicatorTwoDestination);
             info.indicatorDict[info.indicatorTwoInfo[i]] = indic;
         }
+
+        //this might be a dumb fix
+        //Debug.Log(info.indicatorDict.Count);
+        BattleManager.current.currentSongInfo.indicatorDict = info.indicatorDict;
+        //Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Count);
+
     }
 
     //spawn this at the pad location
