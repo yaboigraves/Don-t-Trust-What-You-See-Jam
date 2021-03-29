@@ -155,4 +155,14 @@ public class LevelSelectManager : MonoBehaviour
         SceneManager.UnloadSceneAsync("LevelSelect");
     }
 
+    public void GoBackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
