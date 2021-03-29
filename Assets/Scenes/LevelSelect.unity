@@ -291,15 +291,15 @@ MonoBehaviour:
   levelTitleText: {fileID: 1422109902}
   loadButton: {fileID: 1420749411}
   levelNames:
-  - Tutorial
+  - OtherCube
   - JungleCube
   - SkyCube
-  - ?????
+  - OmariCube
   levelObjects:
-  - {fileID: 11400000, guid: 055fe0fdae771da439c079ce40023f64, type: 2}
+  - {fileID: 11400000, guid: c0cc3494be51a114dbaf3fe25fb3d1bd, type: 2}
   - {fileID: 11400000, guid: 055fe0fdae771da439c079ce40023f64, type: 2}
   - {fileID: 11400000, guid: c7fbb598858184b4488b5f3433ef036b, type: 2}
-  - {fileID: 11400000, guid: 055fe0fdae771da439c079ce40023f64, type: 2}
+  - {fileID: 11400000, guid: 2135b2924b69bec4fa69899ec8784ded, type: 2}
 --- !u!4 &46616199
 Transform:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ public class BattleManager : MonoBehaviour
 
         defenseQueue = new Queue<DefensePrompt>();
 
-        FillDefenseQueue();
+        // FillDefenseQueue();
 
         currentSongInfo = info;
 
@@ -61,6 +61,8 @@ public class BattleManager : MonoBehaviour
             LoadLevelInfo();
             //currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
             UIManager.current.SetupIndicators();
+            FillDefenseQueue();
+
         }
     }
 
@@ -72,11 +74,17 @@ public class BattleManager : MonoBehaviour
 
         //so before we do shit, we gotta instnatiate the currentsonginfo 
         UIManager.current.SetupIndicators();
+        FillDefenseQueue();
+
+
+        //load the defense queue with enough indicators depending on the defense phase length
     }
 
     public void FillDefenseQueue()
     {
         defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
+
+
         for (int i = 0; i < defenseQueueLength; i++)
         {
             defenseQueue.Enqueue(defensePromptOptions[Random.Range(0, defensePromptOptions.Length)]);

@@ -56,7 +56,7 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637522160800815130
+  lastModified: 637525480277567741
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -75,12 +75,35 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637522160801274144
+  lastModified: 637525480277577718
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 888
+    Value: 958
   Exists: 1
+--- !u!114 &-611730411736052955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/lb9
+  m_EditorClassIdentifier: 
+  Path: event:/lb9
+  guid: f0ecc99160568848bd8adecc57166612
+  Banks:
+  - {fileID: 6643916884609311788}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 146238
 --- !u!114 &-230669055039632399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,12 +147,14 @@ MonoBehaviour:
   - {fileID: 3221954066816181366}
   - {fileID: 2472231579786655101}
   - {fileID: -230669055039632399}
+  - {fileID: 4369966402605536754}
+  - {fileID: -611730411736052955}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4962644259976623053}
   StringsBanks:
   - {fileID: -4191745310697559331}
-  stringsBankWriteTime: 637522160801274144
+  stringsBankWriteTime: 637525480277577718
   cacheVersion: 6
 --- !u!114 &2472231579786655101
 MonoBehaviour:
@@ -198,6 +223,29 @@ MonoBehaviour:
   - Name: Desktop
     Value: 796
   Exists: 0
+--- !u!114 &4369966402605536754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/funky
+  m_EditorClassIdentifier: 
+  Path: event:/funky
+  guid: 65d8c57669c6e24881ff5cdc960cf837
+  Banks:
+  - {fileID: 6643916884609311788}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 118857
 --- !u!114 &5171146116181958702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +280,7 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Songs.bank
   Name: Songs
   StudioPath: bank:/Songs
-  lastModified: 637522160838619143
+  lastModified: 637525480278116267
   LoadResult: 0
   FileSizes: []
   Exists: 1
