@@ -124,6 +124,8 @@ public class MusicManager : MonoBehaviour
         if (timelineInfo.currentBeat == 1)
         {
             CameraManager.current.SwitchCamera();
+
+            AnimationManager.current.BeatSwitchAnimation();
         }
         if (BattleManager.current.battleMode == "defense")
         {

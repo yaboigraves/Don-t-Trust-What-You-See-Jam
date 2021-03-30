@@ -76,6 +76,10 @@ public class BattleManager : MonoBehaviour
         UIManager.current.SetupIndicators();
         FillDefenseQueue();
 
+        //tell the animation controller to do its fuckin job
+        AnimationManager.current.FindAnimationControllersInScene();
+
+
 
         //load the defense queue with enough indicators depending on the defense phase length
     }
