@@ -34,6 +34,7 @@ public class MenuManager : MonoBehaviour
         {
             //mark th at we have launched the gamen now (note this doesnt actually save till we call the save function)
             SaveStateManager.saveState.hasGameLaunched = 1;
+            SaveStateManager.SaveGame();
 
             //prompt the user with a ui thing to essentially bind the keys to what they want
             ToggleKeyRebindWindow(true);
@@ -58,6 +59,15 @@ public class MenuManager : MonoBehaviour
     {
         ToggleButtons(false);
         StartCoroutine(captureKeyRoutine(key));
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            //resets the save state
+            SaveStateManager.ResetSaveState();
+        }
     }
 
     IEnumerator captureMidiRoutine(int midi)
