@@ -9,27 +9,22 @@ public static class SaveStateManager
 
     public static SaveState saveState;
 
-
     //so this is run when the main scene runs when the game first opens to just load all the settings
     public static void LoadSaveState()
     {
         if (PlayerPrefs.HasKey("hasGameLaunched"))
         {
             saveState = new SaveState(PlayerPrefs.GetInt("hasGameLaunched"), PlayerPrefs.GetInt("completedLevels"), PlayerPrefs.GetInt("midiBind1"), PlayerPrefs.GetInt("midiBind2"), PlayerPrefs.GetString("keyBind1"), PlayerPrefs.GetString("keyBind2"));
-
         }
         else
         {
             ResetSaveState();
         }
-
-
     }
 
     public static void SaveGame()
     {
         //basically just set all the player pref from the savestate object that it currently has
-
         PlayerPrefs.SetInt("hasGameLaunched", saveState.hasGameLaunched);
         PlayerPrefs.SetInt("completedLevels", saveState.completedLevels);
         PlayerPrefs.SetInt("midiBind1", saveState.midiBind1);
@@ -37,6 +32,7 @@ public static class SaveStateManager
         PlayerPrefs.SetString("keyBind1", saveState.keyBind1.ToString());
         PlayerPrefs.SetString("keyBind2", saveState.keyBind2.ToString());
 
+        Debug.Log("Game Saved!");
     }
 
     public static void ResetSaveState()
@@ -45,7 +41,6 @@ public static class SaveStateManager
         saveState = new SaveState(0, 0, 0, 0, "a", "d");
         SaveGame();
     }
-
 }
 
 

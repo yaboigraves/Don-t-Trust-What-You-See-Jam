@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    public GameObject ControlBindPanel;
     public Button[] keyBindButtons;
-
     private void Awake()
     {
         SaveStateManager.LoadSaveState();
@@ -36,8 +36,13 @@ public class MenuManager : MonoBehaviour
             SaveStateManager.saveState.hasGameLaunched = 1;
 
             //prompt the user with a ui thing to essentially bind the keys to what they want
-
+            ToggleKeyRebindWindow(true);
         }
+    }
+
+    public void ToggleKeyRebindWindow(bool toggle)
+    {
+        ControlBindPanel.SetActive(toggle);
     }
 
 
@@ -45,35 +50,60 @@ public class MenuManager : MonoBehaviour
     {
         //set all the buttons as not interactable 
         ToggleButtons(false);
+        StartCoroutine(captureMidiRoutine(midi));
 
-        if (midi == 1)
-        {
-
-        }
-        else
-        {
-
-        }
     }
 
     public void CaptureKeyBind(int key)
     {
-        //set all the buttons as not interactable 
         ToggleButtons(false);
+        StartCoroutine(captureKeyRoutine(key));
+    }
 
-        if (key == 1)
+    IEnumerator captureMidiRoutine(int midi)
+    {
+        bool gotMidiInput = false;
+        while (gotMidiInput == false)
         {
-            StartCoroutine(captureKeyRoutine());
+            //loop through all of the possible midi keys that coule be pressed
+            bool gotInput = false;
+            for (int i = 23; i < 125; i++)
+            {
+                if (MidiJack.MidiMaster.GetKey(i) > 0.0f)
+                {
+                    if (midi == 1)
+                    {
+                        SaveStateManager.saveState.midiBind1 = i;
+                    }
+                    else
+                    {
+                        SaveStateManager.saveState.midiBind2 = i;
+
+                    }
+
+                    Debug.Log("got input of midi key " + i.ToString());
+                    SaveStateManager.SaveGame();
+                    ToggleButtons(true);
+                    gotInput = true;
+                    break;
+
+                }
+            }
+
+            if (gotInput)
+            {
+                break;
+            }
+
+
+            yield return null;
         }
-        else
-        {
-            StartCoroutine(captureKeyRoutine());
-        }
+
+        yield return null;
     }
 
 
-
-    IEnumerator captureKeyRoutine()
+    IEnumerator captureKeyRoutine(int key)
     {
         bool gotKeyInput = false;
         while (gotKeyInput == false)
@@ -81,16 +111,29 @@ public class MenuManager : MonoBehaviour
             //check and see if a key is pressed
             if (Input.anyKeyDown)
             {
-                //TODO: 
-                //find the key being pressed
                 string inputString = Input.inputString;
                 Debug.Log("got input string of " + inputString);
                 gotKeyInput = true;
-                ToggleButtons(true);
-            }
 
+                if (key == 1)
+                {
+                    SaveStateManager.saveState.keyBind1 = inputString;
+                }
+                else
+                {
+                    SaveStateManager.saveState.keyBind2 = inputString;
+                }
+
+                SaveStateManager.SaveGame();
+                ToggleButtons(true);
+
+                //TODO: set the text of the button
+
+            }
             yield return null;
         }
+
+        yield return null;
     }
 
     void ToggleButtons(bool toggle)
