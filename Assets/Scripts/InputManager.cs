@@ -11,6 +11,8 @@ public class InputManager : MonoBehaviour
 
     public KeyCode twoButtonBindOne = KeyCode.A, twoButtonBindTwo = KeyCode.D;
 
+    public int midiBind1, midiBind2;
+
     public bool defenseInputOpen = false;
 
     public float defenseTolerance = 0.2f;
@@ -44,6 +46,14 @@ public class InputManager : MonoBehaviour
 
     public void InitInputs()
     {
+        //TODO: so this needs to essentially read from playerprefs and set some variables in here that will bind input 
+
+        twoButtonBindOne = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind1", "A").ToUpper());
+        twoButtonBindTwo = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind2", "D").ToUpper());
+
+        midiBind1 = PlayerPrefs.GetInt("midiBind1", 0);
+        midiBind2 = PlayerPrefs.GetInt("midiBind2", 0);
+
         if (inputMode == "one")
         {
             UIManager.current.ToggleOneButtonDefenseInput();
@@ -102,13 +112,19 @@ public class InputManager : MonoBehaviour
         this.enabled = false;
     }
 
+
+    //stop holding of midi keys (bootleg getkeydown)
+    bool gotMidiInput1 = false, gotMidiInput2 = false;
     public void TwoButtonInput()
     {
+
+
+
         if (BattleManager.current.battleMode == "defense")
         {
             //so assuming that input 1 is true and input 2 is false for now
 
-            if (Input.GetKeyDown(twoButtonBindOne))
+            if (Input.GetKeyDown(twoButtonBindOne) || (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f & !gotMidiInput1))
             {
                 gotInputLastDefense = true;
                 if (defenseInputOpen && BattleManager.current.currentDefense.trueOrFalse)
@@ -124,7 +140,7 @@ public class InputManager : MonoBehaviour
                     BattleManager.current.ProcessHit(false);
                 }
             }
-            else if (Input.GetKeyDown(twoButtonBindTwo))
+            else if (Input.GetKeyDown(twoButtonBindTwo) || (MidiJack.MidiMaster.GetKey(midiBind2) > 0.00f && !gotMidiInput2))
             {
                 gotInputLastDefense = true;
                 if (defenseInputOpen && !BattleManager.current.currentDefense.trueOrFalse)
@@ -142,7 +158,7 @@ public class InputManager : MonoBehaviour
         }
         else if (BattleManager.current.battleMode == "offense")
         {
-            if (Input.GetKeyDown(twoButtonBindOne))
+            if (Input.GetKeyDown(twoButtonBindOne) || (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f && !gotMidiInput1))
             {
                 //check and see if theres currently an indicator in lane one that is ready to be hit
 
@@ -167,7 +183,7 @@ public class InputManager : MonoBehaviour
                 }
 
             }
-            else if (Input.GetKeyDown(twoButtonBindTwo))
+            else if (Input.GetKeyDown(twoButtonBindTwo) || (MidiJack.MidiMaster.GetKey(midiBind2) > 0.0f && !gotMidiInput2))
             {
                 //check and see if theres currently an indicator in lane two that is ready to be hit
                 UIManager.current.SpawnFeedBackText(true, 2);
@@ -187,6 +203,27 @@ public class InputManager : MonoBehaviour
                 BattleManager.current.ProcessHit(true);
             }
         }
+
+
+        //bootleg getkeydown
+        if (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f && !gotMidiInput1)
+        {
+            gotMidiInput1 = true;
+        }
+        if (MidiJack.MidiMaster.GetKey(midiBind2) > 0.0f)
+        {
+            gotMidiInput2 = true;
+        }
+
+        if (MidiJack.MidiMaster.GetKeyUp(midiBind1) && gotMidiInput1)
+        {
+            gotMidiInput1 = false;
+        }
+        if (MidiJack.MidiMaster.GetKeyUp(midiBind2) && gotMidiInput2)
+        {
+            gotMidiInput2 = false;
+        }
+
     }
 
 
