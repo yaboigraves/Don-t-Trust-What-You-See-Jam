@@ -58,8 +58,14 @@ public class LevelSelectManager : MonoBehaviour
         levelTitleText.text = levelNames[levelIndex];
 
         //turn off the level text
-        levelTitleText.enabled = true;
-        loadButton.interactable = true;
+
+
+        if (SaveStateManager.saveState.completedLevels >= levelIndex)
+        {
+            levelTitleText.enabled = true;
+            loadButton.interactable = true;
+        }
+
     }
 
 
@@ -82,7 +88,12 @@ public class LevelSelectManager : MonoBehaviour
 
         //turn off the level text
         levelTitleText.enabled = false;
+
+        //check and see if we can access the level
+
         loadButton.interactable = false;
+
+
     }
 
     public void MoveLeft()
@@ -103,31 +114,28 @@ public class LevelSelectManager : MonoBehaviour
 
         //turn off the level text
         levelTitleText.enabled = false;
+
+
+
         loadButton.interactable = false;
+
 
     }
 
     public void LoadLevel()
     {
-        //look at what name is currently selected and load that level
 
-        //TODO: so this is going to need a scene manager tool that can dynamically load in scenes that just have the assets in them
-        //then we can link up the manager assets with all the stuff it needs to manage in the actual scene
-        //can basically do this by just loading everyhing on top of this scene additively and culling with loading screens
-
-        Debug.Log("loading " + levelNames[levelIndex]);
-
-        //so for now we're going to load in the battle scene and then load in the environment scene on top of that, then tie them toegther 
-        // //make sure to de load this scene as well after those load
-        // SceneManager.LoadScene("BattleScene", LoadSceneMode.Additive);
-
-        // //so then we need to also load on top the environment scene
-        // //once both of those are loaded deload this scene
-        // SceneManager.LoadScene("JungleCube", LoadSceneMode.Additive);
-
-
-        //later throw together a loading screen here
-        StartCoroutine(loadBattleScenesAsync(levelNames[levelIndex]));
+        //check if we can even  load the level based on the players save progress 
+        if (SaveStateManager.saveState.completedLevels >= levelIndex)
+        {
+            Debug.Log("loading " + levelNames[levelIndex]);
+            //later throw together a loading screen here
+            StartCoroutine(loadBattleScenesAsync(levelNames[levelIndex]));
+        }
+        else
+        {
+            Debug.Log("cant Load that level yet son");
+        }
 
 
 

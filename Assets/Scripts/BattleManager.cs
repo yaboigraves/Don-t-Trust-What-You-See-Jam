@@ -24,6 +24,7 @@ public class BattleManager : MonoBehaviour
     public StatusInfo statusInfo;
 
     public bool started;
+    public bool battleOver = false;
 
     public bool debugMode = true;
 
@@ -135,6 +136,7 @@ public class BattleManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !started)
         {
             MusicManager.current.StartBattle();
+
             started = true;
             InputManager.current.enabled = true;
         }
@@ -192,6 +194,8 @@ public class BattleManager : MonoBehaviour
         UIManager.current.EnableWinLoseUI(false);
         InputManager.current.EndBattle();
         MusicManager.current.EndBattle();
+        battleOver = true;
+
     }
 
     public void ProcessHit(bool hit)
@@ -219,16 +223,37 @@ public class BattleManager : MonoBehaviour
 
     public int currentBeatCounter;
     public int totalBeatCounter;
+
+    public void WinRound()
+    {
+        UIManager.current.EnableWinLoseUI(true);
+        InputManager.current.enabled = false;
+
+        battleOver = true;
+        //increase our progress and save the game
+        //TODO: limited to 4 levels for now fix this later
+        if (SaveStateManager.saveState.completedLevels < 3)
+        {
+            SaveStateManager.saveState.completedLevels++;
+            SaveStateManager.SaveGame();
+        }
+    }
+
     public void CheckPhase()
     {
+        if (battleOver)
+        {
+            return;
+        }
+
         currentBeatCounter++;
         totalBeatCounter++;
+
 
         if (totalBeatCounter > +currentLevelSongInfo.songLengthInBeats)
         {
             //win state
-            UIManager.current.EnableWinLoseUI(true);
-            InputManager.current.enabled = false;
+            WinRound();
         }
 
         if (battleMode == "defense")

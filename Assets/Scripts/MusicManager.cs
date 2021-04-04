@@ -119,6 +119,11 @@ public class MusicManager : MonoBehaviour
 
     public void beatTrigger()
     {
+        if (BattleManager.current.battleOver)
+        {
+            return;
+        }
+
         BattleManager.current.CheckPhase();
 
         if (timelineInfo.currentBeat == 1)

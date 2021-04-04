@@ -38,8 +38,12 @@ public class AnimationManager : MonoBehaviour
     //this is called roughly every bar to switch to a new animation;
     public void BeatSwitchAnimation()
     {
-        currentPlayerController.SetTrigger("beatSwitch");
-        currentEnemyController.SetTrigger("beatSwitch");
+        if (currentPlayerController != null && currentEnemyController != null)
+        {
+            currentPlayerController.SetTrigger("beatSwitch");
+            currentEnemyController.SetTrigger("beatSwitch");
+        }
+
     }
 
 
