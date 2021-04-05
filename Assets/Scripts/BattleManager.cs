@@ -124,10 +124,6 @@ public class BattleManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("inputMode", 2);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -145,6 +141,8 @@ public class BattleManager : MonoBehaviour
         {
             DictionaryIndicatorsDebug();
         }
+
+
 
         CheckStatus();
     }

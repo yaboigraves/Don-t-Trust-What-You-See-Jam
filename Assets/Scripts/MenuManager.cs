@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using TMPro;
 
 
-
 public class MenuManager : MonoBehaviour
 {
     public GameObject ControlBindPanel;
@@ -17,7 +16,6 @@ public class MenuManager : MonoBehaviour
         //check and see if the game has launched before, and if not ask for midi binds if the user wants to enter them
         CheckIfGameLaunched();
     }
-
 
     public string mainSceneName;
     public void StartGame()
@@ -47,13 +45,11 @@ public class MenuManager : MonoBehaviour
         ControlBindPanel.SetActive(toggle);
     }
 
-
     public void CaptureMidiBind(int midi)
     {
         //set all the buttons as not interactable 
         ToggleButtons(false);
         StartCoroutine(captureMidiRoutine(midi));
-
     }
 
     public void CaptureKeyBind(int key)
@@ -89,7 +85,6 @@ public class MenuManager : MonoBehaviour
                     else
                     {
                         SaveStateManager.saveState.midiBind2 = i;
-
                     }
 
                     Debug.Log("got input of midi key " + i.ToString());
@@ -97,7 +92,6 @@ public class MenuManager : MonoBehaviour
                     ToggleButtons(true);
                     gotInput = true;
                     break;
-
                 }
             }
 
@@ -106,12 +100,10 @@ public class MenuManager : MonoBehaviour
                 break;
             }
 
-
             yield return null;
         }
 
         UpdateRebindButtons();
-
     }
 
     public void UpdateRebindButtons()

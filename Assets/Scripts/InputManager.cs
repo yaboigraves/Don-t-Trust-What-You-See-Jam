@@ -22,6 +22,8 @@ public class InputManager : MonoBehaviour
 
     public bool gotInputLastDefense = false;
 
+    public bool paused = false;
+
 
     private void Awake()
     {
@@ -83,12 +85,32 @@ public class InputManager : MonoBehaviour
         {
             //TODO: Open pause menu
 
-            //for now just loads back to main menu
-            SceneManager.LoadScene("LevelSelect");
+
+            if (!paused)
+            {
+                //stop the music 
+                MusicManager.current.TogglePause(true);
+                //set timescale to 0
+
+
+                Time.timeScale = 0;
+                //open the pause menu ui
+                UIManager.current.TogglePauseMenu(true);
+
+            }
+            else
+            {
+                //resume music
+                MusicManager.current.TogglePause(false);
+                //set timescale to 1
+                Time.timeScale = 1;
+
+                UIManager.current.TogglePauseMenu(false);
+            }
+
+
+            paused = !paused;
         }
-
-
-
 
 
         //TODO: need to delay this from stopping for like one more beat?

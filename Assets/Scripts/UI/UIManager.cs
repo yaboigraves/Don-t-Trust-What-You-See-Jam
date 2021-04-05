@@ -31,6 +31,9 @@ public class UIManager : MonoBehaviour
 
     public Image battlePhaseIcon;
 
+    public GameObject pauseMenuPanel;
+
+
     private void Awake()
     {
         current = this;
@@ -47,6 +50,20 @@ public class UIManager : MonoBehaviour
 
     //indicators are going to have different destinations depending on which lane they are set in here
     //we can set that when we set the indicatoe time
+
+    public void TogglePauseMenu(bool toggle)
+    {
+        pauseMenuPanel.SetActive(toggle);
+    }
+
+    public void ExitBackToMenu()
+    {
+        //reset the timescale back to 1
+        Time.timeScale = 1;
+        SceneManager.LoadScene("LevelSelect");
+    }
+
+
     public void SetupIndicators()
     {
 
@@ -264,4 +281,12 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene("LevelSelect");
     }
+
+
+    //copied in rebind code
+
+
+
+
+
 }

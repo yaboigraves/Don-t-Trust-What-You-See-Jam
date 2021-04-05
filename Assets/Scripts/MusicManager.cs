@@ -70,6 +70,12 @@ public class MusicManager : MonoBehaviour
 
     }
 
+    public void TogglePause(bool pause)
+    {
+        musicPlayEvent.setPaused(pause);
+
+    }
+
     public void LoadSong(string fmodSongName)
     {
         music = fmodSongName;
