@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 
 
@@ -109,7 +110,17 @@ public class MenuManager : MonoBehaviour
             yield return null;
         }
 
-        yield return null;
+        UpdateRebindButtons();
+
+    }
+
+    public void UpdateRebindButtons()
+    {
+        //update all the ui buttons
+        foreach (Button b in keyBindButtons)
+        {
+            b.gameObject.GetComponentInChildren<RebindButton>().UpdateButtonText();
+        }
     }
 
 
@@ -143,7 +154,10 @@ public class MenuManager : MonoBehaviour
             yield return null;
         }
 
-        yield return null;
+
+
+        UpdateRebindButtons();
+
     }
 
     void ToggleButtons(bool toggle)
