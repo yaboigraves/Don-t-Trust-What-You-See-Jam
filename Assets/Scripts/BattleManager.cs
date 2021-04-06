@@ -90,14 +90,24 @@ public class BattleManager : MonoBehaviour
         defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
 
 
-        for (int i = 0; i < defenseQueueLength; i++)
+        //-1 because we skip the first beat now
+        for (int i = 0; i < defenseQueueLength - 1; i++)
         {
             defenseQueue.Enqueue(defensePromptOptions[Random.Range(0, defensePromptOptions.Length)]);
         }
     }
 
+
+    //TODO: so this needs to essentially ignore the first call to this every new defense phase
     public void DequeuDefensePrompt()
     {
+        if (defenseFirstBeatBreak)
+        {
+            defenseFirstBeatBreak = false;
+            UIManager.current.EnableDefenseUI();
+            return;
+        }
+
         //tell the ui manager to present a new prompt to the screen
 
         if (defenseQueue.Count > 1)
@@ -237,6 +247,9 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+
+    public bool defenseFirstBeatBreak = true;
+
     public void CheckPhase()
     {
         if (battleOver)
@@ -275,9 +288,10 @@ public class BattleManager : MonoBehaviour
                 //requeue a bunch more defense prompts into the queue
                 FillDefenseQueue();
                 battleMode = "defense";
+                defenseFirstBeatBreak = true;
                 //UIManager.current.EnableDefenseModeUi();
                 currentBeatCounter = 0;
-                UIManager.current.EnableDefenseUI();
+                // UIManager.current.EnableDefenseUI();
                 UIManager.current.SwapPhaseIcon(battleMode);
             }
         }

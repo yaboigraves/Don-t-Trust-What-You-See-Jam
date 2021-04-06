@@ -147,8 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3449ba7f386e01148a3da7453da6f943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLifetime: 2
+  maxLifetime: 0.4
   lifetime: 0
   destination: {x: 0, y: 0, z: 0}
   startPosition: {x: 0, y: 0, z: 0}
+  speed: 1
+  range: 200
   fText: {fileID: 1458253659545997247}

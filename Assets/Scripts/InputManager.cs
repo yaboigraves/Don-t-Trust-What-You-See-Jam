@@ -56,29 +56,20 @@ public class InputManager : MonoBehaviour
         midiBind1 = PlayerPrefs.GetInt("midiBind1", 0);
         midiBind2 = PlayerPrefs.GetInt("midiBind2", 0);
 
-        if (inputMode == "one")
-        {
-            UIManager.current.ToggleOneButtonDefenseInput();
-        }
-        else if (inputMode == "two")
-        {
-            UIManager.current.ToggleTwoButtonDefenseInput();
-        }
+        // if (inputMode == "one")
+        // {
+        //     UIManager.current.ToggleOneButtonDefenseInput();
+        // }
+        // else if (inputMode == "two")
+        // {
+        // UIManager.current.ToggleTwoButtonDefenseInput();
+        // }
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (inputMode == "one")
-        {
-            // OneButtonInput();
-        }
-        else if (inputMode == "two")
-        {
-            // TwoButtonInput();
-        }
-
         TwoButtonInput();
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -139,12 +130,12 @@ public class InputManager : MonoBehaviour
     bool gotMidiInput1 = false, gotMidiInput2 = false;
     public void TwoButtonInput()
     {
-
-
-
         if (BattleManager.current.battleMode == "defense")
         {
             //so assuming that input 1 is true and input 2 is false for now
+
+            //ignore inputs if we're currently in that buffer area
+
 
             if (Input.GetKeyDown(twoButtonBindOne) || (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f & !gotMidiInput1))
             {
@@ -273,7 +264,7 @@ public class InputManager : MonoBehaviour
             UIManager.current.SpawnFeedBackText(false, 0);
         }
 
-        UIManager.current.ToggleDefenseInputUi();
+        //UIManager.current.ToggleDefenseInputUi();
     }
 
     void CheckIndicatorStatus()
@@ -317,100 +308,4 @@ public class InputManager : MonoBehaviour
             this.enabled = false;
         }
     }
-
-    // public bool CheckInput(int time)
-    // {
-
-
-    //     //TODO: this is extremely ugly and messy refactor this later, at least its evil is contained for now
-
-    //     double nextIndicatorTime = 0;
-
-    //     double indicatorOnePeek = -1, indicatorTwoPeek = -1;
-
-    //     int indicatorNext = 0;
-
-
-    //     if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0)
-    //     {
-    //         indicatorOnePeek = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
-    //     }
-    //     if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0)
-    //     {
-    //         indicatorTwoPeek = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
-    //     }
-
-
-    //     if (indicatorOnePeek != -1 && indicatorTwoPeek == -1)
-    //     {
-    //         //theres still at least one indicator one left
-    //         nextIndicatorTime = indicatorOnePeek;
-    //         indicatorNext = 1;
-    //     }
-    //     else if (indicatorTwoPeek != -1 && indicatorOnePeek == -1)
-    //     {
-    //         //theres still at least one indicator two left
-    //         nextIndicatorTime = indicatorTwoPeek;
-    //         indicatorNext = 2;
-    //     }
-    //     else
-    //     {
-    //         if (BattleManager.current.currentSongInfo.indicatorOneInfo[0] < BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
-    //         {
-    //             //indicator 1 is the next one
-    //             nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
-    //             indicatorNext = 1;
-
-    //         }
-    //         //account for floating point fuckery (ignore the lazy casts lol)
-    //         else if (Mathf.Abs((float)BattleManager.current.currentSongInfo.indicatorOneInfo[0] - (float)BattleManager.current.currentSongInfo.indicatorTwoInfo[0]) < 0.01f)
-    //         {
-    //             //same time, dequeue both
-    //             nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorOneInfo[0];
-    //             indicatorNext = 1;
-
-    //         }
-    //         else if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 1 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] > BattleManager.current.currentSongInfo.indicatorTwoInfo[0])
-    //         {
-    //             //indicator 2 is the next one
-    //             nextIndicatorTime = BattleManager.current.currentSongInfo.indicatorTwoInfo[0];
-    //             indicatorNext = 2;
-
-    //         }
-    //         else
-    //         {
-    //             Debug.LogWarning("SOMETHING IS FUCKED UP  :)");
-    //         }
-    //     }
-
-    //     //so now that we know the next indicator lets see if you hit it on time or you suck
-    //     //again lazy casts
-    //     if (Mathf.Abs(time - (float)nextIndicatorTime) < tolerance)
-    //     {
-    //         //Debug.Log("got it with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
-
-    //         //delete the indicator object
-    //         Destroy(BattleManager.current.currentSongInfo.indicatorDict[nextIndicatorTime].gameObject);
-
-    //         if (indicatorNext == 1)
-    //         {
-    //             BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
-    //         }
-    //         else if (indicatorNext == 2)
-    //         {
-    //             BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
-    //         }
-
-    //         return true;
-    //     }
-    //     else
-    //     {
-    //         //Debug.Log("missed with a difference of " + Mathf.Abs(time - (float)nextIndicatorTime));
-    //         return false;
-    //     }
-
-    // }
-
-
-
 }
