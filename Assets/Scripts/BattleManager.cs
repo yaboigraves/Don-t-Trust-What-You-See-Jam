@@ -284,6 +284,7 @@ public class BattleManager : MonoBehaviour
                 UIManager.current.EnableOffenseUI();
                 UIManager.current.SwapPhaseIcon(battleMode);
 
+
             }
         }
         else if (battleMode == "offense")

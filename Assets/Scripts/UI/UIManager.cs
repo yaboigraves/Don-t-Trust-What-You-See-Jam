@@ -30,6 +30,11 @@ public class UIManager : MonoBehaviour
     public Image battlePhaseIcon;
     public GameObject pauseMenuPanel;
     public GameObject defenseRingIcon;
+    public GameObject indicatorsAndPadContainer;
+
+    public GameObject gridBar, gridBarContainer;
+
+
 
     private void Awake()
     {
@@ -60,12 +65,27 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("LevelSelect");
     }
 
+    public void SetupGridBars()
+    {
+        int defLength = BattleManager.current.currentLevelSongInfo.defensePhaseLength;
+        int offLength = BattleManager.current.currentLevelSongInfo.offensePhaseLength;
 
+        for (int i = defLength; i <= defLength + offLength; i++)
+        {
+            Transform bar = Instantiate(gridBar, new Vector3(0, i, 0), Quaternion.identity).transform;
+            bar.SetParent(gridBarContainer.transform);
+        }
+    }
     public void SetupIndicators()
     {
-
+        //first set up all the bars
+        //basically just need to set these up every x units between the current level song infos size of the phases
 
         SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
+
+        SetupGridBars();
+
+
         info.indicatorDict = new Dictionary<double, Indicator>();
 
 
@@ -203,6 +223,11 @@ public class UIManager : MonoBehaviour
     public void ToggleDefenseModeUI(bool toggle)
     {
         // offenseUIContainer.SetActive(false);
+
+        if (toggle)
+        {
+            indicatorsAndPadContainer.SetActive(false);
+        }
         defenseUIContainer.SetActive(toggle);
     }
 
@@ -253,6 +278,8 @@ public class UIManager : MonoBehaviour
         defensePromptText.text = "";
         padText1.text = "";
         padText2.text = "";
+
+        indicatorsAndPadContainer.SetActive(true);
     }
 
     public void EnableDefenseUI()
