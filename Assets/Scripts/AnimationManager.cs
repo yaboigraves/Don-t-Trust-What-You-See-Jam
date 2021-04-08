@@ -20,7 +20,7 @@ public class AnimationManager : MonoBehaviour
         if (player == null || enemy == null)
         {
             Debug.LogWarning("Couldnt find an animation controller in the scene");
-            Debug.Break();
+            // Debug.Break();
             return;
         }
         else
