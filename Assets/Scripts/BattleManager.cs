@@ -53,7 +53,7 @@ public class BattleManager : MonoBehaviour
 
         // UIManager.current.SetupIndicators();
 
-        UIManager.current.EnableDefenseModeUi();
+        UIManager.current.ToggleDefenseModeUI(true);
         UIManager.current.InitVibeSlider(statusInfo.maxVibe, statusInfo.currentVibe);
         //init the input mode
 
@@ -98,6 +98,8 @@ public class BattleManager : MonoBehaviour
     }
 
 
+
+
     //TODO: so this needs to essentially ignore the first call to this every new defense phase
     public void DequeuDefensePrompt()
     {
@@ -109,6 +111,8 @@ public class BattleManager : MonoBehaviour
         }
 
         //tell the ui manager to present a new prompt to the screen
+
+
 
         if (defenseQueue.Count > 1)
         {
@@ -276,6 +280,7 @@ public class BattleManager : MonoBehaviour
                 // UIManager.current.EnableOffenseModeUi();
                 battleMode = "offense";
                 currentBeatCounter = 0;
+                UIManager.current.ToggleDefenseModeUI(false);
                 UIManager.current.EnableOffenseUI();
                 UIManager.current.SwapPhaseIcon(battleMode);
 
@@ -291,8 +296,10 @@ public class BattleManager : MonoBehaviour
                 defenseFirstBeatBreak = true;
                 //UIManager.current.EnableDefenseModeUi();
                 currentBeatCounter = 0;
-                // UIManager.current.EnableDefenseUI();
+                UIManager.current.ToggleDefenseModeUI(true);
                 UIManager.current.SwapPhaseIcon(battleMode);
+
+
             }
         }
     }

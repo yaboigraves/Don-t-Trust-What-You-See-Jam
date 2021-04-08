@@ -26,13 +26,10 @@ public class UIManager : MonoBehaviour
     public GameObject otherDefenseContainer;
     public GameObject defensePromptAssetContainer;
     public VibeBar vibeBarController;
-
     public Sprite defenseIcon, offenseIcon;
-
     public Image battlePhaseIcon;
-
     public GameObject pauseMenuPanel;
-
+    public GameObject defenseRingIcon;
 
     private void Awake()
     {
@@ -97,6 +94,16 @@ public class UIManager : MonoBehaviour
 
 
     }
+
+
+    //so this needs to get called every 1 and 3 by the music manager
+    //basically spawns a ring that scales itself down to another size over 1? beat
+    public void SpawnDefenseIndicatorRing()
+    {
+        //spawn the ring
+        Instantiate(defenseRingIcon, defenseUIContainer.transform.position, Quaternion.identity, defenseUIContainer.transform);
+    }
+
 
     //spawn this at the pad location
     public void SpawnFeedBackText(bool didHit, int spawnPos = 0)
@@ -193,10 +200,10 @@ public class UIManager : MonoBehaviour
         twoButtonDefenseUI.SetActive(true);
     }
 
-    public void EnableDefenseModeUi()
+    public void ToggleDefenseModeUI(bool toggle)
     {
-        offenseUIContainer.SetActive(false);
-        defenseUIContainer.SetActive(true);
+        // offenseUIContainer.SetActive(false);
+        defenseUIContainer.SetActive(toggle);
     }
 
 

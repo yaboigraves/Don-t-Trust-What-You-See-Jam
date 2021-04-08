@@ -132,10 +132,14 @@ public class MusicManager : MonoBehaviour
 
         BattleManager.current.CheckPhase();
 
+        if ((timelineInfo.currentBeat == 1 || timelineInfo.currentBeat == 3) && (BattleManager.current.battleMode == "defense" && !BattleManager.current.defenseFirstBeatBreak))
+        {
+            UIManager.current.SpawnDefenseIndicatorRing();
+        }
+
         if (timelineInfo.currentBeat == 1)
         {
             CameraManager.current.SwitchCamera();
-
             AnimationManager.current.BeatSwitchAnimation();
         }
         if (BattleManager.current.battleMode == "defense")
