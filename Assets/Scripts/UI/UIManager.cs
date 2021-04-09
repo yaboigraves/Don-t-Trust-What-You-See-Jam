@@ -76,6 +76,15 @@ public class UIManager : MonoBehaviour
             bar.SetParent(gridBarContainer.transform);
         }
     }
+
+    //coroutine to wait to set the gridbars up
+    IEnumerator waitForMusic()
+    {
+        yield return new WaitUntil(() => MusicManager.current.timelineInfo.currentTempo != 0);
+        SetupGridBars();
+    }
+
+
     public void SetupIndicators()
     {
         //first set up all the bars
@@ -83,7 +92,7 @@ public class UIManager : MonoBehaviour
 
         SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
 
-        SetupGridBars();
+        StartCoroutine(waitForMusic());
 
 
         info.indicatorDict = new Dictionary<double, Indicator>();
