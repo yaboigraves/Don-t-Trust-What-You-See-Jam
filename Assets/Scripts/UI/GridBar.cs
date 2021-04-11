@@ -8,31 +8,24 @@ public class GridBar : MonoBehaviour
     // Start is called before the first frame update
 
     //so we basically just need to lerp down over a period of beats
-
     public float startBeat;
-
     public float lerpProgress, lerpEnd, indicatorTime;
-
     public Vector3 startPos;
     private void Start()
     {
         startBeat = transform.position.y;
 
-        //nBeats * time per beat 
-
-        indicatorTime = startBeat * (60f / MusicManager.current.timelineInfo.currentTempo) * 1000f;
+        indicatorTime = startBeat * (60f / 96f) * 1000f;
         startPos = transform.position;
     }
-
 
     //lerp the bar down over time
     void Update()
     {
-        if (MusicManager.current.enabled)
-        {
-            lerpProgress = MusicManager.current.timelineInfo.currentPosition / indicatorTime;
-            transform.position = transform.position = Vector3.Lerp(startPos, Vector3.zero, lerpProgress);
-
-        }
+        // if (MusicManager.current.enabled)
+        // {
+        //     lerpProgress = MusicManager.current.timelineInfo.currentPosition / indicatorTime;
+        //     transform.position = transform.position = Vector3.Lerp(startPos, Vector3.zero, lerpProgress);
+        // }
     }
 }

@@ -21,15 +21,6 @@ public class Indicator : MonoBehaviour
 
     public float lerpProgress, postLerpProgress;
 
-    void Start()
-    {
-
-    }
-    private void Awake()
-    {
-
-    }
-
     public void SetIndicatorTime(float time, Transform dest)
     {
         indicatorTime = time;

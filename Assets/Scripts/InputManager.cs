@@ -104,11 +104,6 @@ public class InputManager : MonoBehaviour
         }
 
 
-        //TODO: need to delay this from stopping for like one more beat?
-        // Debug.Log(BattleManager.current);
-        // Debug.Log(BattleManager.current.totalBeatCounter);
-        // Debug.Break();
-
         if (BattleManager.current.battleMode == "offense" || BattleManager.current.currentBeatCounter <= 1)
         {
 
@@ -135,7 +130,6 @@ public class InputManager : MonoBehaviour
             //so assuming that input 1 is true and input 2 is false for now
 
             //ignore inputs if we're currently in that buffer area
-
 
             if (Input.GetKeyDown(twoButtonBindOne) || (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f & !gotMidiInput1))
             {

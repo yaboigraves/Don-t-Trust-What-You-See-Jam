@@ -85,9 +85,9 @@ public class UIManager : MonoBehaviour
     IEnumerator waitForMusic()
     {
         yield return new WaitUntil(() => MusicManager.current.timelineInfo.currentTempo != 0);
-        SetupGridBars();
+        // Debug.Log("setting up grid bars with bpm" + MusicManager.current.timelineInfo.currentTempo);
+        //SetupGridBars();s
     }
-
 
     public void SetupIndicators()
     {
@@ -96,8 +96,10 @@ public class UIManager : MonoBehaviour
 
         SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
 
-        StartCoroutine(waitForMusic());
+        // StartCoroutine(waitForMusic());
 
+        //TODO: fix this so it can read in the bpm dynamically later
+        SetupGridBars();
 
         info.indicatorDict = new Dictionary<double, Indicator>();
 
@@ -133,7 +135,15 @@ public class UIManager : MonoBehaviour
     //basically spawns a ring that scales itself down to another size over 1? beat
     public void SpawnDefenseIndicatorRing()
     {
+
+        //
         //spawn the ring
+
+        //double check with the battle manager and make sure the beat counter for the current phase isnt small
+        if (BattleManager.current.currentBeatCounter <= 2 || BattleManager.current.currentBeatCounter >= BattleManager.current.currentLevelSongInfo.defensePhaseLength - 2)
+        {
+            return;
+        }
         Instantiate(defenseRingIcon, defenseUIContainer.transform.position, Quaternion.identity, defenseUIContainer.transform);
     }
 
@@ -144,8 +154,6 @@ public class UIManager : MonoBehaviour
         Vector3 feedbackSpawnPos = Vector3.zero;
 
         //depending on the phase we need to spawn these at different positions
-
-
 
         if (spawnPos == 0)
         {
@@ -187,7 +195,6 @@ public class UIManager : MonoBehaviour
                 // Debug.Log(Camera.main);
                 // Debug.Log(offenseTextSpawn2.transform.position);
                 // Debug.Log(Camera.main.WorldToScreenPoint(offenseTextSpawn2.transform.position));
-
                 feedbackSpawnPos = battleUICamera.WorldToScreenPoint(offenseTextSpawn2.transform.position);
             }
         }
@@ -195,7 +202,6 @@ public class UIManager : MonoBehaviour
         FeedbackText fText = Instantiate(feedbackText, feedbackSpawnPos, Quaternion.identity, feedbackContainer).GetComponent<FeedbackText>();
         fText.SetText(didHit);
         // fText.startPosition = Vector3.zero;
-
     }
 
     public void SpawnDefensePrompt(DefensePrompt prompt)

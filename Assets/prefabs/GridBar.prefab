@@ -94,3 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5e08d3dbdc2a04dbfcf92757580a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startBeat: 0
+  lerpProgress: 0
+  lerpEnd: 0
+  indicatorTime: 0
+  startPos: {x: 0, y: 0, z: 0}

@@ -18,6 +18,8 @@ public class FeedbackText : MonoBehaviour
 
         destination = transform.position + new Vector3(Random.Range(-range, range + 1), Random.Range(range / 10, range / 2), Random.Range(-range, range + 1));
         StartCoroutine(spawnFeedback());
+
+        fText.CrossFadeAlpha(0, maxLifetime * 1.5f, false);
     }
 
     public IEnumerator spawnFeedback()

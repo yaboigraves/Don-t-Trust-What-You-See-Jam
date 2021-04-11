@@ -53,7 +53,7 @@ public class BattleManager : MonoBehaviour
 
         // UIManager.current.SetupIndicators();
 
-        UIManager.current.ToggleDefenseModeUI(true);
+        //UIManager.current.ToggleDefenseModeUI(true);
         UIManager.current.InitVibeSlider(statusInfo.maxVibe, statusInfo.currentVibe);
         //init the input mode
 
@@ -89,9 +89,9 @@ public class BattleManager : MonoBehaviour
     {
         defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
 
-
         //-1 because we skip the first beat now
-        for (int i = 0; i < defenseQueueLength - 1; i++)
+        //-2 for the skip at the end too
+        for (int i = 0; i < defenseQueueLength - 3; i++)
         {
             defenseQueue.Enqueue(defensePromptOptions[Random.Range(0, defensePromptOptions.Length)]);
         }
@@ -114,7 +114,7 @@ public class BattleManager : MonoBehaviour
 
 
 
-        if (defenseQueue.Count > 1)
+        if (defenseQueue.Count > 1 && currentBeatCounter <= currentLevelSongInfo.defensePhaseLength - 2)
         {
             currentDefense = defenseQueue.Dequeue();
             UIManager.current.SpawnDefensePrompt(currentDefense);
@@ -273,6 +273,7 @@ public class BattleManager : MonoBehaviour
 
         if (battleMode == "defense")
         {
+
             if (currentBeatCounter >= currentLevelSongInfo.defensePhaseLength)
             {
                 //switch the ui to offense mode
@@ -283,9 +284,18 @@ public class BattleManager : MonoBehaviour
                 UIManager.current.ToggleDefenseModeUI(false);
                 UIManager.current.EnableOffenseUI();
                 UIManager.current.SwapPhaseIcon(battleMode);
-
-
             }
+            //turn off the ui for defense mode and just let the player get ready if we're 2 beats away
+            else if (currentBeatCounter >= currentLevelSongInfo.defensePhaseLength - 1)
+            {
+                //turn off the defense mode ui
+                UIManager.current.ToggleDefenseModeUI(false);
+            }
+            else if (currentBeatCounter >= 2)
+            {
+                UIManager.current.ToggleDefenseModeUI(true);
+            }
+
         }
         else if (battleMode == "offense")
         {
@@ -297,10 +307,10 @@ public class BattleManager : MonoBehaviour
                 defenseFirstBeatBreak = true;
                 //UIManager.current.EnableDefenseModeUi();
                 currentBeatCounter = 0;
-                UIManager.current.ToggleDefenseModeUI(true);
+
+                //wait to do this
+                //UIManager.current.ToggleDefenseModeUI(true);
                 UIManager.current.SwapPhaseIcon(battleMode);
-
-
             }
         }
     }
