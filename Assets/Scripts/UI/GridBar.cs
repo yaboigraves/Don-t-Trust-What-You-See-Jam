@@ -22,10 +22,7 @@ public class GridBar : MonoBehaviour
 
         indicatorTime = startBeat * (60f / MusicManager.current.timelineInfo.currentTempo) * 1000f;
         startPos = transform.position;
-
     }
-
-
 
 
     //lerp the bar down over time

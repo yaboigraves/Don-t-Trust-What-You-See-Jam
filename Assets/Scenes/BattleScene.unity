@@ -150,12 +150,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1380281823}
+  m_Father: {fileID: 934761516}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89, y: -251}
+  m_AnchoredPosition: {x: -632, y: -154}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &23099430
@@ -2335,7 +2335,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1380281823}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2422,6 +2422,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 662184051}
+  - {fileID: 23099429}
   m_Father: {fileID: 323294221}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3508,7 +3509,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1380281823}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3642,7 +3643,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 323449404}
-  - {fileID: 23099429}
   - {fileID: 1226553459}
   - {fileID: 811806415}
   m_Father: {fileID: 323294221}
@@ -4849,6 +4849,9 @@ MonoBehaviour:
   indicatorsAndPadContainer: {fileID: 2017084393}
   gridBar: {fileID: 7453297681551433025, guid: 7977f818007eb83449db44a86df339ef, type: 3}
   gridBarContainer: {fileID: 1032880114}
+  feedbackTextDefenseTextSpawnPos: {fileID: 811806415}
+  offenseTextSpawn1: {fileID: 399288598}
+  offenseTextSpawn2: {fileID: 1861637914}
   padText1: {fileID: 23099430}
   padText2: {fileID: 1226553460}
   phaseText: {fileID: 662184052}

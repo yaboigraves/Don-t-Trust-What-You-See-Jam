@@ -34,6 +34,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject gridBar, gridBarContainer;
 
+    public RectTransform feedbackTextDefenseTextSpawnPos;
+    public Transform offenseTextSpawn1, offenseTextSpawn2;
+
 
 
     private void Awake()
@@ -138,6 +141,11 @@ public class UIManager : MonoBehaviour
     public void SpawnFeedBackText(bool didHit, int spawnPos = 0)
     {
         Vector3 feedbackSpawnPos = Vector3.zero;
+
+        //depending on the phase we need to spawn these at different positions
+
+
+
         if (spawnPos == 0)
         {
             //default spot no pad hit
@@ -147,12 +155,35 @@ public class UIManager : MonoBehaviour
         else if (spawnPos == 1)
         {
             //left pad 
-            feedbackSpawnPos = padText1.transform.position;
+
+
+            if (BattleManager.current.battleMode == "defense")
+            {
+                feedbackSpawnPos = feedbackTextDefenseTextSpawnPos.position;
+            }
+            else if (BattleManager.current.battleMode == "offense")
+            {
+                //TODO: convert this to screen space
+                feedbackSpawnPos = offenseTextSpawn1.transform.position;
+            }
+
+
+
         }
         else if (spawnPos == 2)
         {
             //right pad
-            feedbackSpawnPos = padText2.transform.position;
+            // feedbackSpawnPos = padText2.transform.position;
+
+            if (BattleManager.current.battleMode == "defense")
+            {
+                feedbackSpawnPos = feedbackTextDefenseTextSpawnPos.position;
+            }
+            else if (BattleManager.current.battleMode == "offense")
+            {
+                //TODO: convert this to screen space
+                feedbackSpawnPos = offenseTextSpawn2.transform.position;
+            }
         }
 
         FeedbackText fText = Instantiate(feedbackText, feedbackSpawnPos, Quaternion.identity, feedbackContainer).GetComponent<FeedbackText>();
@@ -279,6 +310,9 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI padText1, padText2;
 
     //new functions for toggling offense/defense just ignore the old ones
+
+
+
 
     public void EnableOffenseUI()
     {
