@@ -4852,6 +4852,7 @@ MonoBehaviour:
   feedbackTextDefenseTextSpawnPos: {fileID: 811806415}
   offenseTextSpawn1: {fileID: 399288598}
   offenseTextSpawn2: {fileID: 1861637914}
+  battleUICamera: {fileID: 419245872}
   padText1: {fileID: 23099430}
   padText2: {fileID: 1226553460}
   phaseText: {fileID: 662184052}

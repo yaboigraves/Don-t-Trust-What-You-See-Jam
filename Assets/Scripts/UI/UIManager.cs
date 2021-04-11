@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     public RectTransform feedbackTextDefenseTextSpawnPos;
     public Transform offenseTextSpawn1, offenseTextSpawn2;
 
+    public Camera battleUICamera;
 
 
     private void Awake()
@@ -164,7 +165,8 @@ public class UIManager : MonoBehaviour
             else if (BattleManager.current.battleMode == "offense")
             {
                 //TODO: convert this to screen space
-                feedbackSpawnPos = offenseTextSpawn1.transform.position;
+
+                feedbackSpawnPos = battleUICamera.WorldToScreenPoint(offenseTextSpawn1.transform.position);
             }
 
 
@@ -181,8 +183,12 @@ public class UIManager : MonoBehaviour
             }
             else if (BattleManager.current.battleMode == "offense")
             {
-                //TODO: convert this to screen space
-                feedbackSpawnPos = offenseTextSpawn2.transform.position;
+                // //TODO: convert this to screen space
+                // Debug.Log(Camera.main);
+                // Debug.Log(offenseTextSpawn2.transform.position);
+                // Debug.Log(Camera.main.WorldToScreenPoint(offenseTextSpawn2.transform.position));
+
+                feedbackSpawnPos = battleUICamera.WorldToScreenPoint(offenseTextSpawn2.transform.position);
             }
         }
 
