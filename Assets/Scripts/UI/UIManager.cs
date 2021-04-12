@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     public Transform indicatorContainer;
     public Transform indicatorOneDestination, indicatorTwoDestination;
     //100 pixels for every beat
-    public int pixelToSeconds = 100;
+
     public GameObject feedbackText;
     public Transform feedbackContainer;
     public TextMeshProUGUI defensePromptText;
@@ -71,13 +71,44 @@ public class UIManager : MonoBehaviour
 
     public void SetupGridBars()
     {
+        Debug.Log("setting up grid bars for song " + BattleManager.current.currentLevelSongInfo.fmodSongName);
         int defLength = BattleManager.current.currentLevelSongInfo.defensePhaseLength;
         int offLength = BattleManager.current.currentLevelSongInfo.offensePhaseLength;
 
-        for (int i = defLength; i <= defLength + offLength; i++)
+        Debug.Log(defLength);
+        Debug.Log(offLength);
+        Debug.Log("bpm of current grid bars is based off " + BattleManager.current.currentLevelSongInfo.bpm);
+
+        //position is based on time now
+        //so if we want to figure out what time a certain beat is 
+        //beat 1 is actually 0 
+        //beat 2 is 
+
+        /*
+
+        //60 bpm which means 1 bps 
+        //
+            1-0
+            2-1
+            3-2
+            4-3
+
+        
+
+        */
+        float beatsPerSecond = 60 / BattleManager.current.currentLevelSongInfo.bpm;
+        Debug.Log("beats per second " + beatsPerSecond);
+
+        //need to initialize this for the amount of offensephases we're going to have which depends on the total length of the song in beats
+
+        for (int i = defLength; i < defLength + offLength; i++)
         {
-            Transform bar = Instantiate(gridBar, new Vector3(0, i, 0), Quaternion.identity).transform;
-            bar.SetParent(gridBarContainer.transform);
+            //so these positions need to be time based, not beat based
+            //convert from beat to time
+            //beats * beats per second oh duh lol & 1000
+            float barPos = (i - 1) * beatsPerSecond;
+            Transform bar = Instantiate(gridBar, new Vector3(0, barPos, 0), Quaternion.identity, gridBarContainer.transform).transform;
+            //bar.SetParent(gridBarContainer.transform);
         }
     }
 
@@ -96,6 +127,8 @@ public class UIManager : MonoBehaviour
 
         SongInfo info = BattleManager.current.currentLevelSongInfo.songInfo;
 
+        Debug.Log(BattleManager.current.currentLevelSongInfo.bpm);
+
         // StartCoroutine(waitForMusic());
 
         //TODO: fix this so it can read in the bpm dynamically later
@@ -103,10 +136,14 @@ public class UIManager : MonoBehaviour
 
         info.indicatorDict = new Dictionary<double, Indicator>();
 
+        //TODO: so we need to make the positions of the indicators more uniform 
+        //positions that beats should spawn at should NOT be related to time, but should rather be related to beat
+
+
 
         for (int i = 0; i < info.indicatorOneInfo.Count; i++)
         {
-            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorOneInfo[i] / 1000 * pixelToSeconds, 0);
+            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorOneInfo[i] / 1000f, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
             indic.SetIndicatorTime((float)info.indicatorOneInfo[i], indicatorOneDestination);
             info.indicatorDict[info.indicatorOneInfo[i]] = indic;
@@ -114,7 +151,7 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
         {
-            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorTwoInfo[i] / 1000 * pixelToSeconds, 0);
+            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorTwoInfo[i] / 1000, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
             indic.SetIndicatorTime((float)info.indicatorTwoInfo[i], indicatorTwoDestination);
             info.indicatorDict[info.indicatorTwoInfo[i]] = indic;

@@ -2300,7 +2300,7 @@ MonoBehaviour:
     vibeDecreaseRate: 0
   started: 0
   battleOver: 0
-  debugMode: 1
+  debugMode: 0
   currentBeatCounter: 0
   totalBeatCounter: 0
   defenseFirstBeatBreak: 1

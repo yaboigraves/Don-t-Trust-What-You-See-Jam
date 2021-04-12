@@ -57,6 +57,7 @@ class MidiParser:
                     if(track[j].note == 64):
                         snareMessages.append(mido.tick2second(
                             totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * (bpm/60))
+
                     # if(track[j].note == 40):
                     #     hatMessages.append(mido.tick2second(
                     #         totTime, mid.ticks_per_beat, mido.bpm2tempo(bpm)) * (bpm/60))

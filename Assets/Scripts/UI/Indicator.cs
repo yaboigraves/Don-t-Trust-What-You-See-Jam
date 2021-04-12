@@ -28,7 +28,8 @@ public class Indicator : MonoBehaviour
         {
             indicatorTime = 1;
         }
-        startPosition = transform.position;
+        startPosition = new Vector3(0, indicatorTime / 1000f, 0);
+        transform.position = startPosition;
         this.enabled = true;
         destinationPoint = dest;
 
