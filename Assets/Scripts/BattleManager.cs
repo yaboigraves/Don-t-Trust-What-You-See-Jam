@@ -273,7 +273,6 @@ public class BattleManager : MonoBehaviour
 
         if (battleMode == "defense")
         {
-
             if (currentBeatCounter >= currentLevelSongInfo.defensePhaseLength)
             {
                 //switch the ui to offense mode
@@ -299,7 +298,7 @@ public class BattleManager : MonoBehaviour
         }
         else if (battleMode == "offense")
         {
-            if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength)
+            if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength + 1)
             {
                 //requeue a bunch more defense prompts into the queue
                 FillDefenseQueue();
