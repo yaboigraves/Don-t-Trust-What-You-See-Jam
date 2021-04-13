@@ -91,7 +91,7 @@ public class BattleManager : MonoBehaviour
 
         //-1 because we skip the first beat now
         //-2 for the skip at the end too
-        for (int i = 0; i < defenseQueueLength - 3; i++)
+        for (int i = 0; i < defenseQueueLength - 1; i++)
         {
             defenseQueue.Enqueue(defensePromptOptions[Random.Range(0, defensePromptOptions.Length)]);
         }
@@ -305,7 +305,7 @@ public class BattleManager : MonoBehaviour
                 battleMode = "defense";
                 defenseFirstBeatBreak = true;
                 //UIManager.current.EnableDefenseModeUi();
-                currentBeatCounter = 0;
+                currentBeatCounter = 1;
 
                 //wait to do this
                 //UIManager.current.ToggleDefenseModeUI(true);

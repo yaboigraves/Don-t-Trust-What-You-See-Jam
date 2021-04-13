@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b19ebf06d3c630d4cab129c286b32909, type: 2}
   m_sharedMaterial: {fileID: -7045047571544118306, guid: b19ebf06d3c630d4cab129c286b32909,
@@ -3631,7 +3631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1380281823
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4766,7 +4766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2017084394
 Transform:
   m_ObjectHideFlags: 0
@@ -4834,7 +4834,6 @@ MonoBehaviour:
   indicatorContainer: {fileID: 1418628809}
   indicatorOneDestination: {fileID: 399288598}
   indicatorTwoDestination: {fileID: 1861637914}
-  pixelToSeconds: 1
   feedbackText: {fileID: 1458253659545997217, guid: b2d17b27c3cc24d47b935b8ee8cd61f0,
     type: 3}
   feedbackContainer: {fileID: 206395154}

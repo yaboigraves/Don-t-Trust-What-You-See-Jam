@@ -26,6 +26,12 @@ public class DefenseRingIcon : MonoBehaviour
     {
         float lerpProgress = (MusicManager.current.timelineInfo.currentPosition - spawnTime) / (lerpEndTime - spawnTime);
         rectTransform.sizeDelta = Vector2.Lerp(startSize, targetSize, lerpProgress);
+
+
+        if (lerpProgress > 1)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }
