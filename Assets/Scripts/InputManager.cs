@@ -163,6 +163,12 @@ public class InputManager : MonoBehaviour
                 // Debug.Log(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]));
                 // Debug.Log((float)MusicManager.current.timelineInfo.currentPosition);
 
+                if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo.Count <= 0)
+                {
+                    //for now we just dont penalize you
+                    return;
+                }
+
 
                 if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
                 {
@@ -189,6 +195,14 @@ public class InputManager : MonoBehaviour
             }
             if (Input.GetKeyDown(twoButtonBindTwo) || (MidiJack.MidiMaster.GetKey(midiBind2) > 0.0f && !gotMidiInput2))
             {
+
+                //make sure theres like actually any notes left to hit
+                if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.Count <= 0)
+                {
+                    //for now we just dont penalize you
+                    return;
+                }
+
 
 
 
