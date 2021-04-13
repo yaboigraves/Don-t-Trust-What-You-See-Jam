@@ -71,23 +71,17 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         TwoButtonInput();
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //TODO: Open pause menu
-
-
             if (!paused)
             {
                 //stop the music 
                 MusicManager.current.TogglePause(true);
                 //set timescale to 0
 
-
                 Time.timeScale = 0;
                 //open the pause menu ui
                 UIManager.current.TogglePauseMenu(true);
-
             }
             else
             {
@@ -98,11 +92,8 @@ public class InputManager : MonoBehaviour
 
                 UIManager.current.TogglePauseMenu(false);
             }
-
-
             paused = !paused;
         }
-
 
         if (BattleManager.current.battleMode == "offense" || BattleManager.current.currentBeatCounter <= 1)
         {
@@ -127,10 +118,6 @@ public class InputManager : MonoBehaviour
     {
         if (BattleManager.current.battleMode == "defense")
         {
-            //so assuming that input 1 is true and input 2 is false for now
-
-            //ignore inputs if we're currently in that buffer area
-
             if (Input.GetKeyDown(twoButtonBindOne) || (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f & !gotMidiInput1))
             {
                 gotInputLastDefense = true;
@@ -165,17 +152,23 @@ public class InputManager : MonoBehaviour
         }
         else if (BattleManager.current.battleMode == "offense")
         {
+
+            //TODO: so this system doesnt really work, i think a better way of handling it will be to have 
+
             if (Input.GetKeyDown(twoButtonBindOne) || (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f && !gotMidiInput1))
             {
                 //check and see if theres currently an indicator in lane one that is ready to be hit
+
+                // Debug.Log("offense mode debug");
+                // Debug.Log(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]));
+                // Debug.Log((float)MusicManager.current.timelineInfo.currentPosition);
+
 
                 if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
                 {
                     //time to do a hit
                     //destroy the indicator attacked to the time
                     UIManager.current.SpawnFeedBackText(true, 1);
-
-                    //TODO: debug this shit
 
                     Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
                     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]].gameObject);
@@ -188,25 +181,57 @@ public class InputManager : MonoBehaviour
                     Debug.Log("hit!");
                     BattleManager.current.ProcessHit(true);
                 }
-
-            }
-            else if (Input.GetKeyDown(twoButtonBindTwo) || (MidiJack.MidiMaster.GetKey(midiBind2) > 0.0f && !gotMidiInput2))
-            {
-                //check and see if theres currently an indicator in lane two that is ready to be hit
-                UIManager.current.SpawnFeedBackText(true, 2);
-
-                //TODO: debug why this causes a reference not foun
-                if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]] != null)
+                else
                 {
-                    Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+                    UIManager.current.SpawnFeedBackText(false, 1);
                 }
 
-                BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
-                //remove the array entry as well
-                BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
+            }
+            if (Input.GetKeyDown(twoButtonBindTwo) || (MidiJack.MidiMaster.GetKey(midiBind2) > 0.0f && !gotMidiInput2))
+            {
 
-                // Debug.Log("hit!");
-                BattleManager.current.ProcessHit(true);
+
+
+                if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
+                {
+                    UIManager.current.SpawnFeedBackText(true, 2);
+
+                    Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
+                    Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+                    //remove it from the dictioanry as well
+
+                    BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
+                    //remove the array entry as well
+                    BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
+
+                    Debug.Log("hit!");
+                    BattleManager.current.ProcessHit(true);
+                }
+                else
+                {
+                    //offense mode hit but timings off
+                    UIManager.current.SpawnFeedBackText(false, 2);
+                }
+
+
+
+
+
+                // //check and see if theres currently an indicator in lane two that is ready to be hit
+                // UIManager.current.SpawnFeedBackText(true, 2);
+
+                // //TODO: debug why this causes a reference not foun
+                // if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]] != null)
+                // {
+                //     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+                // }
+
+                // BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
+                // //remove the array entry as well
+                // BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
+
+                // // Debug.Log("hit!");
+                // BattleManager.current.ProcessHit(true);
             }
         }
 

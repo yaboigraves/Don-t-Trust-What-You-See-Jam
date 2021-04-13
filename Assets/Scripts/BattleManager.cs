@@ -294,7 +294,6 @@ public class BattleManager : MonoBehaviour
             {
                 UIManager.current.ToggleDefenseModeUI(true);
             }
-
         }
         else if (battleMode == "offense")
         {
