@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static InputManager current;
-    public float tolerance;
+    public float tolerance, missDeleteTolerance;
 
     public KeyCode twoButtonBindOne = KeyCode.A, twoButtonBindTwo = KeyCode.D;
 
@@ -100,10 +100,6 @@ public class InputManager : MonoBehaviour
 
             CheckIndicatorStatus();
         }
-        else
-        {
-
-        }
     }
 
     public void EndBattle()
@@ -139,7 +135,7 @@ public class InputManager : MonoBehaviour
                 gotInputLastDefense = true;
                 if (defenseInputOpen && !BattleManager.current.currentDefense.trueOrFalse)
                 {
-                    Debug.Log("Good");
+                    //Debug.Log("Good");
                     UIManager.current.SpawnFeedBackText(true, 2);
                     defenseInputOpen = false;
                 }
@@ -159,13 +155,8 @@ public class InputManager : MonoBehaviour
             {
                 //check and see if theres currently an indicator in lane one that is ready to be hit
 
-                // Debug.Log("offense mode debug");
-                // Debug.Log(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]));
-                // Debug.Log((float)MusicManager.current.timelineInfo.currentPosition);
-
                 if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo.Count <= 0)
                 {
-                    //for now we just dont penalize you
                     return;
                 }
 
@@ -176,7 +167,7 @@ public class InputManager : MonoBehaviour
                     //destroy the indicator attacked to the time
                     UIManager.current.SpawnFeedBackText(true, 1);
 
-                    Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
+                    //Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
                     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]].gameObject);
                     //remove it from the dictioanry as well
 
@@ -184,12 +175,24 @@ public class InputManager : MonoBehaviour
                     //remove the array entry as well
                     BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo.RemoveAt(0);
 
-                    Debug.Log("hit!");
+                    //Debug.Log("hit!");
                     BattleManager.current.ProcessHit(true);
                 }
                 else
                 {
                     UIManager.current.SpawnFeedBackText(false, 1);
+
+                    if (checkMissWithinPadTolerance(1))
+                    {
+                        //delete the note and remove the indicator
+
+                        Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]].gameObject);
+                        //remove it from the dictioanry as well
+
+                        BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]);
+                        //remove the array entry as well
+                        BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo.RemoveAt(0);
+                    }
                 }
 
             }
@@ -204,13 +207,11 @@ public class InputManager : MonoBehaviour
                 }
 
 
-
-
                 if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
                 {
                     UIManager.current.SpawnFeedBackText(true, 2);
 
-                    Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
+
                     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
                     //remove it from the dictioanry as well
 
@@ -218,34 +219,30 @@ public class InputManager : MonoBehaviour
                     //remove the array entry as well
                     BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
 
-                    Debug.Log("hit!");
+                    //Debug.Log("hit!");
                     BattleManager.current.ProcessHit(true);
                 }
                 else
                 {
                     //offense mode hit but timings off
                     UIManager.current.SpawnFeedBackText(false, 2);
+
+                    //so now we're also going to check and see if the next note is within another tolerance value which will delete it 
+                    //ie: if the note is right about to hit the pad and the user fucks up jsut clean up the note 
+                    if (checkMissWithinPadTolerance(2))
+                    {
+                        //delete the note and remove the indicator
+
+                        Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+                        //remove it from the dictioanry as well
+
+                        BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
+                        //remove the array entry as well
+                        BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
+                    }
+
+
                 }
-
-
-
-
-
-                // //check and see if theres currently an indicator in lane two that is ready to be hit
-                // UIManager.current.SpawnFeedBackText(true, 2);
-
-                // //TODO: debug why this causes a reference not foun
-                // if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]] != null)
-                // {
-                //     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
-                // }
-
-                // BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
-                // //remove the array entry as well
-                // BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
-
-                // // Debug.Log("hit!");
-                // BattleManager.current.ProcessHit(true);
             }
         }
 
@@ -271,6 +268,29 @@ public class InputManager : MonoBehaviour
 
     }
 
+
+    bool checkMissWithinPadTolerance(int padNum)
+    {
+        if (padNum == 1)
+        {
+            //check if the difference between the current time and the time of the next note is within the missTolerance value to get auto cleaned up
+
+            if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < missDeleteTolerance)
+            {
+                return true;
+            }
+        }
+        else if (padNum == 2)
+        {
+            if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < missDeleteTolerance)
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+    }
 
     public void OpenDefeneseWindow()
     {
