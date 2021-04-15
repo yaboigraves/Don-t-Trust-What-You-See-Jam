@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     public static InputManager current;
     public float tolerance, missDeleteTolerance;
 
+
+
     public KeyCode twoButtonBindOne = KeyCode.A, twoButtonBindTwo = KeyCode.D;
 
     public int midiBind1, midiBind2;
@@ -56,14 +58,6 @@ public class InputManager : MonoBehaviour
         midiBind1 = PlayerPrefs.GetInt("midiBind1", 0);
         midiBind2 = PlayerPrefs.GetInt("midiBind2", 0);
 
-        // if (inputMode == "one")
-        // {
-        //     UIManager.current.ToggleOneButtonDefenseInput();
-        // }
-        // else if (inputMode == "two")
-        // {
-        // UIManager.current.ToggleTwoButtonDefenseInput();
-        // }
     }
 
 
@@ -110,6 +104,26 @@ public class InputManager : MonoBehaviour
 
     //stop holding of midi keys (bootleg getkeydown)
     bool gotMidiInput1 = false, gotMidiInput2 = false;
+
+
+    public string checkHitAccuracy(float hitDifference)
+    {
+        string status = "good";
+
+
+        if (hitDifference / tolerance < 0.10f)
+        {
+            status = "perfect!!";
+        }
+        else if (hitDifference / tolerance < 0.35f)
+        {
+            status = "nice!";
+        }
+
+        return status;
+    }
+
+
     public void TwoButtonInput()
     {
         if (BattleManager.current.battleMode == "defense")
@@ -119,7 +133,8 @@ public class InputManager : MonoBehaviour
                 gotInputLastDefense = true;
                 if (defenseInputOpen && BattleManager.current.currentDefense.trueOrFalse)
                 {
-                    //Debug.Log("Good");
+                    //TODO: check for degrees of success (good, nice, perfect!)
+
                     UIManager.current.SpawnFeedBackText(true, 1);
                     defenseInputOpen = false;
                     BattleManager.current.ProcessHit(true);
@@ -165,7 +180,13 @@ public class InputManager : MonoBehaviour
                 {
                     //time to do a hit
                     //destroy the indicator attacked to the time
-                    UIManager.current.SpawnFeedBackText(true, 1);
+
+
+                    //TODO: check for degrees of success (good, nice, perfect!)
+
+                    string status = checkHitAccuracy(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition));
+
+                    UIManager.current.SpawnFeedBackText(true, 1, status);
 
                     //Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
                     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorOneInfo[0]].gameObject);
@@ -209,7 +230,11 @@ public class InputManager : MonoBehaviour
 
                 if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
                 {
-                    UIManager.current.SpawnFeedBackText(true, 2);
+
+                    string status = checkHitAccuracy(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition));
+
+
+                    UIManager.current.SpawnFeedBackText(true, 2, status);
 
 
                     Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
@@ -240,8 +265,6 @@ public class InputManager : MonoBehaviour
                         //remove the array entry as well
                         BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
                     }
-
-
                 }
             }
         }

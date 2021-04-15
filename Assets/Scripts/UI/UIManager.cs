@@ -181,7 +181,7 @@ public class UIManager : MonoBehaviour
 
 
     //spawn this at the pad location
-    public void SpawnFeedBackText(bool didHit, int spawnPos = 0)
+    public void SpawnFeedBackText(bool didHit, int spawnPos = 0, string statusText = "")
     {
         Vector3 feedbackSpawnPos = Vector3.zero;
 
@@ -196,8 +196,6 @@ public class UIManager : MonoBehaviour
         else if (spawnPos == 1)
         {
             //left pad 
-
-
             if (BattleManager.current.battleMode == "defense")
             {
                 feedbackSpawnPos = feedbackTextDefenseTextSpawnPos.position;
@@ -208,9 +206,6 @@ public class UIManager : MonoBehaviour
 
                 feedbackSpawnPos = battleUICamera.WorldToScreenPoint(offenseTextSpawn1.transform.position);
             }
-
-
-
         }
         else if (spawnPos == 2)
         {
@@ -232,7 +227,7 @@ public class UIManager : MonoBehaviour
         }
 
         FeedbackText fText = Instantiate(feedbackText, feedbackSpawnPos, Quaternion.identity, feedbackContainer).GetComponent<FeedbackText>();
-        fText.SetText(didHit);
+        fText.SetText(didHit, statusText);
         // fText.startPosition = Vector3.zero;
     }
 

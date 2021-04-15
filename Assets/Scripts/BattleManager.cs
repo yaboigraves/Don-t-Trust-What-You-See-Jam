@@ -149,7 +149,7 @@ public class BattleManager : MonoBehaviour
         if (defenseQueue.Count > 1 && currentBeatCounter <= currentLevelSongInfo.defensePhaseLength - 2)
         {
             currentDefense = defenseQueue.Dequeue();
-            Debug.Log(currentDefense.text);
+            //Debug.Log(currentDefense.text);
             UIManager.current.SpawnDefensePrompt(currentDefense);
             //tell the input manager to get ready to open up a window for input 
             InputManager.current.OpenDefeneseWindow();

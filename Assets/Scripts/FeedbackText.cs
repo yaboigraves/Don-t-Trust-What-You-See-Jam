@@ -34,12 +34,29 @@ public class FeedbackText : MonoBehaviour
         transform.position = Vector3.Lerp(startPosition, destination, lifetime / maxLifetime);
     }
 
-    public void SetText(bool didHit)
+    public void SetText(bool didHit, string status = "")
     {
         if (didHit)
         {
-            fText.text = "Good!";
-            fText.color = Color.green;
+            if (status == "")
+            {
+                fText.color = Color.green;
+                fText.text = "Good!";
+            }
+            else
+            {
+                fText.text = status;
+                if (status == "nice!")
+                {
+                    fText.color = Color.cyan;
+                }
+                else if (status == "perfect!!")
+                {
+                    fText.color = Color.yellow;
+                }
+
+            }
+
         }
         else
         {
