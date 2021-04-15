@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e812f21fd6f2544495439ccc1bb5263, type: 3}
+  m_Name: directionTests
+  m_EditorClassIdentifier: 
+  sceneName: JungleCube
+  tests:
+  - trueOrFalse: 1
+    colorModel: 0
+    text: up
+    sprite: {fileID: 21300000, guid: c484a33c122366b4a8ade03f18c22d21, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+  - trueOrFalse: 1
+    colorModel: 0
+    text: left
+    sprite: {fileID: 21300000, guid: dcc07d82261365b45a8ed3f990e14207, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+  - trueOrFalse: 1
+    colorModel: 0
+    text: right
+    sprite: {fileID: 21300000, guid: 3aff7e88de5bc6b419c72149ac76de87, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+  - trueOrFalse: 0
+    colorModel: 0
+    text: up
+    sprite: {fileID: 21300000, guid: 3aff7e88de5bc6b419c72149ac76de87, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+  - trueOrFalse: 0
+    colorModel: 0
+    text: down
+    sprite: {fileID: 21300000, guid: c484a33c122366b4a8ade03f18c22d21, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+  - trueOrFalse: 0
+    colorModel: 0
+    text: right
+    sprite: {fileID: 21300000, guid: dcc07d82261365b45a8ed3f990e14207, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}

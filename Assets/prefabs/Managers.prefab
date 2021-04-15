@@ -473,6 +473,80 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &5123622447939241182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3435555726734247102}
+  - component: {fileID: 4295804594663679005}
+  - component: {fileID: 745590758936199961}
+  m_Layer: 5
+  m_Name: AssetSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3435555726734247102
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123622447939241182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7946432748539888073}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 234}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4295804594663679005
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123622447939241182}
+  m_CullTransparentMesh: 0
+--- !u!114 &745590758936199961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123622447939241182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7946432748176578708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,7 +1079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7946432748539888073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1020,6 +1094,7 @@ RectTransform:
   - {fileID: 7946432749630545450}
   - {fileID: 7946432748185359461}
   - {fileID: 7946432750186529497}
+  - {fileID: 3435555726734247102}
   m_Father: {fileID: 7946432749630404635}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2246,6 +2321,7 @@ MonoBehaviour:
   offenseTextSpawn1: {fileID: 7946432749706511616}
   offenseTextSpawn2: {fileID: 7946432748752960268}
   battleUICamera: {fileID: 0}
+  defenseSpriteContainer: {fileID: 745590758936199961}
   padText1: {fileID: 7946432749397955632}
   padText2: {fileID: 7946432748185359458}
   phaseText: {fileID: 7946432749969935458}
@@ -3104,8 +3180,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 169}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 0, y: 129}
+  m_SizeDelta: {x: 300, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7946432749630545448
 CanvasRenderer:
@@ -3162,10 +3238,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 75
-  m_fontSizeBase: 75
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -3723,42 +3799,11 @@ MonoBehaviour:
     indicatorOneInfo: []
     indicatorTwoInfo: []
   defenseQueueLength: 16
-  defensePromptOptions:
-  - trueOrFalse: 1
-    colorModel: 0
-    text: Yellow
-    sprite: {fileID: 0}
-    model: {fileID: 0}
-    textColor: {r: 0.97885394, g: 1, b: 0, a: 1}
-    assetColor: {r: 0, g: 0, b: 0, a: 0}
-  - trueOrFalse: 0
-    colorModel: 0
-    text: Green
-    sprite: {fileID: 0}
-    model: {fileID: 0}
-    textColor: {r: 0, g: 0.49738646, b: 1, a: 1}
-    assetColor: {r: 0, g: 0, b: 0, a: 0}
-  - trueOrFalse: 1
-    colorModel: 0
-    text: Red
-    sprite: {fileID: 0}
-    model: {fileID: 0}
-    textColor: {r: 1, g: 0.04995039, b: 0, a: 1}
-    assetColor: {r: 0, g: 0, b: 0, a: 0}
-  - trueOrFalse: 1
-    colorModel: 0
-    text: Synth
-    sprite: {fileID: 0}
-    model: {fileID: 9064163869323797513, guid: 76ab04f57d229d84f9572a43234ced05, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    assetColor: {r: 1, g: 1, b: 1, a: 1}
-  - trueOrFalse: 1
-    colorModel: 1
-    text: Blue Phaser
-    sprite: {fileID: 0}
-    model: {fileID: 3668399528839209855, guid: 9ca3417cd456e7c4d88067cd82b4917a, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    assetColor: {r: 0, g: 0.54226303, b: 1, a: 1}
+  testSettings:
+  - {fileID: 11400000, guid: 91d6614a5de363a4abf4a807abefe379, type: 2}
+  - {fileID: 11400000, guid: be44f948ca624fa499fe3bfac7921365, type: 2}
+  - {fileID: 11400000, guid: f0fe90c5cfe0da84c88a5aa761289694, type: 2}
+  currentTestSettings: {fileID: 0}
   battleMode: defense
   currentDefense:
     trueOrFalse: 0

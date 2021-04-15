@@ -783,6 +783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b22d441c9d151545913a00485895e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControlBindPanel: {fileID: 0}
+  keyBindButtons: []
   mainSceneName: 
 --- !u!1 &806170432
 GameObject:

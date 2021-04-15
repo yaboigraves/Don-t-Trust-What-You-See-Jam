@@ -236,11 +236,14 @@ public class UIManager : MonoBehaviour
         // fText.startPosition = Vector3.zero;
     }
 
+    public Image defenseSpriteContainer;
     public void SpawnDefensePrompt(DefensePrompt prompt)
     {
         if (prompt.sprite)
         {
-            //instantiate the sprite
+
+            defenseSpriteContainer.sprite = prompt.sprite;
+            defenseSpriteContainer.color = Color.white;
         }
         else if (prompt.model)
         {
@@ -264,6 +267,8 @@ public class UIManager : MonoBehaviour
         {
             Destroy(defensePromptAssetContainer.transform.GetChild(i).gameObject);
         }
+        defenseSpriteContainer.sprite = null;
+        defenseSpriteContainer.color = new Color(0, 0, 0, 0);
     }
 
     public void ToggleDefenseInputUi()

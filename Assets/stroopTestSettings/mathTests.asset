@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e812f21fd6f2544495439ccc1bb5263, type: 3}
+  m_Name: mathTests
+  m_EditorClassIdentifier: 
+  sceneName: SkyCube
+  tests:
+  - trueOrFalse: 1
+    colorModel: 0
+    text: 2 + 2 = 4
+    sprite: {fileID: 0}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 0, g: 0, b: 0, a: 0}
+  - trueOrFalse: 1
+    colorModel: 0
+    text: one = 1
+    sprite: {fileID: 0}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 0, g: 0, b: 0, a: 0}
+  - trueOrFalse: 1
+    colorModel: 0
+    text: five plus four equals 9
+    sprite: {fileID: 0}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 0, g: 0, b: 0, a: 0}
+  - trueOrFalse: 0
+    colorModel: 0
+    text: 2 + 2 = 5
+    sprite: {fileID: 0}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 0}
+    assetColor: {r: 0, g: 0, b: 0, a: 0}
+  - trueOrFalse: 0
+    colorModel: 0
+    text: 4 - four = 1
+    sprite: {fileID: 0}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 0}
+    assetColor: {r: 0, g: 0, b: 0, a: 0}
+  - trueOrFalse: 0
+    colorModel: 0
+    text: 3 plus three = 5
+    sprite: {fileID: 0}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 0, g: 0, b: 0, a: 0}

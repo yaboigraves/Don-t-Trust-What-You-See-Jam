@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager current;
@@ -14,7 +13,8 @@ public class BattleManager : MonoBehaviour
     //defense mode queue 
     public int defenseQueueLength = 8;
 
-    public DefensePrompt[] defensePromptOptions;
+    public StroopTestSettings[] testSettings;
+    public StroopTestSettings currentTestSettings;
     public Queue<DefensePrompt> defenseQueue;
     public string battleMode = "defense";
     public DefensePrompt currentDefense;
@@ -57,17 +57,17 @@ public class BattleManager : MonoBehaviour
         UIManager.current.InitVibeSlider(statusInfo.maxVibe, statusInfo.currentVibe);
         //init the input mode
 
-        if (debugMode)
-        {
-            LoadLevelInfo();
-            //currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
-            UIManager.current.SetupIndicators();
-            FillDefenseQueue();
+        // if (debugMode)
+        // {
+        //     LoadLevelInfo("aaaaa");
+        //     //currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
+        //     UIManager.current.SetupIndicators();
+        //     FillDefenseQueue();
 
-        }
+        // }
     }
 
-    public void LoadLevelInfo()
+    public void LoadLevelInfo(string sceneName)
     {
         // Debug.Log("loading song info for " + currentLevelSongInfo.fmodSongName);
         MusicManager.current.LoadSong(currentLevelSongInfo.fmodSongName);
@@ -75,6 +75,12 @@ public class BattleManager : MonoBehaviour
 
         //so before we do shit, we gotta instnatiate the currentsonginfo 
         UIManager.current.SetupIndicators();
+
+
+        //before we fill the defense queue load the stroop test settings for the level
+        currentTestSettings = GetStroopTestByName(sceneName);
+
+
         FillDefenseQueue();
 
         //tell the animation controller to do its fuckin job
@@ -85,6 +91,30 @@ public class BattleManager : MonoBehaviour
         //load the defense queue with enough indicators depending on the defense phase length
     }
 
+    StroopTestSettings GetStroopTestByName(string sceneName)
+    {
+        Debug.Log("trying to load stroop settings for scene " + sceneName);
+
+
+
+        foreach (StroopTestSettings s in testSettings)
+        {
+            if (s.sceneName == sceneName)
+            {
+                return s;
+
+            }
+        }
+
+
+
+        Debug.LogError("COULDNT FIND STROOP SETTINGS FOR SCENE " + sceneName);
+        Debug.Break();
+        return null;
+    }
+
+
+    //TODO: so this needs to load the options depending on the current stroop test thats loaded
     public void FillDefenseQueue()
     {
         defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
@@ -93,7 +123,9 @@ public class BattleManager : MonoBehaviour
         //-2 for the skip at the end too
         for (int i = 0; i < defenseQueueLength - 1; i++)
         {
-            defenseQueue.Enqueue(defensePromptOptions[Random.Range(0, defensePromptOptions.Length)]);
+
+            defenseQueue.Enqueue(currentTestSettings.tests[Random.Range(0, currentTestSettings.tests.Length)]);
+            Debug.Log(defenseQueue.Peek().text);
         }
     }
 
@@ -117,6 +149,7 @@ public class BattleManager : MonoBehaviour
         if (defenseQueue.Count > 1 && currentBeatCounter <= currentLevelSongInfo.defensePhaseLength - 2)
         {
             currentDefense = defenseQueue.Dequeue();
+            Debug.Log(currentDefense.text);
             UIManager.current.SpawnDefensePrompt(currentDefense);
             //tell the input manager to get ready to open up a window for input 
             InputManager.current.OpenDefeneseWindow();
@@ -329,14 +362,3 @@ public class StatusInfo
 }
 
 
-//for now we're just going to have these simple options, if theres no sprite or model its just text
-[System.Serializable]
-public class DefensePrompt
-{
-    public bool trueOrFalse;
-    public bool colorModel = false;
-    public string text;
-    public GameObject sprite;
-    public GameObject model;
-    public Color textColor, assetColor;
-}
