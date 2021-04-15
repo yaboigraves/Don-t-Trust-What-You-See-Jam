@@ -38,9 +38,10 @@ public class FeedbackText : MonoBehaviour
     {
         if (didHit)
         {
+            fText.color = Color.green;
             if (status == "")
             {
-                fText.color = Color.green;
+
                 fText.text = "Good!";
             }
             else
