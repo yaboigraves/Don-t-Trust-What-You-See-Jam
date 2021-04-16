@@ -1685,8 +1685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c99ee7fb5737f648b6b94af2fe69fde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tolerance: 50
-  missDeleteTolerance: 75
+  tolerance: 100
+  missDeleteTolerance: 101
   twoButtonBindOne: 97
   twoButtonBindTwo: 100
   midiBind1: 0

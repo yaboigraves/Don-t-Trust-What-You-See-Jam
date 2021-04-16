@@ -12,7 +12,6 @@ public class BattleManager : MonoBehaviour
     public SongInfo currentSongInfo;
     //defense mode queue 
     public int defenseQueueLength = 8;
-
     public StroopTestSettings[] testSettings;
     public StroopTestSettings currentTestSettings;
     public Queue<DefensePrompt> defenseQueue;
@@ -27,6 +26,8 @@ public class BattleManager : MonoBehaviour
     public bool battleOver = false;
 
     public bool debugMode = true;
+
+    public int defensePhaseCount = 1;
 
     private void Awake()
     {
@@ -117,14 +118,25 @@ public class BattleManager : MonoBehaviour
     //TODO: so this needs to load the options depending on the current stroop test thats loaded
     public void FillDefenseQueue()
     {
+
+        defenseQueue.Clear();
         defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
 
-        //-1 because we skip the first beat now
-        //-2 for the skip at the end too
+        //go through the current tests and break them up into levels 
+
+        List<DefensePrompt> legalPrompts = new List<DefensePrompt>();
+
+        foreach(DefensePrompt d in currentTestSettings.tests){
+            if(d.levelUnlocked <= defensePhaseCount){
+                legalPrompts.Add(d);
+            }
+        }
+
+        //TODO: make it so you cant get the same one too many times in a row
+
         for (int i = 0; i < defenseQueueLength - 1; i++)
         {
-
-            defenseQueue.Enqueue(currentTestSettings.tests[Random.Range(0, currentTestSettings.tests.Length)]);
+            defenseQueue.Enqueue(legalPrompts[Random.Range(0, legalPrompts.Count)]);
             Debug.Log(defenseQueue.Peek().text);
         }
     }
@@ -143,8 +155,6 @@ public class BattleManager : MonoBehaviour
         }
 
         //tell the ui manager to present a new prompt to the screen
-
-
 
         if (defenseQueue.Count > 1 && currentBeatCounter <= currentLevelSongInfo.defensePhaseLength - 2)
         {
@@ -332,6 +342,10 @@ public class BattleManager : MonoBehaviour
         {
             if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength + 1)
             {
+                
+                //advance the defense count 
+                defensePhaseCount++;
+
                 //requeue a bunch more defense prompts into the queue
                 FillDefenseQueue();
                 battleMode = "defense";

@@ -8,16 +8,21 @@ public class StroopTestSettings : ScriptableObject
     public string sceneName;
 
     public DefensePrompt[] tests;
-
 }
+
 
 [System.Serializable]
 public class DefensePrompt
 {
+
+    public string promptLabel = "";
     public bool trueOrFalse;
     public bool colorModel = false;
     public string text;
     public Sprite sprite;
     public GameObject model;
     public Color textColor = Color.white, assetColor = Color.white;
+
+    //any prompts that can only be 
+    public int levelUnlocked = 1;
 }

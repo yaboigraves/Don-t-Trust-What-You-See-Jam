@@ -56,7 +56,7 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637525480277567741
+  lastModified: 637541224350000000
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -75,11 +75,9 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637525480277577718
+  lastModified: 637541224350000000
   LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 958
+  FileSizes: []
   Exists: 1
 --- !u!114 &-611730411736052955
 MonoBehaviour:
@@ -154,7 +152,7 @@ MonoBehaviour:
   - {fileID: -4962644259976623053}
   StringsBanks:
   - {fileID: -4191745310697559331}
-  stringsBankWriteTime: 637525480277577718
+  stringsBankWriteTime: 637541224350000000
   cacheVersion: 6
 --- !u!114 &2472231579786655101
 MonoBehaviour:
@@ -280,7 +278,7 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Songs.bank
   Name: Songs
   StudioPath: bank:/Songs
-  lastModified: 637525480278116267
+  lastModified: 637541224360000000
   LoadResult: 0
   FileSizes: []
   Exists: 1

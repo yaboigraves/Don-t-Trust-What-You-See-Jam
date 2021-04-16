@@ -21,14 +21,14 @@ public static class SongLoader
         //Path to the folder of greeter.py
         searchPaths.Add(Application.dataPath);
         //Path to the Python standard library
-        searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
+        searchPaths.Add(Application.dataPath + @"/Plugins/Lib/");
         engine.SetSearchPaths(searchPaths);
 
-        dynamic py = engine.ExecuteFile(Application.dataPath + @"\scripts\midiParser.py");
+        dynamic py = engine.ExecuteFile(Application.dataPath + @"/scripts/midiParser.py");
         dynamic parser = py.MidiParser();
         // Debug.Log(parser.test());
 
-        Dictionary<string, List<System.Double>> midiParse = parser.parse(Application.dataPath + @"\scripts\midis\" + midiFileName + ".mid", bpm);
+        Dictionary<string, List<System.Double>> midiParse = parser.parse(Application.dataPath + @"/scripts/midis/" + midiFileName + ".mid", bpm);
         return new SongInfo(midiParse["kick"], midiParse["snare"]);
     }
 }
