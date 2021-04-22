@@ -165,7 +165,9 @@ public class UIManager : MonoBehaviour
 
     //so this needs to get called every 1 and 3 by the music manager
     //basically spawns a ring that scales itself down to another size over 1? beat
-    public void SpawnDefenseIndicatorRing()
+
+    //so ring close time needs to be configurable based on halftime
+    public void SpawnDefenseIndicatorRing(bool halftime)
     {
 
         //
@@ -176,7 +178,12 @@ public class UIManager : MonoBehaviour
         {
             return;
         }
-        Instantiate(defenseRingIcon, defenseUIContainer.transform.position, Quaternion.identity, defenseUIContainer.transform);
+
+        GameObject ring = Instantiate(defenseRingIcon, defenseUIContainer.transform.position, Quaternion.identity, defenseUIContainer.transform);
+        if (halftime)
+        {
+            ring.GetComponent<DefenseRingIcon>().makeHalfTime();
+        }
     }
 
 

@@ -132,10 +132,7 @@ public class MusicManager : MonoBehaviour
 
         BattleManager.current.CheckPhase();
 
-        if ((timelineInfo.currentBeat == 1 || timelineInfo.currentBeat == 3) && (BattleManager.current.battleMode == "defense" && !BattleManager.current.defenseFirstBeatBreak))
-        {
-            UIManager.current.SpawnDefenseIndicatorRing();
-        }
+
 
         if (timelineInfo.currentBeat == 1)
         {
@@ -144,23 +141,35 @@ public class MusicManager : MonoBehaviour
         }
         if (BattleManager.current.battleMode == "defense")
         {
+
+            //TODO: so depending on the battle phase thing we need to go from 
+            //1 - spawning on the 1
+            //2 - spawning on the  1 and 3
+
             //check whether we're waiting for an input or not
-            if (timelineInfo.currentBeat == 1 || timelineInfo.currentBeat == 3)
+
+            if (BattleManager.current.defensePhaseCount == 1)
             {
-                //tell the battlemanager to dequeue a new defense prompt
-                BattleManager.current.DequeuDefensePrompt();
+                if (timelineInfo.currentBeat == 1)
+                {
 
-                //reset if we got an input from the last defense
-                InputManager.current.gotInputLastDefense = false;
-
+                    //tell the battlemanager to dequeue a new defense prompt
+                    BattleManager.current.DequeuDefensePrompt(true);
+                    //reset if we got an input from the last defense
+                    InputManager.current.gotInputLastDefense = false;
+                }
             }
             else
             {
-                //we're just waiting for a defense prompt
+                if (timelineInfo.currentBeat == 1 || timelineInfo.currentBeat == 3)
+                {
+                    //tell the battlemanager to dequeue a new defense prompt
+                    BattleManager.current.DequeuDefensePrompt(false);
+                    //reset if we got an input from the last defense
+                    InputManager.current.gotInputLastDefense = false;
+                }
             }
-
         }
-
     }
 
 

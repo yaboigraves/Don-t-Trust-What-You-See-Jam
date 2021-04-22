@@ -126,8 +126,10 @@ public class BattleManager : MonoBehaviour
 
         List<DefensePrompt> legalPrompts = new List<DefensePrompt>();
 
-        foreach(DefensePrompt d in currentTestSettings.tests){
-            if(d.levelUnlocked <= defensePhaseCount){
+        foreach (DefensePrompt d in currentTestSettings.tests)
+        {
+            if (d.levelUnlocked <= defensePhaseCount)
+            {
                 legalPrompts.Add(d);
             }
         }
@@ -143,9 +145,8 @@ public class BattleManager : MonoBehaviour
 
 
 
-
-    //TODO: so this needs to essentially ignore the first call to this every new defense phase
-    public void DequeuDefensePrompt()
+    //TODO: so depending on if we're half time or not we just need to have the circles close smaller and the windows open differently
+    public void DequeuDefensePrompt(bool halfTime)
     {
         if (defenseFirstBeatBreak)
         {
@@ -158,15 +159,12 @@ public class BattleManager : MonoBehaviour
 
         if (defenseQueue.Count > 1 && currentBeatCounter <= currentLevelSongInfo.defensePhaseLength - 2)
         {
+            UIManager.current.SpawnDefenseIndicatorRing(halfTime);
             currentDefense = defenseQueue.Dequeue();
             //Debug.Log(currentDefense.text);
             UIManager.current.SpawnDefensePrompt(currentDefense);
             //tell the input manager to get ready to open up a window for input 
-            InputManager.current.OpenDefeneseWindow();
-        }
-        else
-        {
-            //switch the battle mode
+            InputManager.current.OpenDefeneseWindow(halfTime);
         }
     }
 
@@ -342,7 +340,7 @@ public class BattleManager : MonoBehaviour
         {
             if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength + 1)
             {
-                
+
                 //advance the defense count 
                 defensePhaseCount++;
 

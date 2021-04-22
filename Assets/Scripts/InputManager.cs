@@ -315,10 +315,19 @@ public class InputManager : MonoBehaviour
         return false;
     }
 
-    public void OpenDefeneseWindow()
+    public void OpenDefeneseWindow(bool halfTime)
     {
-        StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 - defenseTolerance) * (60f / 80f) * 1000), true));
-        StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 + defenseTolerance) * (60f / 80f) * 1000), false));
+        if (!halfTime)
+        {
+            StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 - defenseTolerance) * (60f / 80f) * 1000), true));
+            StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + ((1 + defenseTolerance) * (60f / 80f) * 1000), false));
+        }
+        else
+        {
+            StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + (2 * (1 - defenseTolerance) * (60f / 80f) * 1000), true));
+            StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + (2 * (1 + defenseTolerance) * (60f / 80f) * 1000), false));
+        }
+
     }
 
 

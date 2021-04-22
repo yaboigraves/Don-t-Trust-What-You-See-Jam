@@ -22,6 +22,11 @@ public class DefenseRingIcon : MonoBehaviour
 
     }
 
+    public void makeHalfTime()
+    {
+        lerpEndTime = MusicManager.current.timelineInfo.currentPosition + (2 * (60f / MusicManager.current.timelineInfo.currentTempo) * 1000f);
+    }
+
     private void Update()
     {
         float lerpProgress = (MusicManager.current.timelineInfo.currentPosition - spawnTime) / (lerpEndTime - spawnTime);
