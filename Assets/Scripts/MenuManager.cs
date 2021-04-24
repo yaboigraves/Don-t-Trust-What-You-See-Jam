@@ -125,6 +125,13 @@ public class MenuManager : MonoBehaviour
             if (Input.anyKeyDown)
             {
                 string inputString = Input.inputString;
+
+                Debug.Log(inputString);
+                if (inputString == " ")
+                {
+                    inputString = "Space";
+                }
+
                 Debug.Log("got input string of " + inputString);
                 gotKeyInput = true;
 

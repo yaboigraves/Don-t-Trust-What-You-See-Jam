@@ -52,8 +52,13 @@ public class InputManager : MonoBehaviour
     {
         //TODO: so this needs to essentially read from playerprefs and set some variables in here that will bind input 
 
-        twoButtonBindOne = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind1", "A").ToUpper());
-        twoButtonBindTwo = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind2", "D").ToUpper());
+        Debug.Log(PlayerPrefs.GetString("keyBind1"));
+        twoButtonBindOne = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind1", "A"));
+        //twoButtonBindTwo = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind2", "D"));
+
+        //TODO: fix this its hard coded to space rn
+
+        // twoButtonBindOne = KeyCode.Space;
 
         midiBind1 = PlayerPrefs.GetInt("midiBind1", 0);
         midiBind2 = PlayerPrefs.GetInt("midiBind2", 0);

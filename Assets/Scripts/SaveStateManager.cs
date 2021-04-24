@@ -38,7 +38,7 @@ public static class SaveStateManager
     public static void ResetSaveState()
     {
         PlayerPrefs.DeleteAll();
-        saveState = new SaveState(0, 4, 0, 0, "a", "d");
+        saveState = new SaveState(0, 4, 0, 0, "space", "d");
         SaveGame();
     }
 }
