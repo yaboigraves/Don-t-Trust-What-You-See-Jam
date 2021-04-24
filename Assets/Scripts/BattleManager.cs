@@ -77,17 +77,13 @@ public class BattleManager : MonoBehaviour
         //so before we do shit, we gotta instnatiate the currentsonginfo 
         UIManager.current.SetupIndicators();
 
-
         //before we fill the defense queue load the stroop test settings for the level
         currentTestSettings = GetStroopTestByName(sceneName);
-
 
         FillDefenseQueue();
 
         //tell the animation controller to do its fuckin job
         AnimationManager.current.FindAnimationControllersInScene();
-
-
 
         //load the defense queue with enough indicators depending on the defense phase length
     }
@@ -168,7 +164,6 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -197,8 +192,6 @@ public class BattleManager : MonoBehaviour
             DictionaryIndicatorsDebug();
         }
 
-
-
         CheckStatus();
     }
 
@@ -213,7 +206,6 @@ public class BattleManager : MonoBehaviour
             Debug.Log(pair.Key);
         }
         Debug.Log("-----------------------------------");
-
 
         Debug.Log("\n array 1 of indicators");
 
@@ -248,7 +240,6 @@ public class BattleManager : MonoBehaviour
         InputManager.current.EndBattle();
         MusicManager.current.EndBattle();
         battleOver = true;
-
     }
 
     public void ProcessHit(bool hit)
