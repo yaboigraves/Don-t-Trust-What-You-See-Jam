@@ -1,241 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7605947241426354027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/sourpunchv1
-  m_EditorClassIdentifier: 
-  Path: event:/sourpunchv1
-  guid: a15dd662733ad447b03816ce0c52313b
-  Banks: []
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 48000
---- !u!114 &-6134444199134616852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: ../WeekJam1/FMOD SHIT/weekJam/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 637507546348201064
-  LoadResult: 0
-  FileSizes: []
-  Exists: 0
---- !u!114 &-4962644259976623053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD SHIT/weekJam/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-<<<<<<< HEAD
-  lastModified: 637548030822320532
-=======
-  lastModified: 637525480277567741
->>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &-4191745310697559331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD SHIT/weekJam/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-<<<<<<< HEAD
-  lastModified: 637548030822330512
-=======
-  lastModified: 637525480277577718
->>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 958
-  Exists: 1
---- !u!114 &-611730411736052955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/lb9
-  m_EditorClassIdentifier: 
-  Path: event:/lb9
-  guid: f0ecc99160568848bd8adecc57166612
-  Banks:
-  - {fileID: 6643916884609311788}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 146238
---- !u!114 &-230669055039632399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/purple
-  m_EditorClassIdentifier: 
-  Path: event:/purple
-  guid: 03787b24f7b59f469263d643fd9ed2bf
-  Banks:
-  - {fileID: 6643916884609311788}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 163876
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -4191745310697559331}
-  - {fileID: -4962644259976623053}
-  - {fileID: 6643916884609311788}
-  EditorEvents:
-  - {fileID: 3221954066816181366}
-  - {fileID: 2472231579786655101}
-  - {fileID: -230669055039632399}
-  - {fileID: 4369966402605536754}
-  - {fileID: -611730411736052955}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -4962644259976623053}
-  StringsBanks:
-  - {fileID: -4191745310697559331}
-<<<<<<< HEAD
-  stringsBankWriteTime: 637548030822330512
-=======
-  stringsBankWriteTime: 637525480277577718
->>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
-  cacheVersion: 6
---- !u!114 &2472231579786655101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/cruiseControl
-  m_EditorClassIdentifier: 
-  Path: event:/cruiseControl
-  guid: 605cd2869d383f43a9732ce1156a7324
-  Banks:
-  - {fileID: 6643916884609311788}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 192610
---- !u!114 &3221954066816181366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/omariTest
-  m_EditorClassIdentifier: 
-  Path: event:/omariTest
-  guid: 695f1757d1685e44918bddb9a9d1675d
-  Banks:
-  - {fileID: 6643916884609311788}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 48000
---- !u!114 &3676910649272943687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ../WeekJam1/FMOD SHIT/weekJam/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 637507546348221013
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 796
-  Exists: 0
---- !u!114 &4369966402605536754
+--- !u!114 &-6736723026973062618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,7 +15,7 @@ MonoBehaviour:
   Path: event:/funky
   guid: 65d8c57669c6e24881ff5cdc960cf837
   Banks:
-  - {fileID: 6643916884609311788}
+  - {fileID: 6065748675177167693}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -258,7 +23,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 118857
---- !u!114 &5171146116181958702
+--- !u!114 &-3745225820085996969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,16 +33,114 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Songs.bank
+  m_Name: bank:/Master.bank
   m_EditorClassIdentifier: 
-  Path: ../WeekJam1/FMOD SHIT/weekJam/Build/Desktop/Songs.bank
-  Name: Songs
-  StudioPath: bank:/Songs
-  lastModified: 637507546348431542
+  Path: FMOD SHIT/weekJam/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637548030822320532
   LoadResult: 0
   FileSizes: []
-  Exists: 0
---- !u!114 &6643916884609311788
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 7282791928438832019}
+  - {fileID: -3745225820085996969}
+  - {fileID: 6065748675177167693}
+  EditorEvents:
+  - {fileID: 5312910242399431366}
+  - {fileID: 8652248243784970333}
+  - {fileID: -6736723026973062618}
+  - {fileID: 5316457565651781883}
+  - {fileID: 5423270908021115804}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -3745225820085996969}
+  StringsBanks:
+  - {fileID: 7282791928438832019}
+  stringsBankWriteTime: 637548030822330512
+  cacheVersion: 6
+--- !u!114 &5312910242399431366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/purple
+  m_EditorClassIdentifier: 
+  Path: event:/purple
+  guid: 03787b24f7b59f469263d643fd9ed2bf
+  Banks:
+  - {fileID: 6065748675177167693}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 163876
+--- !u!114 &5316457565651781883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/omariTest
+  m_EditorClassIdentifier: 
+  Path: event:/omariTest
+  guid: 695f1757d1685e44918bddb9a9d1675d
+  Banks:
+  - {fileID: 6065748675177167693}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 48000
+--- !u!114 &5423270908021115804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/lb9
+  m_EditorClassIdentifier: 
+  Path: event:/lb9
+  guid: f0ecc99160568848bd8adecc57166612
+  Banks:
+  - {fileID: 6065748675177167693}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 146238
+--- !u!114 &6065748675177167693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,11 +155,51 @@ MonoBehaviour:
   Path: FMOD SHIT/weekJam/Build/Desktop/Songs.bank
   Name: Songs
   StudioPath: bank:/Songs
-<<<<<<< HEAD
   lastModified: 637548030822597570
-=======
-  lastModified: 637546362408482934
->>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &7282791928438832019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD SHIT/weekJam/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637548030822330512
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 958
+  Exists: 1
+--- !u!114 &8652248243784970333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/cruiseControl
+  m_EditorClassIdentifier: 
+  Path: event:/cruiseControl
+  guid: 605cd2869d383f43a9732ce1156a7324
+  Banks:
+  - {fileID: 6065748675177167693}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 192610

@@ -171,7 +171,6 @@ public class InputManager : MonoBehaviour
                     UIManager.current.SpawnFeedBackText(true, 1, status);
 
                     //Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
-<<<<<<< HEAD
 
                     //So we gotta look at the indicator object and check if its true or false, we're gonna destroy it regardless though
 
@@ -182,9 +181,6 @@ public class InputManager : MonoBehaviour
                     
                     
                     Destroy(indicator.gameObject);
-=======
-                    Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0]].gameObject);
->>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
                     //remove it from the dictioanry as well
 
                     BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0]);
@@ -192,12 +188,8 @@ public class InputManager : MonoBehaviour
                     BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo.RemoveAt(0);
 
                     //Debug.Log("hit!");
-<<<<<<< HEAD
 
             
-=======
-                    BattleManager.current.ProcessHit(true);
->>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
                 }
                 else
                 {
@@ -516,13 +508,9 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-<<<<<<< HEAD
 
                 //so processing the hit here needs to add to some kind of multiplier rather than giving an actual point
                 BattleManager.current.ProcessHit(true,true);
-=======
-                BattleManager.current.ProcessHit(true);
->>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
                 UIManager.current.SpawnFeedBackText(true, 0);
             }
 
@@ -577,7 +565,6 @@ public class InputManager : MonoBehaviour
             //so before we destroy these, check and make sure they're actually in the dictionary
             if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.mergedIndicatorInfo[0]))
             {
-<<<<<<< HEAD
                 Indicator indicator = BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.mergedIndicatorInfo[0]];
                 
 
@@ -602,21 +589,7 @@ public class InputManager : MonoBehaviour
 
         }
 
-
-=======
-                Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.mergedIndicatorInfo[0]].gameObject);
-            }
-
-            BattleManager.current.currentSongInfo.mergedIndicatorInfo.RemoveAt(0);
-
-            UIManager.current.SpawnFeedBackText(false, 0);
-            //delete the indicator too
-            //Debug.Log("missed a kick");
-            BattleManager.current.ProcessHit(false);
-        }
-
-
->>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
+        
         if (BattleManager.current.currentSongInfo.mergedIndicatorInfo.Count < 1 && BattleManager.current.currentSongInfo.mergedIndicatorInfo.Count < 1)
         {
             this.enabled = false;
