@@ -2801,9 +2801,24 @@ PrefabInstance:
       propertyPath: cart
       value: 
       objectReference: {fileID: 1045665871}
+    - target: {fileID: 7946432748670137543, guid: dda6fa7e1a739764f83f46db9adf678e,
+        type: 3}
+      propertyPath: m_Name
+      value: TwoButton (lol actually one button)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946432748752960271, guid: dda6fa7e1a739764f83f46db9adf678e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7946432748937881865, guid: dda6fa7e1a739764f83f46db9adf678e,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946432748976041983, guid: dda6fa7e1a739764f83f46db9adf678e,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7946432748991518962, guid: dda6fa7e1a739764f83f46db9adf678e,
@@ -2869,6 +2884,16 @@ PrefabInstance:
     - target: {fileID: 7946432749175405135, guid: dda6fa7e1a739764f83f46db9adf678e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946432749706511616, guid: dda6fa7e1a739764f83f46db9adf678e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946432749706511616, guid: dda6fa7e1a739764f83f46db9adf678e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7946432750063676593, guid: dda6fa7e1a739764f83f46db9adf678e,

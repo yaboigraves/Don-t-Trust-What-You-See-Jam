@@ -135,31 +135,44 @@ public class UIManager : MonoBehaviour
         //TODO: so we need to make the positions of the indicators more uniform 
         //positions that beats should spawn at should NOT be related to time, but should rather be related to beat
 
+        //legacy two button initialization
+        // for (int i = 0; i < info.indicatorOneInfo.Count; i++)
+        // {
+        //     Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorOneInfo[i] / 1000f, 0);
+        //     Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
+        //     indic.SetIndicatorTime((float)info.indicatorOneInfo[i], indicatorOneDestination);
+        //     info.indicatorDict[info.indicatorOneInfo[i]] = indic;
+        // }
 
-        for (int i = 0; i < info.indicatorOneInfo.Count; i++)
+        // for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
+        // {
+        //     Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorTwoInfo[i] / 1000, 0);
+        //     Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
+        //     indic.SetIndicatorTime((float)info.indicatorTwoInfo[i], indicatorTwoDestination);
+        //     info.indicatorDict[info.indicatorTwoInfo[i]] = indic;
+        // }
+
+
+        //new one button input
+
+        //TODO: give each of these a true/false text to them randomly
+
+        for (int i = 0; i < info.mergedIndicatorInfo.Count; i++)
         {
-            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorOneInfo[i] / 1000f, 0);
+            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.mergedIndicatorInfo[i] / 1000f, 0);
             Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
-            indic.SetIndicatorTime((float)info.indicatorOneInfo[i], indicatorOneDestination);
-            info.indicatorDict[info.indicatorOneInfo[i]] = indic;
+            indic.SetIndicatorTime((float)info.mergedIndicatorInfo[i], indicatorOneDestination);
+            info.indicatorDict[info.mergedIndicatorInfo[i]] = indic;
+
+            //random true or false
+            indic.SetIndicatorInfo((Random.Range(0,2) == 0));
         }
 
-        for (int i = 0; i < info.indicatorTwoInfo.Count; i++)
-        {
-            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.indicatorTwoInfo[i] / 1000, 0);
-            Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
-            indic.SetIndicatorTime((float)info.indicatorTwoInfo[i], indicatorTwoDestination);
-            info.indicatorDict[info.indicatorTwoInfo[i]] = indic;
-        }
 
         //instnatiate the object 
         BattleManager.current.currentSongInfo = info;
 
-
-
         //this is a patch fix fixing some sphaget dont mind me :))
-
-
     }
 
 
@@ -170,7 +183,6 @@ public class UIManager : MonoBehaviour
     public void SpawnDefenseIndicatorRing(bool halftime)
     {
 
-        //
         //spawn the ring
 
         //double check with the battle manager and make sure the beat counter for the current phase isnt small

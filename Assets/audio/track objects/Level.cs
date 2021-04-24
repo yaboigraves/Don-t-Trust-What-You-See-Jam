@@ -24,14 +24,23 @@ public class Level : ScriptableObject
         songInfo.indicatorDict = new Dictionary<double, Indicator>();
 
         float beatsPerSecond = 60f / bpm;
-        for (int i = 0; i < songInfo.indicatorOneInfo.Count; i++)
+
+        //old build for two button 
+        // for (int i = 0; i < songInfo.indicatorOneInfo.Count; i++)
+        // {
+        //     songInfo.indicatorOneInfo[i] *= (beatsPerSecond) * 1000;
+        // }
+        // // Debug.Log("Snares");
+        // for (int i = 0; i < songInfo.indicatorTwoInfo.Count; i++)
+        // {
+        //     songInfo.indicatorTwoInfo[i] *= (beatsPerSecond) * 1000;
+        // }
+
+        //one button new version
+
+        for (int i = 0; i < songInfo.mergedIndicatorInfo.Count; i++)
         {
-            songInfo.indicatorOneInfo[i] *= (beatsPerSecond) * 1000;
-        }
-        // Debug.Log("Snares");
-        for (int i = 0; i < songInfo.indicatorTwoInfo.Count; i++)
-        {
-            songInfo.indicatorTwoInfo[i] *= (beatsPerSecond) * 1000;
+            songInfo.mergedIndicatorInfo[i] *= (beatsPerSecond) * 1000;
         }
 
 

@@ -9,8 +9,6 @@ public class InputManager : MonoBehaviour
     public static InputManager current;
     public float tolerance, missDeleteTolerance;
 
-
-
     public KeyCode twoButtonBindOne = KeyCode.A, twoButtonBindTwo = KeyCode.D;
 
     public int midiBind1, midiBind2;
@@ -52,8 +50,13 @@ public class InputManager : MonoBehaviour
     {
         //TODO: so this needs to essentially read from playerprefs and set some variables in here that will bind input 
 
-        twoButtonBindOne = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind1", "A").ToUpper());
-        twoButtonBindTwo = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind2", "D").ToUpper());
+        Debug.Log(PlayerPrefs.GetString("keyBind1"));
+        twoButtonBindOne = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind1", "A"));
+        //twoButtonBindTwo = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("keyBind2", "D"));
+
+        //TODO: fix this its hard coded to space rn
+
+        // twoButtonBindOne = KeyCode.Space;
 
         midiBind1 = PlayerPrefs.GetInt("midiBind1", 0);
         midiBind2 = PlayerPrefs.GetInt("midiBind2", 0);
@@ -64,7 +67,8 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TwoButtonInput();
+        // TwoButtonInput();
+        OneButtonInput();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!paused)
@@ -123,6 +127,159 @@ public class InputManager : MonoBehaviour
         return status;
     }
 
+
+    public void OneButtonInput()
+    {
+        if (BattleManager.current.battleMode == "defense")
+        {
+            //so if we're in one button input, we only accept input for true statements, false statements are passed by not hitting at all
+            if (Input.GetKeyDown(twoButtonBindOne) || (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f & !gotMidiInput1))
+            {
+                gotInputLastDefense = true;
+                if (defenseInputOpen && BattleManager.current.currentDefense.trueOrFalse)
+                {
+                    //TODO: check for degrees of success (good, nice, perfect!)
+
+                    UIManager.current.SpawnFeedBackText(true, 1);
+                    defenseInputOpen = false;
+                    BattleManager.current.ProcessHit(true);
+                }
+                else
+                {
+                    UIManager.current.SpawnFeedBackText(false, 1);
+                    BattleManager.current.ProcessHit(false);
+                }
+            }
+        }
+        else if (BattleManager.current.battleMode == "offense")
+        {
+            //SO first things first, probably gotta get 
+
+            if (Input.GetKeyDown(twoButtonBindOne) || (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f && !gotMidiInput1))
+            {
+                //check and see if theres currently an indicator in lane one that is ready to be hit
+
+                if (BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo.Count <= 0)
+                {
+                    return;
+                }
+
+                if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
+                {
+                    string status = checkHitAccuracy(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition));
+
+                    UIManager.current.SpawnFeedBackText(true, 1, status);
+
+                    //Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
+
+                    //So we gotta look at the indicator object and check if its true or false, we're gonna destroy it regardless though
+
+                    Indicator indicator = BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0]];
+                    
+
+                    BattleManager.current.ProcessHit(indicator.isTrueOrFalse);
+                    
+                    
+                    Destroy(indicator.gameObject);
+                    //remove it from the dictioanry as well
+
+                    BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0]);
+                    //remove the array entry as well
+                    BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo.RemoveAt(0);
+
+                    //Debug.Log("hit!");
+
+            
+                }
+                else
+                {
+                    UIManager.current.SpawnFeedBackText(false, 1);
+
+                    if (checkMissWithinPadTolerance(1))
+                    {
+                        //delete the note and remove the indicator
+                        Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0]].gameObject);
+                        //remove it from the dictioanry as well
+
+                        BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0]);
+                        //remove the array entry as well
+                        BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo.RemoveAt(0);
+                    }
+                }
+            }
+
+            // if (Input.GetKeyDown(twoButtonBindTwo) || (MidiJack.MidiMaster.GetKey(midiBind2) > 0.0f && !gotMidiInput2))
+            // {
+
+            //     //make sure theres like actually any notes left to hit
+            //     if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.Count <= 0)
+            //     {
+            //         //for now we just dont penalize you
+            //         return;
+            //     }
+
+
+            //     if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
+            //     {
+
+            //         string status = checkHitAccuracy(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition));
+
+
+            //         UIManager.current.SpawnFeedBackText(true, 2, status);
+
+
+            //         Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+            //         //remove it from the dictioanry as well
+
+            //         BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
+            //         //remove the array entry as well
+            //         BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
+
+            //         //Debug.Log("hit!");
+            //         BattleManager.current.ProcessHit(true);
+            //     }
+            //     else
+            //     {
+            //         //offense mode hit but timings off
+            //         UIManager.current.SpawnFeedBackText(false, 2);
+
+            //         //so now we're also going to check and see if the next note is within another tolerance value which will delete it 
+            //         //ie: if the note is right about to hit the pad and the user fucks up jsut clean up the note 
+            //         if (checkMissWithinPadTolerance(2))
+            //         {
+            //             //delete the note and remove the indicator
+
+            //             Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
+            //             //remove it from the dictioanry as well
+
+            //             BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
+            //             //remove the array entry as well
+            //             BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
+            //         }
+            //     }
+            // }
+        }
+
+
+        //bootleg getkeydown
+        if (MidiJack.MidiMaster.GetKey(midiBind1) > 0.0f && !gotMidiInput1)
+        {
+            gotMidiInput1 = true;
+        }
+        if (MidiJack.MidiMaster.GetKey(midiBind2) > 0.0f)
+        {
+            gotMidiInput2 = true;
+        }
+
+        if (MidiJack.MidiMaster.GetKeyUp(midiBind1) && gotMidiInput1)
+        {
+            gotMidiInput1 = false;
+        }
+        if (MidiJack.MidiMaster.GetKeyUp(midiBind2) && gotMidiInput2)
+        {
+            gotMidiInput2 = false;
+        }
+    }
 
     public void TwoButtonInput()
     {
@@ -327,7 +484,6 @@ public class InputManager : MonoBehaviour
             StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + (2 * (1 - defenseTolerance) * (60f / 80f) * 1000), true));
             StartCoroutine(openWindowRoutine(MusicManager.current.timelineInfo.currentPosition + (2 * (1 + defenseTolerance) * (60f / 80f) * 1000), false));
         }
-
     }
 
 
@@ -344,8 +500,20 @@ public class InputManager : MonoBehaviour
 
         if (toggle == false && !gotInputLastDefense)
         {
-            BattleManager.current.ProcessHit(false);
-            UIManager.current.SpawnFeedBackText(false, 0);
+
+            if (BattleManager.current.currentDefense.trueOrFalse)
+            {
+                BattleManager.current.ProcessHit(false);
+                UIManager.current.SpawnFeedBackText(false, 0);
+            }
+            else
+            {
+
+                //so processing the hit here needs to add to some kind of multiplier rather than giving an actual point
+                BattleManager.current.ProcessHit(true,true);
+                UIManager.current.SpawnFeedBackText(true, 0);
+            }
+
         }
 
         //UIManager.current.ToggleDefenseInputUi();
@@ -353,43 +521,79 @@ public class InputManager : MonoBehaviour
 
     void CheckIndicatorStatus()
     {
-        if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
-        {
+        // if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
+        // {
 
+        //     //so before we destroy these, check and make sure they're actually in the dictionary
+        //     if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.indicatorOneInfo[0]))
+        //     {
+        //         Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorOneInfo[0]].gameObject);
+        //     }
+
+        //     BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
+
+        //     UIManager.current.SpawnFeedBackText(false, 0);
+        //     //delete the indicator too
+        //     //Debug.Log("missed a kick");
+        //     BattleManager.current.ProcessHit(false);
+
+        // }
+
+        // if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorTwoInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
+        // {
+        //     if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.indicatorTwoInfo[0]))
+        //     {
+        //         Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorTwoInfo[0]].gameObject);
+        //     }
+        //     BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
+
+        //     //delete the indicator too
+        //     //Debug.Log("missed a snare");
+        //     UIManager.current.SpawnFeedBackText(false, 0);
+        //     BattleManager.current.ProcessHit(false);
+
+        // }
+
+        // //if theres no indicators left turn off the input
+        // if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count < 1 && BattleManager.current.currentSongInfo.indicatorTwoInfo.Count < 1)
+        // {
+        //     this.enabled = false;
+        // }
+
+        if (BattleManager.current.currentSongInfo.mergedIndicatorInfo.Count > 0 && BattleManager.current.currentSongInfo.mergedIndicatorInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
+        {
             //so before we destroy these, check and make sure they're actually in the dictionary
-            if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.indicatorOneInfo[0]))
+            if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.mergedIndicatorInfo[0]))
             {
-                Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorOneInfo[0]].gameObject);
+                Indicator indicator = BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.mergedIndicatorInfo[0]];
+                
+
+                if(indicator.isTrueOrFalse){
+                    UIManager.current.SpawnFeedBackText(false, 0);
+                    //delete the indicator too
+                    //Debug.Log("missed a kick");
+                    BattleManager.current.ProcessHit(false);
+                }
+                else{
+                    UIManager.current.SpawnFeedBackText(true, 0);
+                    //delete the indicator too
+                    //Debug.Log("missed a kick");
+                    BattleManager.current.ProcessHit(true);
+                }
+       
+                
+                Destroy(indicator.gameObject);
             }
 
-            BattleManager.current.currentSongInfo.indicatorOneInfo.RemoveAt(0);
-
-            UIManager.current.SpawnFeedBackText(false, 0);
-            //delete the indicator too
-            //Debug.Log("missed a kick");
-            BattleManager.current.ProcessHit(false);
+            BattleManager.current.currentSongInfo.mergedIndicatorInfo.RemoveAt(0);
 
         }
 
-        if (BattleManager.current.currentSongInfo.indicatorTwoInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorTwoInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
-        {
-            if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.indicatorTwoInfo[0]))
-            {
-                Destroy(BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.indicatorTwoInfo[0]].gameObject);
-            }
-            BattleManager.current.currentSongInfo.indicatorTwoInfo.RemoveAt(0);
 
-            //delete the indicator too
-            //Debug.Log("missed a snare");
-            UIManager.current.SpawnFeedBackText(false, 0);
-            BattleManager.current.ProcessHit(false);
-
-        }
-
-        //if theres no indicators left turn off the input
-        if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count < 1 && BattleManager.current.currentSongInfo.indicatorTwoInfo.Count < 1)
+        if (BattleManager.current.currentSongInfo.mergedIndicatorInfo.Count < 1 && BattleManager.current.currentSongInfo.mergedIndicatorInfo.Count < 1)
         {
             this.enabled = false;
         }
+
     }
 }

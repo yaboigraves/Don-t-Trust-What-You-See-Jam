@@ -36,7 +36,7 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-
+        
         currentLevelSongInfo = Instantiate(currentLevelSongInfo);
         // GameObject lo = Instantiate(levelObject, trans
         // currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
@@ -77,17 +77,13 @@ public class BattleManager : MonoBehaviour
         //so before we do shit, we gotta instnatiate the currentsonginfo 
         UIManager.current.SetupIndicators();
 
-
         //before we fill the defense queue load the stroop test settings for the level
         currentTestSettings = GetStroopTestByName(sceneName);
-
 
         FillDefenseQueue();
 
         //tell the animation controller to do its fuckin job
         AnimationManager.current.FindAnimationControllersInScene();
-
-
 
         //load the defense queue with enough indicators depending on the defense phase length
     }
@@ -106,8 +102,6 @@ public class BattleManager : MonoBehaviour
 
             }
         }
-
-
 
         Debug.LogError("COULDNT FIND STROOP SETTINGS FOR SCENE " + sceneName);
         Debug.Break();
@@ -168,7 +162,6 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -197,8 +190,6 @@ public class BattleManager : MonoBehaviour
             DictionaryIndicatorsDebug();
         }
 
-
-
         CheckStatus();
     }
 
@@ -213,7 +204,6 @@ public class BattleManager : MonoBehaviour
             Debug.Log(pair.Key);
         }
         Debug.Log("-----------------------------------");
-
 
         Debug.Log("\n array 1 of indicators");
 
@@ -248,24 +238,35 @@ public class BattleManager : MonoBehaviour
         InputManager.current.EndBattle();
         MusicManager.current.EndBattle();
         battleOver = true;
-
     }
 
-    public void ProcessHit(bool hit)
+
+    //this is used for defense mode non inputs so they can stack onto a later hit
+    public int hitMultiplier = 1;
+    public void ProcessHit(bool hit, bool multiplier = false)
     {
-        if (hit)
+        if (hit && !multiplier)
         {
             if (statusInfo.currentVibe + statusInfo.vibeIncreaseRate <= statusInfo.maxVibe)
             {
-                statusInfo.currentVibe += statusInfo.vibeIncreaseRate;
+                statusInfo.currentVibe += statusInfo.vibeIncreaseRate * hitMultiplier;
+
             }
 
+            hitMultiplier = 1;
+
             statusInfo.streak++;
+            
+        }
+        else if(hit && multiplier){
+            hitMultiplier ++;
+            statusInfo.streak ++;
         }
         else
         {
             statusInfo.currentVibe += statusInfo.vibeDecreaseRate;
             statusInfo.streak = 0;
+            hitMultiplier = 1;
         }
 
         UIManager.current.UpdateVibeBarSlider(statusInfo.currentVibe);

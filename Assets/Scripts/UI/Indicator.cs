@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class Indicator : MonoBehaviour
 {
 
@@ -12,6 +14,8 @@ public class Indicator : MonoBehaviour
     public Transform destinationPoint;
     public Vector3 startPosition;
 
+    public SpriteRenderer sprite;
+
     //post destination lerp
 
     //in beats
@@ -21,6 +25,12 @@ public class Indicator : MonoBehaviour
 
     public float lerpProgress, postLerpProgress;
 
+    public bool isTrueOrFalse;
+
+
+    private void Start() {
+        sprite = GetComponent<SpriteRenderer>();
+    }
     public void SetIndicatorTime(float time, Transform dest)
     {
         indicatorTime = time;
@@ -33,6 +43,17 @@ public class Indicator : MonoBehaviour
         this.enabled = true;
         destinationPoint = dest;
 
+    }
+
+    public void SetIndicatorInfo(bool trueOrFalse){
+        if(trueOrFalse){
+            sprite.color = Color.green;
+        }
+        else{
+            sprite.color = Color.red;
+        }
+
+        isTrueOrFalse = trueOrFalse;
     }
 
     // Update is called once per frame

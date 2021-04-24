@@ -38,14 +38,25 @@ public static class SongLoader
 [System.Serializable]
 public class SongInfo
 {
-    public List<double> indicatorOneInfo, indicatorTwoInfo;
-
+    public List<double> indicatorOneInfo, indicatorTwoInfo, mergedIndicatorInfo;
     public Dictionary<double, Indicator> indicatorDict = new Dictionary<double, Indicator>();
     public SongInfo(List<double> oneInfo, List<double> twoInfo)
     {
+        mergedIndicatorInfo = new List<double>();
         //floats? I guess?
         indicatorOneInfo = oneInfo;
         indicatorTwoInfo = twoInfo;
         indicatorDict = new Dictionary<double, Indicator>();
+
+        //merge indicator one and indicator two info then resort it
+        foreach (float f in indicatorOneInfo)
+        {
+            mergedIndicatorInfo.Add(f);
+        }
+        foreach (float f in indicatorTwoInfo)
+        {
+            mergedIndicatorInfo.Add(f);
+        }
+        mergedIndicatorInfo.Sort();
     }
 }
