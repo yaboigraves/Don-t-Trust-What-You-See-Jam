@@ -155,6 +155,7 @@ public class UIManager : MonoBehaviour
 
         //new one button input
 
+<<<<<<< HEAD
         //TODO: give each of these a true/false text to them randomly
 
         for (int i = 0; i < info.mergedIndicatorInfo.Count; i++)
@@ -167,6 +168,16 @@ public class UIManager : MonoBehaviour
             //random true or false
             indic.SetIndicatorInfo((Random.Range(0,2) == 0));
         }
+=======
+        for (int i = 0; i < info.mergedIndicatorInfo.Count; i++)
+        {
+            Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.mergedIndicatorInfo[i] / 1000f, 0);
+            Indicator indic = Instantiate(indicator, indicPos, Quaternion.identity, indicatorContainer.transform).GetComponent<Indicator>();
+            indic.SetIndicatorTime((float)info.mergedIndicatorInfo[i], indicatorOneDestination);
+            info.indicatorDict[info.mergedIndicatorInfo[i]] = indic;
+        }
+
+>>>>>>> 53ce42b85ce56d14fc239edc48124bee0ff358a6
 
 
         //instnatiate the object 
