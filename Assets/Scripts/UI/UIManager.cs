@@ -39,6 +39,10 @@ public class UIManager : MonoBehaviour
 
     public Camera battleUICamera;
 
+    //so this needs to be abstracted a bit more probably but eh
+    public Sprite[] indicatorArrowSprites;
+
+    public Image offensePrompt;
 
     private void Awake()
     {
@@ -153,10 +157,10 @@ public class UIManager : MonoBehaviour
         // }
 
 
-        //new one button input
 
-        //TODO: give each of these a true/false text to them randomly
 
+
+        //TODO: need to dynamically figure out what mode we're in direction,math, etc and stuff
         for (int i = 0; i < info.mergedIndicatorInfo.Count; i++)
         {
             Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.mergedIndicatorInfo[i] / 1000f, 0);
@@ -165,7 +169,22 @@ public class UIManager : MonoBehaviour
             info.indicatorDict[info.mergedIndicatorInfo[i]] = indic;
 
             //random true or false
-            indic.SetIndicatorInfo((Random.Range(0,2) == 0));
+            int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
+            string arrowStr;
+
+            if (arrowDir == 0)
+            {
+                arrowStr = "left";
+            }
+            else if (arrowDir == 1)
+            {
+                arrowStr = "up";
+            }
+            else
+            {
+                arrowStr = "right";
+            }
+            indic.SetIndicatorInfo((Random.Range(0, 2) == 0), indicatorArrowSprites[arrowDir], arrowStr);
         }
 
 
@@ -335,12 +354,7 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void EnableOffenseModeUi()
-    {
-        otherDefenseContainer.SetActive(false);
-        offenseUIContainer.SetActive(true);
-        defenseUIContainer.SetActive(false);
-    }
+
 
     public void EnableWinLoseUI(bool didWin)
     {
@@ -386,6 +400,7 @@ public class UIManager : MonoBehaviour
         padText2.text = "";
 
         indicatorsAndPadContainer.SetActive(true);
+        ToggleOffensePrompt(true);
     }
 
     public void EnableDefenseUI()
@@ -423,7 +438,36 @@ public class UIManager : MonoBehaviour
     }
 
 
-    //copied in rebind code
+
+    //OFFENSE PROMPT VARIABLES
+    [Header("OFFENSE PROMPT VARIABLES")]
+    public string offenseArrowDirection;
+
+    public void ToggleOffensePrompt(bool toggle)
+    {
+        offensePrompt.enabled = toggle;
+        if (offensePrompt.isActiveAndEnabled)
+        {
+            //change to a different arrow
+            int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
+            offensePrompt.sprite = indicatorArrowSprites[arrowDir];
+            if (arrowDir == 0)
+            {
+                offenseArrowDirection = "left";
+            }
+            else if (arrowDir == 1)
+            {
+                offenseArrowDirection = "up";
+            }
+            else
+            {
+                offenseArrowDirection = "right";
+            }
+
+        }
+    }
+
+
 
 
 

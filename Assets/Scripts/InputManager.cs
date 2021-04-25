@@ -168,18 +168,30 @@ public class InputManager : MonoBehaviour
                 {
                     string status = checkHitAccuracy(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition));
 
-                    UIManager.current.SpawnFeedBackText(true, 1, status);
+
 
                     //Debug.Log(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict);
 
                     //So we gotta look at the indicator object and check if its true or false, we're gonna destroy it regardless though
 
                     Indicator indicator = BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.mergedIndicatorInfo[0]];
-                    
 
-                    BattleManager.current.ProcessHit(indicator.isTrueOrFalse);
-                    
-                    
+
+                    if (indicator.checkTrue())
+                    {
+                        //if its true and you hit it yay good job
+                        BattleManager.current.ProcessHit(true);
+                        UIManager.current.SpawnFeedBackText(true, 1, status);
+
+                    }
+                    else
+                    {
+                        BattleManager.current.ProcessHit(false);
+                        UIManager.current.SpawnFeedBackText(false, 1, status);
+                    }
+
+
+
                     Destroy(indicator.gameObject);
                     //remove it from the dictioanry as well
 
@@ -189,7 +201,7 @@ public class InputManager : MonoBehaviour
 
                     //Debug.Log("hit!");
 
-            
+
                 }
                 else
                 {
@@ -510,7 +522,7 @@ public class InputManager : MonoBehaviour
             {
 
                 //so processing the hit here needs to add to some kind of multiplier rather than giving an actual point
-                BattleManager.current.ProcessHit(true,true);
+                BattleManager.current.ProcessHit(true, true);
                 UIManager.current.SpawnFeedBackText(true, 0);
             }
 
@@ -566,22 +578,24 @@ public class InputManager : MonoBehaviour
             if (BattleManager.current.currentSongInfo.indicatorDict.ContainsKey(BattleManager.current.currentSongInfo.mergedIndicatorInfo[0]))
             {
                 Indicator indicator = BattleManager.current.currentSongInfo.indicatorDict[BattleManager.current.currentSongInfo.mergedIndicatorInfo[0]];
-                
 
-                if(indicator.isTrueOrFalse){
+
+                if (indicator.checkTrue())
+                {
                     UIManager.current.SpawnFeedBackText(false, 0);
                     //delete the indicator too
                     //Debug.Log("missed a kick");
                     BattleManager.current.ProcessHit(false);
                 }
-                else{
+                else
+                {
                     UIManager.current.SpawnFeedBackText(true, 0);
                     //delete the indicator too
                     //Debug.Log("missed a kick");
                     BattleManager.current.ProcessHit(true);
                 }
-       
-                
+
+
                 Destroy(indicator.gameObject);
             }
 
@@ -589,7 +603,7 @@ public class InputManager : MonoBehaviour
 
         }
 
-        
+
         if (BattleManager.current.currentSongInfo.mergedIndicatorInfo.Count < 1 && BattleManager.current.currentSongInfo.mergedIndicatorInfo.Count < 1)
         {
             this.enabled = false;

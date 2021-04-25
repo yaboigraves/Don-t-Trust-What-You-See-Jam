@@ -27,8 +27,12 @@ public class Indicator : MonoBehaviour
 
     public bool isTrueOrFalse;
 
+    public string promptStr;
 
-    private void Start() {
+    //so indicators are also going to need be able to be assigned sprites from the ui manager
+
+    private void Start()
+    {
         sprite = GetComponent<SpriteRenderer>();
     }
     public void SetIndicatorTime(float time, Transform dest)
@@ -45,15 +49,35 @@ public class Indicator : MonoBehaviour
 
     }
 
-    public void SetIndicatorInfo(bool trueOrFalse){
-        if(trueOrFalse){
-            sprite.color = Color.green;
-        }
-        else{
-            sprite.color = Color.red;
-        }
+    public void SetIndicatorInfo(bool trueOrFalse, Sprite spriteAsset, string prompt)
+    {
+        sprite.sprite = spriteAsset;
+        // if (trueOrFalse)
+        // {
+        //     sprite.color = Color.green;
+        // }
+        // else
+        // {
+        //     sprite.color = Color.red;
+        // }
 
-        isTrueOrFalse = trueOrFalse;
+        // isTrueOrFalse = trueOrFalse;
+        promptStr = prompt;
+    }
+
+    public bool checkTrue()
+    {
+        //check if our sprite matches the sprite the uimanager is looking for
+
+        //TODO: fix this up
+        if (promptStr == UIManager.current.offenseArrowDirection)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // Update is called once per frame

@@ -36,7 +36,7 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
-        
+
         currentLevelSongInfo = Instantiate(currentLevelSongInfo);
         // GameObject lo = Instantiate(levelObject, trans
         // currentLevelSongInfo = lo.GetComponent<LevelObject>().level;
@@ -256,11 +256,12 @@ public class BattleManager : MonoBehaviour
             hitMultiplier = 1;
 
             statusInfo.streak++;
-            
+
         }
-        else if(hit && multiplier){
-            hitMultiplier ++;
-            statusInfo.streak ++;
+        else if (hit && multiplier)
+        {
+            hitMultiplier++;
+            statusInfo.streak++;
         }
         else
         {
@@ -325,6 +326,7 @@ public class BattleManager : MonoBehaviour
                 UIManager.current.ToggleDefenseModeUI(false);
                 UIManager.current.EnableOffenseUI();
                 UIManager.current.SwapPhaseIcon(battleMode);
+
             }
             //turn off the ui for defense mode and just let the player get ready if we're 2 beats away
             else if (currentBeatCounter >= currentLevelSongInfo.defensePhaseLength - 1)
@@ -355,6 +357,7 @@ public class BattleManager : MonoBehaviour
                 //wait to do this
                 //UIManager.current.ToggleDefenseModeUI(true);
                 UIManager.current.SwapPhaseIcon(battleMode);
+                UIManager.current.ToggleOffensePrompt(false);
             }
         }
     }
