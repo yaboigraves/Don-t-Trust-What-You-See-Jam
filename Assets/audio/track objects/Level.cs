@@ -17,6 +17,9 @@ public class Level : ScriptableObject
     public int songLengthInBeats = 64;
     public string fmodSongName;
 
+    //color,math,direction
+    public string stroopTestType;
+
     public void buildSongInfo()
     {
         Debug.Log("buildind dat young song info");

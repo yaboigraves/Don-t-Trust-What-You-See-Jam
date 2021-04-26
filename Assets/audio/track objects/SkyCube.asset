@@ -69,9 +69,11 @@ MonoBehaviour:
     - 152225.35806289135
     - 153544.04010350115
     - 154862.7221441109
+    mergedIndicatorInfo: []
   midiFileName: devonwho-purple-midi-bpm91
   bpm: 91
   defensePhaseLength: 32
   offensePhaseLength: 16
   songLengthInBeats: 240
   fmodSongName: event:/purple
+  stroopTestType: math

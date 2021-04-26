@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
     public Transform indicatorContainer;
     public Transform indicatorOneDestination, indicatorTwoDestination;
     //100 pixels for every beat
-
     public GameObject feedbackText;
     public Transform feedbackContainer;
     public TextMeshProUGUI defensePromptText;
@@ -44,6 +43,10 @@ public class UIManager : MonoBehaviour
 
     public Image offensePrompt;
 
+    //so we gotta know what stroop test assets to load from and how to load it depending on the current test type
+
+    public string currentStroopTestType;
+
     private void Awake()
     {
         current = this;
@@ -64,6 +67,11 @@ public class UIManager : MonoBehaviour
     public void TogglePauseMenu(bool toggle)
     {
         pauseMenuPanel.SetActive(toggle);
+    }
+
+    public void SetStroopTestType(string stroopType)
+    {
+        currentStroopTestType = stroopType;
     }
 
     public void ExitBackToMenu()
@@ -161,6 +169,8 @@ public class UIManager : MonoBehaviour
 
 
         //TODO: need to dynamically figure out what mode we're in direction,math, etc and stuff
+        currentStroopTestType = BattleManager.current.currentLevelSongInfo.stroopTestType;
+        //Debug.Log(currentStroopTestType);
         for (int i = 0; i < info.mergedIndicatorInfo.Count; i++)
         {
             Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.mergedIndicatorInfo[i] / 1000f, 0);
@@ -168,23 +178,55 @@ public class UIManager : MonoBehaviour
             indic.SetIndicatorTime((float)info.mergedIndicatorInfo[i], indicatorOneDestination);
             info.indicatorDict[info.mergedIndicatorInfo[i]] = indic;
 
-            //random true or false
-            int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
-            string arrowStr;
 
-            if (arrowDir == 0)
+            if (currentStroopTestType == "direction")
             {
-                arrowStr = "left";
+                //random true or false
+                int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
+                string arrowStr;
+
+                if (arrowDir == 0)
+                {
+                    arrowStr = "left";
+                }
+                else if (arrowDir == 1)
+                {
+                    arrowStr = "up";
+                }
+                else
+                {
+                    arrowStr = "right";
+                }
+
+                indic.SetIndicatorInfo((Random.Range(0, 2) == 0), indicatorArrowSprites[arrowDir], arrowStr, Color.white);
             }
-            else if (arrowDir == 1)
+            else if (currentStroopTestType == "color")
             {
-                arrowStr = "up";
+                int color = Random.Range(0, offenseColors.Length);
+                string colorPrompt = "";
+
+                if (color == 0)
+                {
+                    //red   
+                    colorPrompt = "red";
+                }
+                else if (color == 1)
+                {
+                    //blue
+                    colorPrompt = "blue";
+                }
+                else if (color == 2)
+                {
+                    //yellow 
+                    colorPrompt = "yellow";
+                }
+
+                indic.SetIndicatorInfo(true, colorSprite, colorPrompt, offenseColors[color]);
             }
-            else
+            else if (currentStroopTestType == "math")
             {
-                arrowStr = "right";
+                //TODO: add math tests
             }
-            indic.SetIndicatorInfo((Random.Range(0, 2) == 0), indicatorArrowSprites[arrowDir], arrowStr);
         }
 
 
@@ -424,7 +466,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
     //reload the scene
     public void RetryButton()
     {
@@ -437,40 +478,60 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("LevelSelect");
     }
 
-
-
     //OFFENSE PROMPT VARIABLES
     [Header("OFFENSE PROMPT VARIABLES")]
-    public string offenseArrowDirection;
+    public string currentOffensePrompt;
+
+    [SerializeField]
+    public Color[] offenseColors;
+    public Sprite colorSprite;
 
     public void ToggleOffensePrompt(bool toggle)
     {
         offensePrompt.enabled = toggle;
         if (offensePrompt.isActiveAndEnabled)
         {
-            //change to a different arrow
-            int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
-            offensePrompt.sprite = indicatorArrowSprites[arrowDir];
-            if (arrowDir == 0)
+            if (currentStroopTestType == "direction")
             {
-                offenseArrowDirection = "left";
+                //change to a different arrow
+                int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
+                offensePrompt.sprite = indicatorArrowSprites[arrowDir];
+                if (arrowDir == 0)
+                {
+                    currentOffensePrompt = "left";
+                }
+                else if (arrowDir == 1)
+                {
+                    currentOffensePrompt = "up";
+                }
+                else
+                {
+                    currentOffensePrompt = "right";
+                }
             }
-            else if (arrowDir == 1)
+            else if (currentStroopTestType == "color")
             {
-                offenseArrowDirection = "up";
-            }
-            else
-            {
-                offenseArrowDirection = "right";
-            }
+                int color = Random.Range(0, offenseColors.Length);
+                offensePrompt.sprite = colorSprite;
+                offensePrompt.color = offenseColors[color];
 
+                if (color == 0)
+                {
+                    currentOffensePrompt = "red";
+                }
+                else if (color == 1)
+                {
+                    currentOffensePrompt = "blue";
+                }
+                else if (color == 2)
+                {
+                    currentOffensePrompt = "yellow";
+                }
+            }
+            else if (currentStroopTestType == "math")
+            {
+                //TODO: add math stuff
+            }
         }
     }
-
-
-
-
-
-
-
 }

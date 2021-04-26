@@ -49,7 +49,7 @@ public class Indicator : MonoBehaviour
 
     }
 
-    public void SetIndicatorInfo(bool trueOrFalse, Sprite spriteAsset, string prompt)
+    public void SetIndicatorInfo(bool trueOrFalse, Sprite spriteAsset, string prompt, Color col)
     {
         sprite.sprite = spriteAsset;
         // if (trueOrFalse)
@@ -62,6 +62,7 @@ public class Indicator : MonoBehaviour
         // }
 
         // isTrueOrFalse = trueOrFalse;
+        sprite.color = col;
         promptStr = prompt;
     }
 
@@ -70,7 +71,7 @@ public class Indicator : MonoBehaviour
         //check if our sprite matches the sprite the uimanager is looking for
 
         //TODO: fix this up
-        if (promptStr == UIManager.current.offenseArrowDirection)
+        if (promptStr == UIManager.current.currentOffensePrompt)
         {
             return true;
         }
@@ -83,7 +84,6 @@ public class Indicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (MusicManager.current.enabled)
         {
             if (lerpProgress < 1)
@@ -99,7 +99,5 @@ public class Indicator : MonoBehaviour
         //     postLerpProgress = MusicManager.current.timelineInfo.currentPosition / (indicatorTime + (lerpProgress = MusicManager.current.timelineInfo.currentPosition / (indicatorTime + (postLerpLength * (60f / 80f)))));
         //     transform.position = Vector3.Lerp(destinationPoint.position, destinationPoint.position + postLerpDistance, postLerpProgress);
         // }
-
-
     }
 }

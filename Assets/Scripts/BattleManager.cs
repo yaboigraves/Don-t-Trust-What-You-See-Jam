@@ -29,6 +29,8 @@ public class BattleManager : MonoBehaviour
 
     public int defensePhaseCount = 1;
 
+    public InputManager inputManager;
+
     private void Awake()
     {
         current = this;
@@ -86,6 +88,9 @@ public class BattleManager : MonoBehaviour
         AnimationManager.current.FindAnimationControllersInScene();
 
         //load the defense queue with enough indicators depending on the defense phase length
+
+        //tell the ui manager wraht type of stroop tests to load
+        UIManager.current.SetStroopTestType(currentLevelSongInfo.stroopTestType);
     }
 
     StroopTestSettings GetStroopTestByName(string sceneName)
@@ -164,6 +169,8 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
+
+        //tODO remove these on builds
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             PlayerPrefs.SetInt("inputMode", 1);
@@ -181,8 +188,17 @@ public class BattleManager : MonoBehaviour
         {
             MusicManager.current.StartBattle();
 
-            started = true;
-            InputManager.current.enabled = true;
+
+
+            // InputManager.current.enabled = true;
+
+            // inputManager.enabled = true;
+            // InputManager.current = inputManager;
+            // //find the component for it
+
+            //wait a frame then do this
+            StartCoroutine(waitFrameActive());
+
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -193,7 +209,11 @@ public class BattleManager : MonoBehaviour
         CheckStatus();
     }
 
-
+    IEnumerator waitFrameActive()
+    {
+        yield return new WaitForEndOfFrame();
+        started = true;
+    }
     public void DictionaryIndicatorsDebug()
     {
         Debug.Log("dictionary of times to indicators");
@@ -282,6 +302,8 @@ public class BattleManager : MonoBehaviour
     public void WinRound()
     {
         UIManager.current.EnableWinLoseUI(true);
+
+        //TODO testing put this back
         InputManager.current.enabled = false;
 
         battleOver = true;

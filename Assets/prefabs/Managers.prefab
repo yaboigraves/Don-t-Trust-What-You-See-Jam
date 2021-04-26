@@ -1564,7 +1564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7946432748670137540}
   m_Layer: 8
-  m_Name: TwoButton
+  m_Name: TwoButton (lol actually one button)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1786,7 +1786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7946432748752960268
 Transform:
   m_ObjectHideFlags: 0
@@ -2400,10 +2400,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c484a33c122366b4a8ade03f18c22d21, type: 3}
   - {fileID: 21300000, guid: 3aff7e88de5bc6b419c72149ac76de87, type: 3}
   offensePrompt: {fileID: 1992615081531020918}
+  currentStroopTestType: 
   defenseSpriteContainer: {fileID: 745590758936199961}
   padText1: {fileID: 7946432749397955632}
   padText2: {fileID: 7946432748185359458}
   phaseText: {fileID: 7946432749969935458}
+  currentOffensePrompt: 
+  offenseColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.009653568, b: 1, a: 1}
+  - {r: 1, g: 0.80241597, b: 0, a: 1}
+  colorSprite: {fileID: 21300000, guid: d394a4e97272c7e43bfc589b03796415, type: 3}
 --- !u!1 &7946432749175072840
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,7 +2492,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7946432749175405134}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3291,9 +3298,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b19ebf06d3c630d4cab129c286b32909, type: 2}
-  m_sharedMaterial: {fileID: -7045047571544118306, guid: b19ebf06d3c630d4cab129c286b32909,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3454,8 +3460,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7946432749706511619}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.314, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 7946432748670137540}
   m_RootOrder: 0
@@ -3908,6 +3914,7 @@ MonoBehaviour:
   battleOver: 0
   debugMode: 0
   defensePhaseCount: 1
+  inputManager: {fileID: 7946432748727351503}
   hitMultiplier: 1
   currentBeatCounter: 0
   totalBeatCounter: 0

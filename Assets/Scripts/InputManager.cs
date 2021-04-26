@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
 
         InitInputs();
 
-        this.enabled = false;
+
     }
 
     public void InitInputs()
@@ -67,6 +67,10 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //shitty patch fix
+
+
+
         // TwoButtonInput();
         OneButtonInput();
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -130,6 +134,10 @@ public class InputManager : MonoBehaviour
 
     public void OneButtonInput()
     {
+        if (!BattleManager.current.started)
+        {
+            return;
+        }
         if (BattleManager.current.battleMode == "defense")
         {
             //so if we're in one button input, we only accept input for true statements, false statements are passed by not hitting at all
@@ -533,6 +541,10 @@ public class InputManager : MonoBehaviour
 
     void CheckIndicatorStatus()
     {
+        if (!BattleManager.current.started)
+        {
+            return;
+        }
         // if (BattleManager.current.currentSongInfo.indicatorOneInfo.Count > 0 && BattleManager.current.currentSongInfo.indicatorOneInfo[0] < MusicManager.current.timelineInfo.currentPosition - tolerance)
         // {
 
@@ -600,7 +612,6 @@ public class InputManager : MonoBehaviour
             }
 
             BattleManager.current.currentSongInfo.mergedIndicatorInfo.RemoveAt(0);
-
         }
 
 
@@ -608,6 +619,5 @@ public class InputManager : MonoBehaviour
         {
             this.enabled = false;
         }
-
     }
 }
