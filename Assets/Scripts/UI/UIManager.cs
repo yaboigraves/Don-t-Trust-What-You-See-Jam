@@ -30,23 +30,15 @@ public class UIManager : MonoBehaviour
     public GameObject pauseMenuPanel;
     public GameObject defenseRingIcon;
     public GameObject indicatorsAndPadContainer;
-
     public GameObject gridBar, gridBarContainer;
-
     public RectTransform feedbackTextDefenseTextSpawnPos;
     public Transform offenseTextSpawn1, offenseTextSpawn2;
-
     public Camera battleUICamera;
-
     //so this needs to be abstracted a bit more probably but eh
     public Sprite[] indicatorArrowSprites;
-
     public Image offensePrompt;
-
     //so we gotta know what stroop test assets to load from and how to load it depending on the current test type
-
     public string currentStroopTestType;
-
     private void Awake()
     {
         current = this;
@@ -95,10 +87,6 @@ public class UIManager : MonoBehaviour
         // Debug.Log(offLength);
         // Debug.Log("bpm of current grid bars is based off " + BattleManager.current.currentLevelSongInfo.bpm);
 
-
-
-
-
         float beatsPerSecond = 60 / BattleManager.current.currentLevelSongInfo.bpm;
         Debug.Log("beats per second " + beatsPerSecond);
 
@@ -106,8 +94,6 @@ public class UIManager : MonoBehaviour
 
         for (int j = 0; j < numBarIterations; j++)
         {
-
-
             for (int i = defLength + (phaseLength * j); i < phaseLength + (phaseLength * j) + 1; i++)
             {
                 //so these positions need to be time based, not beat based
@@ -171,6 +157,11 @@ public class UIManager : MonoBehaviour
         //TODO: need to dynamically figure out what mode we're in direction,math, etc and stuff
         currentStroopTestType = BattleManager.current.currentLevelSongInfo.stroopTestType;
         //Debug.Log(currentStroopTestType);
+
+
+        OffensePrompt[] prompts = BattleManager.current.currentTestSettings.offensePrompts;
+
+
         for (int i = 0; i < info.mergedIndicatorInfo.Count; i++)
         {
             Vector3 indicPos = indicatorContainer.transform.position + new Vector3(0, (float)info.mergedIndicatorInfo[i] / 1000f, 0);
@@ -178,62 +169,18 @@ public class UIManager : MonoBehaviour
             indic.SetIndicatorTime((float)info.mergedIndicatorInfo[i], indicatorOneDestination);
             info.indicatorDict[info.mergedIndicatorInfo[i]] = indic;
 
+            //so now we can set the info just by grabbing randomly from the offense prompts
+            OffensePrompt p = prompts[Random.Range(0, prompts.Length)];
 
-            if (currentStroopTestType == "direction")
-            {
-                //random true or false
-                int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
-                string arrowStr;
+            indic.SetIndicatorInfo(p.sprite, p.promptLabel, p.assetColor);
 
-                if (arrowDir == 0)
-                {
-                    arrowStr = "left";
-                }
-                else if (arrowDir == 1)
-                {
-                    arrowStr = "up";
-                }
-                else
-                {
-                    arrowStr = "right";
-                }
-
-                indic.SetIndicatorInfo((Random.Range(0, 2) == 0), indicatorArrowSprites[arrowDir], arrowStr, Color.white);
-            }
-            else if (currentStroopTestType == "color")
-            {
-                int color = Random.Range(0, offenseColors.Length);
-                string colorPrompt = "";
-
-                if (color == 0)
-                {
-                    //red   
-                    colorPrompt = "red";
-                }
-                else if (color == 1)
-                {
-                    //blue
-                    colorPrompt = "blue";
-                }
-                else if (color == 2)
-                {
-                    //yellow 
-                    colorPrompt = "yellow";
-                }
-
-                indic.SetIndicatorInfo(true, colorSprite, colorPrompt, offenseColors[color]);
-            }
-            else if (currentStroopTestType == "math")
-            {
-                //TODO: add math tests
-            }
         }
 
 
         //instnatiate the object 
         BattleManager.current.currentSongInfo = info;
 
-        //this is a patch fix fixing some sphaget dont mind me :))
+
     }
 
 

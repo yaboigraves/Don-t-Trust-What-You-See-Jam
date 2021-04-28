@@ -49,7 +49,7 @@ public class Indicator : MonoBehaviour
 
     }
 
-    public void SetIndicatorInfo(bool trueOrFalse, Sprite spriteAsset, string prompt, Color col)
+    public void SetIndicatorInfo(Sprite spriteAsset, string prompt, Color col)
     {
         sprite.sprite = spriteAsset;
         // if (trueOrFalse)

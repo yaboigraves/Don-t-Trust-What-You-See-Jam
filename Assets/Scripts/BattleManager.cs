@@ -13,8 +13,9 @@ public class BattleManager : MonoBehaviour
     //defense mode queue 
     public int defenseQueueLength = 8;
     public StroopTestSettings[] testSettings;
-    public StroopTestSettings currentTestSettings;
+    public StroopTestSettings currentTestSettings = null;
     public Queue<DefensePrompt> defenseQueue;
+    public List<OffensePrompt> offenseQueue;
     public string battleMode = "defense";
     public DefensePrompt currentDefense;
 
@@ -49,6 +50,7 @@ public class BattleManager : MonoBehaviour
         SongInfo info = currentLevelSongInfo.songInfo;
 
         defenseQueue = new Queue<DefensePrompt>();
+        offenseQueue = new List<OffensePrompt>();
 
         // FillDefenseQueue();
 
@@ -77,12 +79,13 @@ public class BattleManager : MonoBehaviour
         //currentLevelSongInfo.songInfo.indicatorDict = new Dictionary<double, Indicator>();
 
         //so before we do shit, we gotta instnatiate the currentsonginfo 
-        UIManager.current.SetupIndicators();
+
 
         //before we fill the defense queue load the stroop test settings for the level
         currentTestSettings = GetStroopTestByName(sceneName);
+        //wait until the settings are loaded then go
 
-        FillDefenseQueue();
+        StartCoroutine(waitToLoadStroop());
 
         //tell the animation controller to do its fuckin job
         AnimationManager.current.FindAnimationControllersInScene();
@@ -91,6 +94,19 @@ public class BattleManager : MonoBehaviour
 
         //tell the ui manager wraht type of stroop tests to load
         UIManager.current.SetStroopTestType(currentLevelSongInfo.stroopTestType);
+    }
+
+    IEnumerator waitToLoadStroop()
+    {
+
+        yield return new WaitUntil(() => currentTestSettings != null);
+
+        Debug.Log("stoop test loaded");
+
+        FillDefenseQueue();
+        FillOffenseQueue();
+        UIManager.current.SetupIndicators();
+
     }
 
     StroopTestSettings GetStroopTestByName(string sceneName)
@@ -104,7 +120,6 @@ public class BattleManager : MonoBehaviour
             if (s.sceneName == sceneName)
             {
                 return s;
-
             }
         }
 
@@ -117,7 +132,6 @@ public class BattleManager : MonoBehaviour
     //TODO: so this needs to load the options depending on the current stroop test thats loaded
     public void FillDefenseQueue()
     {
-
         defenseQueue.Clear();
         defenseQueueLength = currentLevelSongInfo.defensePhaseLength / 2;
 
@@ -125,7 +139,7 @@ public class BattleManager : MonoBehaviour
 
         List<DefensePrompt> legalPrompts = new List<DefensePrompt>();
 
-        foreach (DefensePrompt d in currentTestSettings.tests)
+        foreach (DefensePrompt d in currentTestSettings.defensePrompts)
         {
             if (d.levelUnlocked <= defensePhaseCount)
             {
@@ -139,6 +153,27 @@ public class BattleManager : MonoBehaviour
         {
             defenseQueue.Enqueue(legalPrompts[Random.Range(0, legalPrompts.Count)]);
             Debug.Log(defenseQueue.Peek().text);
+        }
+    }
+
+    public void FillOffenseQueue()
+    {
+        offenseQueue.Clear();
+
+        //so i guess we can start with just like 2 things in the queue 
+        List<OffensePrompt> legalPrompts = new List<OffensePrompt>();
+
+        foreach (OffensePrompt d in currentTestSettings.offensePrompts)
+        {
+            if (d.levelUnlocked <= defensePhaseCount)
+            {
+                legalPrompts.Add(d);
+            }
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            offenseQueue.Add(legalPrompts[Random.Range(0, legalPrompts.Count)]);
         }
     }
 
@@ -343,6 +378,7 @@ public class BattleManager : MonoBehaviour
                 //switch the ui to offense mode
 
                 // UIManager.current.EnableOffenseModeUi();
+                FillOffenseQueue();
                 battleMode = "offense";
                 currentBeatCounter = 0;
                 UIManager.current.ToggleDefenseModeUI(false);
