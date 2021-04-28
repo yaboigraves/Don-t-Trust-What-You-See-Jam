@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 5286954522506353554}
   - component: {fileID: 5421975953649707698}
   - component: {fileID: 1992615081531020918}
+  - component: {fileID: 2546148519799267772}
   m_Layer: 5
   m_Name: OffensePrompt
   m_TagString: Untagged
@@ -961,6 +962,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2546148519799267772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5687634046908917364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299ddaa68033ea46b97ddb223ce3701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pulseAmount: 1.5
+  maxPulseFadeTime: 1.5
 --- !u!1 &7517511854778911876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1061,7 @@ GameObject:
   - component: {fileID: 7946432748176578709}
   - component: {fileID: 7946432748176578707}
   - component: {fileID: 7946432748176578706}
+  - component: {fileID: 8704820566607513326}
   m_Layer: 5
   m_Name: StreakInfoText
   m_TagString: Untagged
@@ -1169,6 +1185,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8704820566607513326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946432748176578708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299ddaa68033ea46b97ddb223ce3701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pulseAmount: 1.2
+  maxPulseFadeTime: 1
 --- !u!1 &7946432748185359460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,6 +2735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7946432748976041980}
+  - component: {fileID: 3485415982557788158}
   m_Layer: 8
   m_Name: IndicatorsAndPad
   m_TagString: Untagged
@@ -2727,6 +2758,20 @@ Transform:
   m_Father: {fileID: 7946432749646254665}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3485415982557788158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946432748976041983}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299ddaa68033ea46b97ddb223ce3701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pulseAmount: 1.1
+  maxPulseFadeTime: 1.5
 --- !u!1 &7946432748991518964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2823,6 +2868,7 @@ MonoBehaviour:
   padText1: {fileID: 7946432749397955632}
   padText2: {fileID: 7946432748185359458}
   phaseText: {fileID: 7946432749969935458}
+  pulseBois: []
 --- !u!1 &7946432749175072840
 GameObject:
   m_ObjectHideFlags: 0
@@ -4329,7 +4375,7 @@ MonoBehaviour:
   battleOver: 0
   debugMode: 0
   defensePhaseCount: 1
-  offensePhasePromptSwitchBeatCount: 16
+  offensePhasePromptSwitchBeatCount: 8
   hitMultiplier: 1
   currentBeatCounter: 0
   totalBeatCounter: 0
@@ -5086,6 +5132,7 @@ GameObject:
   - component: {fileID: 7946432750186529479}
   - component: {fileID: 7946432750186529478}
   - component: {fileID: 7946432750186529476}
+  - component: {fileID: 1239068432174340425}
   m_Layer: 5
   m_Name: DefenseCircleCenter
   m_TagString: Untagged
@@ -5162,6 +5209,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotation: {x: 0, y: 0, z: 350}
+--- !u!114 &1239068432174340425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946432750186529496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299ddaa68033ea46b97ddb223ce3701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pulseAmount: 1.2
+  maxPulseFadeTime: 1
 --- !u!1 &7946432750241871933
 GameObject:
   m_ObjectHideFlags: 0

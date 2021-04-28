@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+
     public static UIManager current;
     public GameObject indicator;
     public Transform indicatorContainer;
@@ -216,6 +217,10 @@ public class UIManager : MonoBehaviour
     {
         Vector3 feedbackSpawnPos = Vector3.zero;
 
+
+        if(didHit){
+            pulseAll();
+        }
         //depending on the phase we need to spawn these at different positions
 
         if (spawnPos == 0)
@@ -472,6 +477,15 @@ public class UIManager : MonoBehaviour
         offensePromptSwitchCounterText.text = count.ToString();
         if(count == 1){
             offensePromptSwitchCounterText.text += "Ready!";
+        }
+    }
+
+
+    public  List<BeatPulse> pulseBois;
+
+    public  void pulseAll(){
+        foreach(BeatPulse b in pulseBois){
+            b.Pulse();
         }
     }
 }
