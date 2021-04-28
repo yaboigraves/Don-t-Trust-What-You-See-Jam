@@ -114,7 +114,6 @@ public class BattleManager : MonoBehaviour
         Debug.Log("trying to load stroop settings for scene " + sceneName);
 
 
-
         foreach (StroopTestSettings s in testSettings)
         {
             if (s.sceneName == sceneName)

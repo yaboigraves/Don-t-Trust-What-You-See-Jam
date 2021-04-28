@@ -438,47 +438,52 @@ public class UIManager : MonoBehaviour
         offensePrompt.enabled = toggle;
         if (offensePrompt.isActiveAndEnabled)
         {
-            if (currentStroopTestType == "direction")
-            {
-                //change to a different arrow
-                int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
-                offensePrompt.sprite = indicatorArrowSprites[arrowDir];
-                if (arrowDir == 0)
-                {
-                    currentOffensePrompt = "left";
-                }
-                else if (arrowDir == 1)
-                {
-                    currentOffensePrompt = "up";
-                }
-                else
-                {
-                    currentOffensePrompt = "right";
-                }
-            }
-            else if (currentStroopTestType == "color")
-            {
-                int color = Random.Range(0, offenseColors.Length);
-                offensePrompt.sprite = colorSprite;
-                offensePrompt.color = offenseColors[color];
+            OffensePrompt op = BattleManager.current.offenseQueue[0];
+            offensePrompt.sprite = op.sprite;
+            //currentOffensePrompt = op.promptLabel;
 
-                if (color == 0)
-                {
-                    currentOffensePrompt = "red";
-                }
-                else if (color == 1)
-                {
-                    currentOffensePrompt = "blue";
-                }
-                else if (color == 2)
-                {
-                    currentOffensePrompt = "yellow";
-                }
-            }
-            else if (currentStroopTestType == "math")
-            {
-                //TODO: add math stuff
-            }
+
+            // if (currentStroopTestType == "direction")
+            // {
+            //     //change to a different arrow
+            //     int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
+            //     offensePrompt.sprite = indicatorArrowSprites[arrowDir];
+            //     if (arrowDir == 0)
+            //     {
+            //         currentOffensePrompt = "left";
+            //     }
+            //     else if (arrowDir == 1)
+            //     {
+            //         currentOffensePrompt = "up";
+            //     }
+            //     else
+            //     {
+            //         currentOffensePrompt = "right";
+            //     }
+            // }
+            // else if (currentStroopTestType == "color")
+            // {
+            //     int color = Random.Range(0, offenseColors.Length);
+            //     offensePrompt.sprite = colorSprite;
+            //     offensePrompt.color = offenseColors[color];
+
+            //     if (color == 0)
+            //     {
+            //         currentOffensePrompt = "red";
+            //     }
+            //     else if (color == 1)
+            //     {
+            //         currentOffensePrompt = "blue";
+            //     }
+            //     else if (color == 2)
+            //     {
+            //         currentOffensePrompt = "yellow";
+            //     }
+            // }
+            // else if (currentStroopTestType == "math")
+            // {
+            //     //TODO: add math stuff
+            // }
         }
     }
 }

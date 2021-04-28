@@ -32,3 +32,11 @@ MonoBehaviour:
     textColor: {r: 1, g: 1, b: 1, a: 1}
     assetColor: {r: 1, g: 1, b: 1, a: 1}
     levelUnlocked: 0
+  - promptLabel: left
+    colorModel: 0
+    text: 
+    sprite: {fileID: 21300000, guid: dcc07d82261365b45a8ed3f990e14207, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+    levelUnlocked: 0

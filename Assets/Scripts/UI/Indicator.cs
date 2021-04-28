@@ -71,7 +71,7 @@ public class Indicator : MonoBehaviour
         //check if our sprite matches the sprite the uimanager is looking for
 
         //TODO: fix this up
-        if (promptStr == UIManager.current.currentOffensePrompt)
+        if (promptStr == BattleManager.current.offenseQueue[0].promptLabel)
         {
             return true;
         }
