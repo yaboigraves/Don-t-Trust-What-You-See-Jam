@@ -29,6 +29,7 @@ public class BattleManager : MonoBehaviour
 
     public int defensePhaseCount = 1;
 
+    public int offensePhasePromptSwitchBeatCount = 8;
     private void Awake()
     {
         current = this;
