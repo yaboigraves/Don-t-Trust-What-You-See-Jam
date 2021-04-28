@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager current;
-    public string currentBattleSongName;
 
     //ok so my sphaget has failed me here, this variable should be the one everyone is referencing ,not the imported one from the level info object
     public SongInfo currentSongInfo;
@@ -29,8 +28,6 @@ public class BattleManager : MonoBehaviour
     public bool debugMode = true;
 
     public int defensePhaseCount = 1;
-
-    public InputManager inputManager;
 
     private void Awake()
     {
@@ -170,7 +167,7 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             offenseQueue.Add(legalPrompts[Random.Range(0, legalPrompts.Count)]);
         }
@@ -414,7 +411,7 @@ public class BattleManager : MonoBehaviour
                 //wait to do this
                 //UIManager.current.ToggleDefenseModeUI(true);
                 UIManager.current.SwapPhaseIcon(battleMode);
-                UIManager.current.ToggleOffensePrompt(false);
+                UIManager.current.ToggleOffensePrompts(false);
             }
         }
     }

@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
     public Camera battleUICamera;
     //so this needs to be abstracted a bit more probably but eh
     public Sprite[] indicatorArrowSprites;
-    public Image offensePrompt;
+    public Image[] offensePrompts;
     //so we gotta know what stroop test assets to load from and how to load it depending on the current test type
     public string currentStroopTestType;
     private void Awake()
@@ -389,7 +389,7 @@ public class UIManager : MonoBehaviour
         padText2.text = "";
 
         indicatorsAndPadContainer.SetActive(true);
-        ToggleOffensePrompt(true);
+        ToggleOffensePrompts(true);
     }
 
     public void EnableDefenseUI()
@@ -426,64 +426,37 @@ public class UIManager : MonoBehaviour
     }
 
     //OFFENSE PROMPT VARIABLES
-    [Header("OFFENSE PROMPT VARIABLES")]
-    public string currentOffensePrompt;
 
-    [SerializeField]
-    public Color[] offenseColors;
-    public Sprite colorSprite;
-
-    public void ToggleOffensePrompt(bool toggle)
+    public void ToggleOffensePrompts(bool toggle)
     {
-        offensePrompt.enabled = toggle;
-        if (offensePrompt.isActiveAndEnabled)
+        //enable all the offense prompts as long as theirs room in in the queue
+
+        //calculate num prompts to actually show
+
+        int numPrompts = 3;
+
+
+        if (toggle && BattleManager.current.offenseQueue.Count < numPrompts)
         {
-            OffensePrompt op = BattleManager.current.offenseQueue[0];
-            offensePrompt.sprite = op.sprite;
-            //currentOffensePrompt = op.promptLabel;
+            numPrompts = BattleManager.current.offenseQueue.Count;
+        }
 
 
-            // if (currentStroopTestType == "direction")
-            // {
-            //     //change to a different arrow
-            //     int arrowDir = Random.Range(0, indicatorArrowSprites.Length);
-            //     offensePrompt.sprite = indicatorArrowSprites[arrowDir];
-            //     if (arrowDir == 0)
-            //     {
-            //         currentOffensePrompt = "left";
-            //     }
-            //     else if (arrowDir == 1)
-            //     {
-            //         currentOffensePrompt = "up";
-            //     }
-            //     else
-            //     {
-            //         currentOffensePrompt = "right";
-            //     }
-            // }
-            // else if (currentStroopTestType == "color")
-            // {
-            //     int color = Random.Range(0, offenseColors.Length);
-            //     offensePrompt.sprite = colorSprite;
-            //     offensePrompt.color = offenseColors[color];
+        for (int i = 0; i < numPrompts; i++)
+        {
+            offensePrompts[i].enabled = toggle;
+        }
 
-            //     if (color == 0)
-            //     {
-            //         currentOffensePrompt = "red";
-            //     }
-            //     else if (color == 1)
-            //     {
-            //         currentOffensePrompt = "blue";
-            //     }
-            //     else if (color == 2)
-            //     {
-            //         currentOffensePrompt = "yellow";
-            //     }
-            // }
-            // else if (currentStroopTestType == "math")
-            // {
-            //     //TODO: add math stuff
-            // }
+
+        if (offensePrompts[0].isActiveAndEnabled)
+        {
+
+            //TODO: only do this up to the amount of prompts that are there
+            for (int i = 0; i < 3; i++)
+            {
+                OffensePrompt op = BattleManager.current.offenseQueue[i];
+                offensePrompts[i].sprite = op.sprite;
+            }
         }
     }
 }
