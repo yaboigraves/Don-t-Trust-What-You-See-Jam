@@ -10,7 +10,7 @@ public class BattleManager : MonoBehaviour
     //ok so my sphaget has failed me here, this variable should be the one everyone is referencing ,not the imported one from the level info object
     public SongInfo currentSongInfo;
     //defense mode queue 
-    public int defenseQueueLength = 8;
+    public int defenseQueueLength = 16;
     public StroopTestSettings[] testSettings;
     public StroopTestSettings currentTestSettings = null;
     public Queue<DefensePrompt> defenseQueue;
@@ -29,7 +29,8 @@ public class BattleManager : MonoBehaviour
 
     public int defensePhaseCount = 1;
 
-    public int offensePhasePromptSwitchBeatCount = 8;
+    public int offensePhasePromptSwitchBeatCount = 16;
+
     private void Awake()
     {
         current = this;
@@ -168,7 +169,7 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 12; i++)
         {
             offenseQueue.Add(legalPrompts[Random.Range(0, legalPrompts.Count)]);
         }
@@ -370,6 +371,9 @@ public class BattleManager : MonoBehaviour
 
         if (battleMode == "defense")
         {
+
+
+
             if (currentBeatCounter >= currentLevelSongInfo.defensePhaseLength)
             {
                 //switch the ui to offense mode
@@ -396,6 +400,8 @@ public class BattleManager : MonoBehaviour
         }
         else if (battleMode == "offense")
         {
+
+            UIManager.current.UpdateOffenseCountdownText(offensePhasePromptSwitchBeatCount - ((currentBeatCounter-1) % offensePhasePromptSwitchBeatCount));
             if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength + 1)
             {
 
@@ -414,7 +420,29 @@ public class BattleManager : MonoBehaviour
                 UIManager.current.SwapPhaseIcon(battleMode);
                 UIManager.current.ToggleOffensePrompts(false);
             }
+            else{
+                //check and see if we need to move the offense prompts over
+
+
+                if(((currentBeatCounter -1) != 0 ) && (currentBeatCounter - 1 ) % offensePhasePromptSwitchBeatCount == 0){
+                    //time to advance the offense prompt
+                    AdvanceOffensePrompt();
+                }
+            }
+
         }
+    }
+
+    //so yea delete the front of the list, update the ui
+    public void AdvanceOffensePrompt(){
+        if(offenseQueue.Count <= 0){
+            Debug.LogWarning("NO MORE IN OFFENSE QUEUE");
+            return;
+        }
+        offenseQueue.RemoveAt(0);
+        //retoggling on just refreshes the ui
+        UIManager.current.ToggleOffensePrompts(true);
+
     }
 }
 

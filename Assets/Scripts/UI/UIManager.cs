@@ -39,6 +39,10 @@ public class UIManager : MonoBehaviour
     public Image[] offensePrompts;
     //so we gotta know what stroop test assets to load from and how to load it depending on the current test type
     public string currentStroopTestType;
+
+    
+    public TextMeshProUGUI offensePromptSwitchCounterText;
+
     private void Awake()
     {
         current = this;
@@ -441,6 +445,10 @@ public class UIManager : MonoBehaviour
             numPrompts = BattleManager.current.offenseQueue.Count;
         }
 
+        //refresh 
+        for(int i = 0; i < offensePrompts.Length; i++){
+            offensePrompts[i].enabled = false;
+        }
 
         for (int i = 0; i < numPrompts; i++)
         {
@@ -452,11 +460,18 @@ public class UIManager : MonoBehaviour
         {
 
             //TODO: only do this up to the amount of prompts that are there
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < numPrompts; i++)
             {
                 OffensePrompt op = BattleManager.current.offenseQueue[i];
                 offensePrompts[i].sprite = op.sprite;
             }
+        }
+    }
+
+    public void UpdateOffenseCountdownText(int count){
+        offensePromptSwitchCounterText.text = count.ToString();
+        if(count == 1){
+            offensePromptSwitchCounterText.text += "Ready!";
         }
     }
 }
