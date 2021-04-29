@@ -41,8 +41,10 @@ public class UIManager : MonoBehaviour
     //so we gotta know what stroop test assets to load from and how to load it depending on the current test type
     public string currentStroopTestType;
 
-    
+
     public TextMeshProUGUI offensePromptSwitchCounterText;
+
+    public TextMeshProUGUI multiplierText;
 
     private void Awake()
     {
@@ -218,7 +220,8 @@ public class UIManager : MonoBehaviour
         Vector3 feedbackSpawnPos = Vector3.zero;
 
 
-        if(didHit){
+        if (didHit)
+        {
             pulseAll();
         }
         //depending on the phase we need to spawn these at different positions
@@ -302,11 +305,7 @@ public class UIManager : MonoBehaviour
         defenseSpriteContainer.color = new Color(0, 0, 0, 0);
     }
 
-    public void ToggleDefenseInputUi()
-    {
-        //turn on the white bar or turn it off
-        defenseCenterPointIndicator.enabled = !defenseCenterPointIndicator.enabled;
-    }
+
 
     //vibe slider stuff
     public void InitVibeSlider(int maxVibe, int currentVibe)
@@ -347,9 +346,14 @@ public class UIManager : MonoBehaviour
         if (toggle)
         {
             indicatorsAndPadContainer.SetActive(false);
+            offensePromptSwitchCounterText.enabled = false;
         }
         defenseUIContainer.SetActive(toggle);
+
+
     }
+
+
 
 
 
@@ -399,6 +403,24 @@ public class UIManager : MonoBehaviour
 
         indicatorsAndPadContainer.SetActive(true);
         ToggleOffensePrompts(true);
+        //turn on the counter text
+
+        offensePromptSwitchCounterText.enabled = true;
+
+    }
+
+    public void ToggleMultiplierText(bool toggle, int multiplier)
+    {
+        if (toggle)
+        {
+            multiplierText.text = "x" + multiplier.ToString();
+            multiplierText.enabled = true;
+
+        }
+        else
+        {
+            multiplierText.enabled = false;
+        }
     }
 
     public void EnableDefenseUI()
@@ -451,7 +473,8 @@ public class UIManager : MonoBehaviour
         }
 
         //refresh 
-        for(int i = 0; i < offensePrompts.Length; i++){
+        for (int i = 0; i < offensePrompts.Length; i++)
+        {
             offensePrompts[i].enabled = false;
         }
 
@@ -473,18 +496,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateOffenseCountdownText(int count){
+    public void UpdateOffenseCountdownText(int count)
+    {
         offensePromptSwitchCounterText.text = count.ToString();
-        if(count == 1){
-            offensePromptSwitchCounterText.text += "Ready!";
+        if (count == 1)
+        {
+            offensePromptSwitchCounterText.text = "Ready!";
         }
     }
 
 
-    public  List<BeatPulse> pulseBois;
+    public List<BeatPulse> pulseBois;
 
-    public  void pulseAll(){
-        foreach(BeatPulse b in pulseBois){
+    public void pulseAll()
+    {
+        foreach (BeatPulse b in pulseBois)
+        {
             b.Pulse();
         }
     }

@@ -325,6 +325,15 @@ public class BattleManager : MonoBehaviour
 
         UIManager.current.UpdateVibeBarSlider(statusInfo.currentVibe);
         UIManager.current.UpdateStreakText(statusInfo.streak);
+
+        if (hitMultiplier > 1)
+        {
+            UIManager.current.ToggleMultiplierText(true, hitMultiplier);
+        }
+        else
+        {
+            UIManager.current.ToggleMultiplierText(false, hitMultiplier);
+        }
     }
 
     //call this in the music manager every beat
@@ -401,10 +410,9 @@ public class BattleManager : MonoBehaviour
         else if (battleMode == "offense")
         {
 
-            UIManager.current.UpdateOffenseCountdownText(offensePhasePromptSwitchBeatCount - ((currentBeatCounter-1) % offensePhasePromptSwitchBeatCount));
+            UIManager.current.UpdateOffenseCountdownText(offensePhasePromptSwitchBeatCount - ((currentBeatCounter - 1) % offensePhasePromptSwitchBeatCount));
             if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength + 1)
             {
-
                 //advance the defense count 
                 defensePhaseCount++;
 
@@ -420,11 +428,13 @@ public class BattleManager : MonoBehaviour
                 UIManager.current.SwapPhaseIcon(battleMode);
                 UIManager.current.ToggleOffensePrompts(false);
             }
-            else{
+            else
+            {
                 //check and see if we need to move the offense prompts over
 
 
-                if(((currentBeatCounter -1) != 0 ) && (currentBeatCounter - 1 ) % offensePhasePromptSwitchBeatCount == 0){
+                if (((currentBeatCounter - 1) != 0) && (currentBeatCounter - 1) % offensePhasePromptSwitchBeatCount == 0)
+                {
                     //time to advance the offense prompt
                     AdvanceOffensePrompt();
                 }
@@ -434,8 +444,10 @@ public class BattleManager : MonoBehaviour
     }
 
     //so yea delete the front of the list, update the ui
-    public void AdvanceOffensePrompt(){
-        if(offenseQueue.Count <= 0){
+    public void AdvanceOffensePrompt()
+    {
+        if (offenseQueue.Count <= 0)
+        {
             Debug.LogWarning("NO MORE IN OFFENSE QUEUE");
             return;
         }

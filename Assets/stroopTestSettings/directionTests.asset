@@ -23,6 +23,51 @@ MonoBehaviour:
     textColor: {r: 1, g: 1, b: 1, a: 1}
     assetColor: {r: 1, g: 1, b: 1, a: 1}
     levelUnlocked: 0
+  - promptLabel: left
+    trueOrFalse: 1
+    colorModel: 0
+    text: left
+    sprite: {fileID: 21300000, guid: dcc07d82261365b45a8ed3f990e14207, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+    levelUnlocked: 0
+  - promptLabel: right
+    trueOrFalse: 1
+    colorModel: 0
+    text: right
+    sprite: {fileID: 21300000, guid: 3aff7e88de5bc6b419c72149ac76de87, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+    levelUnlocked: 0
+  - promptLabel: right
+    trueOrFalse: 0
+    colorModel: 0
+    text: right
+    sprite: {fileID: 21300000, guid: c484a33c122366b4a8ade03f18c22d21, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+    levelUnlocked: 0
+  - promptLabel: up
+    trueOrFalse: 0
+    colorModel: 0
+    text: up
+    sprite: {fileID: 21300000, guid: dcc07d82261365b45a8ed3f990e14207, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+    levelUnlocked: 0
+  - promptLabel: down
+    trueOrFalse: 0
+    colorModel: 0
+    text: down
+    sprite: {fileID: 21300000, guid: 3aff7e88de5bc6b419c72149ac76de87, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+    levelUnlocked: 0
   offensePrompts:
   - promptLabel: up
     colorModel: 0
@@ -36,6 +81,14 @@ MonoBehaviour:
     colorModel: 0
     text: 
     sprite: {fileID: 21300000, guid: dcc07d82261365b45a8ed3f990e14207, type: 3}
+    model: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    assetColor: {r: 1, g: 1, b: 1, a: 1}
+    levelUnlocked: 0
+  - promptLabel: right
+    colorModel: 0
+    text: 
+    sprite: {fileID: 21300000, guid: 3aff7e88de5bc6b419c72149ac76de87, type: 3}
     model: {fileID: 0}
     textColor: {r: 1, g: 1, b: 1, a: 1}
     assetColor: {r: 1, g: 1, b: 1, a: 1}

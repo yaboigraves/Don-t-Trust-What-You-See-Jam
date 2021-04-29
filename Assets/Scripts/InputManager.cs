@@ -227,57 +227,6 @@ public class InputManager : MonoBehaviour
                     }
                 }
             }
-
-            // if (Input.GetKeyDown(twoButtonBindTwo) || (MidiJack.MidiMaster.GetKey(midiBind2) > 0.0f && !gotMidiInput2))
-            // {
-
-            //     //make sure theres like actually any notes left to hit
-            //     if (BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.Count <= 0)
-            //     {
-            //         //for now we just dont penalize you
-            //         return;
-            //     }
-
-
-            //     if (Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition) < tolerance)
-            //     {
-
-            //         string status = checkHitAccuracy(Mathf.Abs((float)BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0] - (float)MusicManager.current.timelineInfo.currentPosition));
-
-
-            //         UIManager.current.SpawnFeedBackText(true, 2, status);
-
-
-            //         Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
-            //         //remove it from the dictioanry as well
-
-            //         BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
-            //         //remove the array entry as well
-            //         BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
-
-            //         //Debug.Log("hit!");
-            //         BattleManager.current.ProcessHit(true);
-            //     }
-            //     else
-            //     {
-            //         //offense mode hit but timings off
-            //         UIManager.current.SpawnFeedBackText(false, 2);
-
-            //         //so now we're also going to check and see if the next note is within another tolerance value which will delete it 
-            //         //ie: if the note is right about to hit the pad and the user fucks up jsut clean up the note 
-            //         if (checkMissWithinPadTolerance(2))
-            //         {
-            //             //delete the note and remove the indicator
-
-            //             Destroy(BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict[BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]].gameObject);
-            //             //remove it from the dictioanry as well
-
-            //             BattleManager.current.currentLevelSongInfo.songInfo.indicatorDict.Remove(BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo[0]);
-            //             //remove the array entry as well
-            //             BattleManager.current.currentLevelSongInfo.songInfo.indicatorTwoInfo.RemoveAt(0);
-            //         }
-            //     }
-            // }
         }
 
 
@@ -604,7 +553,7 @@ public class InputManager : MonoBehaviour
                     UIManager.current.SpawnFeedBackText(true, 0);
                     //delete the indicator too
                     //Debug.Log("missed a kick");
-                    BattleManager.current.ProcessHit(true);
+                    BattleManager.current.ProcessHit(true, true);
                 }
 
 
