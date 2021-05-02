@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ccac7a7b193e24b838948044c40846, type: 3}
   m_Name: RetroPostProcessEffect
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 4
   FixedVerticalResolution:
     overrideState: 1
-    value: 180
+    value: 480
   ColorDepth:
     overrideState: 1
     value: 0.102

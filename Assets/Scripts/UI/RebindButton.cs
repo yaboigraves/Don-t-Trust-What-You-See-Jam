@@ -4,18 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class RebindButton : MonoBehaviour
 {
-    TextMeshProUGUI buttonText;
+    public TextMeshProUGUI buttonText;
     public int keyNum;
     public string prefsStringName;
     public bool isMidi;
 
     private void Start()
     {
-        buttonText = GetComponentInChildren<TextMeshProUGUI>();
-
+        //buttonText = GetComponentInChildren<TextMeshProUGUI>();
 
         UpdateButtonText();
     }
@@ -60,11 +58,10 @@ public class RebindButton : MonoBehaviour
             else
             {
                 buttonTextStr = "Keyboard Key " + keyNum.ToString() + " : " + key;
-
             }
-
         }
 
+        buttonText = GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = buttonTextStr;
     }
 

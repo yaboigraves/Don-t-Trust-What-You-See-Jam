@@ -1005,6 +1005,41 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2879405467281780197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7356129215628996468}
+  m_Layer: 5
+  m_Name: TweenStartPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7356129215628996468
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2879405467281780197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7946432748539888073}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1239, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3481148899864157092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1496,7 @@ GameObject:
   - component: {fileID: 7946432748176578707}
   - component: {fileID: 7946432748176578706}
   - component: {fileID: 8704820566607513326}
+  - component: {fileID: 8898685720203877874}
   m_Layer: 5
   m_Name: StreakInfoText
   m_TagString: Untagged
@@ -1482,11 +1518,11 @@ RectTransform:
   m_Father: {fileID: 7946432749630404635}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -496, y: 72}
   m_SizeDelta: {x: 220, y: 50}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7946432748176578707
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1549,8 +1585,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1598,6 +1634,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pulseAmount: 1.2
   maxPulseFadeTime: 1
+--- !u!114 &8898685720203877874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946432748176578708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6bba47b62e36046b4c347b2e3557b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenSettings: []
 --- !u!1 &7946432748185359460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,6 +2039,7 @@ GameObject:
   - component: {fileID: 7946432748539888119}
   - component: {fileID: 7946432748539888118}
   - component: {fileID: 7946432748539888116}
+  - component: {fileID: 4820886875175058217}
   m_Layer: 5
   m_Name: DefenseUI
   m_TagString: Untagged
@@ -2012,6 +2062,7 @@ RectTransform:
   - {fileID: 7946432748185359461}
   - {fileID: 7946432750186529497}
   - {fileID: 3435555726734247102}
+  - {fileID: 7356129215628996468}
   m_Father: {fileID: 7946432749630404635}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2068,6 +2119,49 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
+--- !u!114 &4820886875175058217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946432748539888072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6bba47b62e36046b4c347b2e3557b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenSettings:
+  - tweenerName: 
+    tweenType: 0
+    easeType: 38
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    tweenStartPos: {fileID: 0}
+    tweenTime: 2
+    TweenOnStart: 1
 --- !u!1 &7946432748541000833
 GameObject:
   m_ObjectHideFlags: 0
@@ -3181,6 +3275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7946432748991518965}
   - component: {fileID: 7946432748991518962}
+  - component: {fileID: 4885539885542101403}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -3269,6 +3364,18 @@ MonoBehaviour:
   padText2: {fileID: 7946432748185359458}
   phaseText: {fileID: 7946432749969935458}
   pulseBois: []
+--- !u!114 &4885539885542101403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946432748991518964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a29f5ac9e5139749ac98d97cb373795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7946432749175072840
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,6 +5744,7 @@ GameObject:
   - component: {fileID: 7946432750241871930}
   - component: {fileID: 7946432750241871928}
   - component: {fileID: 7946432750241871931}
+  - component: {fileID: 6917084197083875508}
   m_Layer: 5
   m_Name: Attack/Defense Icon
   m_TagString: Untagged
@@ -5703,6 +5811,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6917084197083875508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946432750241871933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6bba47b62e36046b4c347b2e3557b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenSettings:
+  - tweenerName: icon
+    tweenType: 0
+    easeType: 0
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+      m_RotationOrder: 0
+    tweenStartPos: {fileID: 0}
+    tweenTime: 1
+    TweenOnStart: 0
 --- !u!1 &7946432750245141485
 GameObject:
   m_ObjectHideFlags: 0

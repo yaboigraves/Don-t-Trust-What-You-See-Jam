@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-
+        TweenManager.current.InvokeTween("icon");
     }
 
     //so big sprint time
