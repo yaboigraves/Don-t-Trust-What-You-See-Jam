@@ -52,8 +52,14 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-        TweenManager.current.InvokeTween("icon");
+        // TweenManager.current.InvokeTween("icon");
+
+        //wait 10 seconds then tell all the defense ui to fade out
+
+        //TweenManager.current.InvokeTween("defenseStart");
+
     }
+
 
     //so big sprint time
     //cocks out
@@ -342,13 +348,22 @@ public class UIManager : MonoBehaviour
     public void ToggleDefenseModeUI(bool toggle)
     {
         // offenseUIContainer.SetActive(false);
+        //defenseUIContainer.SetActive(toggle);
 
         if (toggle)
         {
             indicatorsAndPadContainer.SetActive(false);
             offensePromptSwitchCounterText.enabled = false;
+            TweenManager.current.InvokeTween("defenseStart");
         }
-        defenseUIContainer.SetActive(toggle);
+        else
+        {
+            TweenManager.current.InvokeTween("defenseEnd");
+        }
+
+
+
+
 
 
     }
@@ -406,6 +421,8 @@ public class UIManager : MonoBehaviour
         //turn on the counter text
 
         offensePromptSwitchCounterText.enabled = true;
+
+        TweenManager.current.InvokeTween("offenseStart");
 
     }
 

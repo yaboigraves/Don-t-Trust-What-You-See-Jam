@@ -11,7 +11,8 @@ public class TweenManager : MonoBehaviour
 {
     public static TweenManager current;
 
-    public Dictionary<string, Tween> tweeners = new Dictionary<string, Tween>();
+    //TODO: rewrite this as maybe just a list of strings to tweens, it'll be easier to make them all be triggered whenever
+    public List<KeyValuePair<string, Tween>> tweeners = new List<KeyValuePair<string, Tween>>();
 
     private void Awake()
     {
@@ -21,7 +22,18 @@ public class TweenManager : MonoBehaviour
 
     public void InvokeTween(string tweenerName)
     {
-        tweeners[tweenerName].DoTween();
+        //find any tweens with this name
+
+        foreach (KeyValuePair<string, Tween> t in tweeners)
+        {
+            if (t.Key == tweenerName)
+            {
+                t.Value.DoTween();
+            }
+        }
+
+
+
     }
 
 

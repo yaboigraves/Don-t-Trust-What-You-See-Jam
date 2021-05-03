@@ -150,7 +150,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < defenseQueueLength - 1; i++)
         {
             defenseQueue.Enqueue(legalPrompts[Random.Range(0, legalPrompts.Count)]);
-            Debug.Log(defenseQueue.Peek().text);
+            //Debug.Log(defenseQueue.Peek().text);
         }
     }
 
@@ -404,7 +404,7 @@ public class BattleManager : MonoBehaviour
             }
             else if (currentBeatCounter >= 2)
             {
-                UIManager.current.ToggleDefenseModeUI(true);
+                //UIManager.current.ToggleDefenseModeUI(true);
             }
         }
         else if (battleMode == "offense")
@@ -427,11 +427,17 @@ public class BattleManager : MonoBehaviour
                 //UIManager.current.ToggleDefenseModeUI(true);
                 UIManager.current.SwapPhaseIcon(battleMode);
                 UIManager.current.ToggleOffensePrompts(false);
+
+            }
+
+            else if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength - 1)
+            {
+                //start the lerp one beat early
+                UIManager.current.ToggleDefenseModeUI(true);
             }
             else
             {
                 //check and see if we need to move the offense prompts over
-
 
                 if (((currentBeatCounter - 1) != 0) && (currentBeatCounter - 1) % offensePhasePromptSwitchBeatCount == 0)
                 {
