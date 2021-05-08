@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 680dd942120b24d4d86476ff35401b5a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: FohrScore
+  fontNames:
+  - FohrScore
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 92f5a35412898d44eb3229e9a69048ed, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
