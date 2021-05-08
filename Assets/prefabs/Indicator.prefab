@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 50}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6716106494508414878
 CanvasRenderer:
@@ -90,3 +90,10 @@ MonoBehaviour:
   indicatorTime: 0
   destinationPoint: {fileID: 0}
   startPosition: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 0}
+  postLerpLength: 0.5
+  postLerpDistance: {x: 0.5, y: 0, z: 0}
+  lerpProgress: 0
+  postLerpProgress: 0
+  isTrueOrFalse: 0
+  promptStr: 
