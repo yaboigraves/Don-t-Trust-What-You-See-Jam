@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GradientSkybox
-  m_Shader: {fileID: -6465566751694194690, guid: 5685202720282cd4f8927fca09fd2cc9,
+  m_Shader: {fileID: -6465566751694194690, guid: 5728161340b6b724f9f749ceeea96c4b,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -26,5 +26,5 @@ Material:
     m_Colors:
     - Color_36965951: {r: 0.04601282, g: 0.8867924, b: 0.091903746, a: 0}
     - Color_37104B63: {r: 0.14815027, g: 0.95283014, b: 0.10337307, a: 0}
-    - Color_7A8F03DC: {r: 0.16197933, g: 0.543746, b: 0.9811321, a: 0}
-    - Color_B86513FB: {r: 1, g: 0.4146728, b: 0, a: 0}
+    - Color_7A8F03DC: {r: 0.0039215684, g: 0.61377275, b: 0.8666667, a: 0}
+    - Color_B86513FB: {r: 0.8745099, g: 0.8470589, b: 0.13333334, a: 0}
