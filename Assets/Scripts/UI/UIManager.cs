@@ -345,6 +345,20 @@ public class UIManager : MonoBehaviour
         twoButtonDefenseUI.SetActive(true);
     }
 
+
+    public void ToggleOffenseModeUI(bool toggle)
+    {
+        if (toggle)
+        {
+            indicatorsAndPadContainer.SetActive(true);
+            offensePromptSwitchCounterText.enabled = true;
+        }
+        else
+        {
+            indicatorsAndPadContainer.SetActive(false);
+            offensePromptSwitchCounterText.enabled = false;
+        }
+    }
     public void ToggleDefenseModeUI(bool toggle)
     {
         // offenseUIContainer.SetActive(false);
@@ -352,20 +366,16 @@ public class UIManager : MonoBehaviour
 
         if (toggle)
         {
-            indicatorsAndPadContainer.SetActive(false);
-            offensePromptSwitchCounterText.enabled = false;
+
+            //TODO: so this probably shouldnt happen here probably gotta mmove this to another function lol
+            //indicatorsAndPadContainer.SetActive(false);
+            // offensePromptSwitchCounterText.enabled = false;
             TweenManager.current.InvokeTween("defenseStart");
         }
         else
         {
             TweenManager.current.InvokeTween("defenseEnd");
         }
-
-
-
-
-
-
     }
 
 

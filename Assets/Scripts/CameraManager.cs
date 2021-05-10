@@ -28,4 +28,14 @@ public class CameraManager : MonoBehaviour
         cart.m_Path = cameraPaths[currentPath];
     }
 
+    public void LoadCameras()
+    {
+        // //find all the smooth paths in the scene and add them to the path
+        // this.cameraPaths = cameraPaths;
+
+        CinemachineSmoothPath[] paths = GameObject.FindObjectsOfType<CinemachineSmoothPath>();
+        this.cameraPaths = paths;
+
+    }
+
 }

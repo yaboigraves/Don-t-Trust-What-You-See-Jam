@@ -93,6 +93,8 @@ public class BattleManager : MonoBehaviour
 
         //tell the ui manager wraht type of stroop tests to load
         UIManager.current.SetStroopTestType(currentLevelSongInfo.stroopTestType);
+
+        CameraManager.current.LoadCameras();
     }
 
     IEnumerator waitToLoadStroop()
@@ -381,8 +383,6 @@ public class BattleManager : MonoBehaviour
         if (battleMode == "defense")
         {
 
-
-
             if (currentBeatCounter >= currentLevelSongInfo.defensePhaseLength)
             {
                 //switch the ui to offense mode
@@ -391,9 +391,11 @@ public class BattleManager : MonoBehaviour
                 FillOffenseQueue();
                 battleMode = "offense";
                 currentBeatCounter = 0;
+                UIManager.current.ToggleOffenseModeUI(true);
                 UIManager.current.ToggleDefenseModeUI(false);
                 UIManager.current.EnableOffenseUI();
                 UIManager.current.SwapPhaseIcon(battleMode);
+
 
             }
             //turn off the ui for defense mode and just let the player get ready if we're 2 beats away
@@ -427,6 +429,8 @@ public class BattleManager : MonoBehaviour
                 //UIManager.current.ToggleDefenseModeUI(true);
                 UIManager.current.SwapPhaseIcon(battleMode);
                 UIManager.current.ToggleOffensePrompts(false);
+                UIManager.current.ToggleOffenseModeUI(false);
+
 
             }
 
@@ -434,6 +438,7 @@ public class BattleManager : MonoBehaviour
             {
                 //start the lerp one beat early
                 UIManager.current.ToggleDefenseModeUI(true);
+
             }
             else
             {
