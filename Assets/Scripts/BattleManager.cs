@@ -29,7 +29,7 @@ public class BattleManager : MonoBehaviour
 
     public int defensePhaseCount = 1;
 
-    public int offensePhasePromptSwitchBeatCount = 8;
+    public int offensePhasePromptSwitchBeatCount = 7;
 
     private void Awake()
     {
@@ -370,8 +370,6 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        currentBeatCounter++;
-        totalBeatCounter++;
 
 
         if (totalBeatCounter > +currentLevelSongInfo.songLengthInBeats)
@@ -412,7 +410,7 @@ public class BattleManager : MonoBehaviour
         else if (battleMode == "offense")
         {
 
-            UIManager.current.UpdateOffenseCountdownText(offensePhasePromptSwitchBeatCount - ((currentBeatCounter - 1) % offensePhasePromptSwitchBeatCount));
+            UIManager.current.UpdateOffenseCountdownText(currentBeatCounter % offensePhasePromptSwitchBeatCount);
             if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength + 1)
             {
                 //advance the defense count 
@@ -423,7 +421,7 @@ public class BattleManager : MonoBehaviour
                 battleMode = "defense";
                 defenseFirstBeatBreak = true;
                 //UIManager.current.EnableDefenseModeUi();
-                currentBeatCounter = 1;
+                currentBeatCounter = 0;
 
                 //wait to do this
                 //UIManager.current.ToggleDefenseModeUI(true);
@@ -452,6 +450,9 @@ public class BattleManager : MonoBehaviour
             }
 
         }
+
+        currentBeatCounter++;
+        totalBeatCounter++;
     }
 
     //so yea delete the front of the list, update the ui

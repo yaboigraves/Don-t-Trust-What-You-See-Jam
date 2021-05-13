@@ -530,13 +530,33 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+    //TODO: just enable the individual ui images
+
+    public Image[] offenseCountDownImages;
+
     public void UpdateOffenseCountdownText(int count)
     {
-        offensePromptSwitchCounterText.text = count.ToString();
-        if (count == 1)
+        // offensePromptSwitchCounterText.text = count.ToString();
+        // if (count == 1)
+        // {
+        //     offensePromptSwitchCounterText.text = "Ready!";
+        // }
+
+        Debug.Log(count);
+        if (count >= offenseCountDownImages.Length - 1)
         {
-            offensePromptSwitchCounterText.text = "Ready!";
+            //unenable all of them
+            foreach (Image i in offenseCountDownImages)
+            {
+                i.enabled = false;
+            }
+            return;
         }
+
+        offenseCountDownImages[count].enabled = true;
+
+
     }
 
 
