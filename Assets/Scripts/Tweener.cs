@@ -18,7 +18,11 @@ public class Tweener : MonoBehaviour
     private void Start()
     {
 
-        RectTransform rect = GetComponent<RectTransform>();
+        Transform rect = GetComponent<RectTransform>();
+        if (rect == null)
+        {
+            rect = transform;
+        }
         Vector3 initialPos = rect.position;
         Vector3 initialScale = rect.localScale;
 
@@ -66,6 +70,8 @@ public class Tween
     public bool TweenOnStart = false;
     GameObject gO;
 
+    public bool scaleIn, scaleOut;
+
     public void SetGO(GameObject g, Vector3 initialPos, Vector3 initialScale)
     {
         gO = g;
@@ -82,6 +88,9 @@ public class Tween
 
     }
 
+
+    //TODO: make it so that scaleing the tween has an option to either scaleIn or scaleOut with appropriate activation 
+    //of the gameobject
     public virtual void DoTween()
     {
         // Debug.Log("doin da tween on " + gO.name + " to " + initialScale.x);
@@ -97,7 +106,23 @@ public class Tween
             }
             else
             {
-                LeanTween.scale(gO, initialScale, tweenTime).setEase(curve);
+
+                if (scaleIn)
+                {
+                    gO.SetActive(true);
+                    gO.transform.localScale = Vector3.zero;
+                    LeanTween.scale(gO, initialScale, tweenTime).setEase(curve);
+                }
+                else if (scaleOut)
+                {
+
+                    LeanTween.scale(gO, Vector3.zero, tweenTime).setEase(curve).setOnComplete(() => gO.SetActive(false));
+                }
+                else
+                {
+                    LeanTween.scale(gO, initialScale, tweenTime).setEase(curve);
+                }
+
             }
         }
         //preset tween

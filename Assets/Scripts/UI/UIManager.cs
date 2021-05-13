@@ -350,12 +350,19 @@ public class UIManager : MonoBehaviour
     {
         if (toggle)
         {
-            indicatorsAndPadContainer.SetActive(true);
+            //do the tween
+            TweenManager.current.InvokeTween("offenseStart");
+            TweenManager.current.InvokeTween("promptsIn");
+            //indicatorsAndPadContainer.SetActive(true);
             offensePromptSwitchCounterText.enabled = true;
+
+            //do the tween
         }
         else
         {
-            indicatorsAndPadContainer.SetActive(false);
+            TweenManager.current.InvokeTween("offenseEnd");
+            TweenManager.current.InvokeTween("promptsOut");
+            //indicatorsAndPadContainer.SetActive(false);
             offensePromptSwitchCounterText.enabled = false;
         }
     }
