@@ -164,9 +164,6 @@ public class UIManager : MonoBehaviour
         // }
 
 
-
-
-
         //TODO: need to dynamically figure out what mode we're in direction,math, etc and stuff
         currentStroopTestType = BattleManager.current.currentLevelSongInfo.stroopTestType;
         //Debug.Log(currentStroopTestType);
@@ -346,6 +343,8 @@ public class UIManager : MonoBehaviour
     }
 
 
+
+
     public void ToggleOffenseModeUI(bool toggle)
     {
         if (toggle)
@@ -356,6 +355,11 @@ public class UIManager : MonoBehaviour
             //indicatorsAndPadContainer.SetActive(true);
             offensePromptSwitchCounterText.enabled = true;
 
+            //turn on phase switch counter thingies
+            foreach (Image i in offenseCountDownImages)
+            {
+                i.enabled = true;
+            }
             //do the tween
         }
         else
@@ -364,6 +368,11 @@ public class UIManager : MonoBehaviour
             TweenManager.current.InvokeTween("promptsOut");
             //indicatorsAndPadContainer.SetActive(false);
             offensePromptSwitchCounterText.enabled = false;
+
+            foreach (Image i in offenseCountDownImages)
+            {
+                i.enabled = false;
+            }
         }
     }
     public void ToggleDefenseModeUI(bool toggle)
@@ -535,28 +544,26 @@ public class UIManager : MonoBehaviour
 
     public Image[] offenseCountDownImages;
 
-    public void UpdateOffenseCountdownText(int count)
-    {
-        // offensePromptSwitchCounterText.text = count.ToString();
-        // if (count == 1)
-        // {
-        //     offensePromptSwitchCounterText.text = "Ready!";
-        // }
 
-        Debug.Log(count);
-        if (count >= offenseCountDownImages.Length - 1)
+    int offenseModeSwitchCounter = 0;
+    public void UpdateOffenseCountdownText()
+    {
+
+
+        if (offenseModeSwitchCounter >= offenseCountDownImages.Length)
         {
-            //unenable all of them
+            offenseModeSwitchCounter = 0;
+
             foreach (Image i in offenseCountDownImages)
             {
-                i.enabled = false;
+                i.color = Color.white;
             }
-            return;
+
         }
 
-        offenseCountDownImages[count].enabled = true;
+        offenseCountDownImages[offenseModeSwitchCounter].color = Color.green;
 
-
+        offenseModeSwitchCounter++;
     }
 
 

@@ -388,11 +388,13 @@ public class BattleManager : MonoBehaviour
                 // UIManager.current.EnableOffenseModeUi();
                 FillOffenseQueue();
                 battleMode = "offense";
+
                 currentBeatCounter = 0;
                 UIManager.current.ToggleOffenseModeUI(true);
                 UIManager.current.ToggleDefenseModeUI(false);
                 UIManager.current.EnableOffenseUI();
                 UIManager.current.SwapPhaseIcon(battleMode);
+                UIManager.current.UpdateOffenseCountdownText();
 
 
             }
@@ -410,7 +412,7 @@ public class BattleManager : MonoBehaviour
         else if (battleMode == "offense")
         {
 
-            UIManager.current.UpdateOffenseCountdownText(currentBeatCounter % offensePhasePromptSwitchBeatCount);
+            UIManager.current.UpdateOffenseCountdownText();
             if (currentBeatCounter >= currentLevelSongInfo.offensePhaseLength + 1)
             {
                 //advance the defense count 
