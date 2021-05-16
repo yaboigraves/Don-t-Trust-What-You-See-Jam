@@ -548,6 +548,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    //5/15/2021 left off here
+    //TODO: do this shit
+    public void ProgressOffenseQueue()
+    {
+        //go through all the prompts and either tween them left or destroy them
+        //Destroy(offensePrompts[0].transform.GetChild(0).gameObject);
+
+        //shift over the other prompts
+    }
+
 
     //TODO: just enable the individual ui images
 

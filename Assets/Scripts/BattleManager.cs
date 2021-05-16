@@ -467,7 +467,10 @@ public class BattleManager : MonoBehaviour
         }
         offenseQueue.RemoveAt(0);
         //retoggling on just refreshes the ui
-        UIManager.current.ToggleOffensePrompts(true);
+        //UIManager.current.ToggleOffensePrompts(true);
+
+        //trigger all the tweens and add any new stuff to the prompt if needed
+        UIManager.current.ProgressOffenseQueue();
 
     }
 }
