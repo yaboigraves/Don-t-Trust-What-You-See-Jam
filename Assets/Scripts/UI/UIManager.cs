@@ -501,6 +501,8 @@ public class UIManager : MonoBehaviour
 
     //OFFENSE PROMPT VARIABLES
 
+    public GameObject offensePrompt;
+
     public void ToggleOffensePrompts(bool toggle)
     {
         //enable all the offense prompts as long as theirs room in in the queue
@@ -530,11 +532,18 @@ public class UIManager : MonoBehaviour
         if (offensePrompts[0].isActiveAndEnabled)
         {
 
-            //TODO: only do this up to the amount of prompts that are there
+            //TODO: instantiate prefabs so they can move around rather than setting the sprites
             for (int i = 0; i < numPrompts; i++)
             {
                 OffensePrompt op = BattleManager.current.offenseQueue[i];
-                offensePrompts[i].sprite = op.sprite;
+
+                GameObject p = Instantiate(offensePrompt);
+
+                p.transform.SetParent(offensePrompts[i].transform);
+                p.transform.localPosition = Vector3.zero;
+                p.GetComponent<Image>().sprite = op.sprite;
+                p.GetComponent<Image>().enabled = true;
+                // offensePrompts[i].sprite = op.sprite;
             }
         }
     }
